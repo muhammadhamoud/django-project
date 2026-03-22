@@ -4,39 +4,11 @@
     <div class="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         
         <!-- Logo / Site Name -->
-        <a href="/" class="flex min-w-0 items-center gap-3">
-            {% if site_metadata.logo %}
-                <img
-                    src="{{ site_metadata.logo.url }}"
-                    alt="{{ site_information.name|default:site_information.name }}"
-                    class="h-12 w-12 rounded-2xl object-cover shadow-soft"
-                >
-            {% else %}
-                <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-600 text-lg font-bold text-white shadow-soft">
-                    {{ site_information.name|default:site_information.name|slice:":1"|upper }}
-                </div>
-            {% endif %}
-
-            <div class="min-w-0">
-                <h1 class="truncate text-lg font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-xl">
-                    {{ site_information.name|default:site_information.name }}
-                </h1>
-                {% if site_information.description %}
-                <p class="hidden truncate text-xs text-slate-500 dark:text-slate-400 sm:block">
-                    {{ site_information.description }}
-                </p>
-                {% endif %}
-
-                {% if site_additional.tagline %}
-                <p class="hidden truncate text-xs text-slate-500 dark:text-slate-400 sm:block">
-                    {{ site_additional.tagline }}
-                </p>
-                {% endif %}
-            </div>
-        </a>
+        {% include 'homepage/partials/logo.html' %}
 
         <!-- Right Side -->
         <div class="flex items-center gap-3">
+            {% include 'homepage/partials/theme.html' %}
             <a
                 href="#contact"
                 class="inline-flex items-center gap-2 rounded-2xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:bg-brand-700"

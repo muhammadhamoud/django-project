@@ -3,39 +3,42 @@
 
 {% block contenthomepage %}
 {% include 'accounts/header.html' %}
-<div class="min-h-[80vh] flex items-center justify-center">
 
-    <div class="w-full max-w-md bg-white shadow-lg rounded-xl p-6">
+<div class="min-h-[80vh] flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+    <div class="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:shadow-2xl">
 
-        <h3 class="text-xl font-semibold text-center mb-4">
+        <h3 class="mb-4 text-center text-xl font-semibold text-slate-900 dark:text-white">
             Resend Verification Email
         </h3>
 
-        <p class="text-sm text-gray-600 text-center mb-4">
+        <p class="mb-4 text-center text-sm text-slate-600 dark:text-slate-400">
             Enter your email address and we will send you a new verification link.
         </p>
 
-        <!-- Messages -->
         {% if messages %}
-            <div class="space-y-2 mb-4">
+            <div class="mb-4 space-y-2">
                 {% for message in messages %}
-                    <div class="px-4 py-2 rounded text-sm
-                        {% if 'success' in message.tags %}bg-green-100 text-green-800
-                        {% elif 'error' in message.tags %}bg-red-100 text-red-800
-                        {% elif 'warning' in message.tags %}bg-yellow-100 text-yellow-800
-                        {% else %}bg-gray-100 text-gray-800{% endif %}">
+                    <div class="rounded-lg px-4 py-2 text-sm
+                        {% if 'success' in message.tags %}
+                            bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300
+                        {% elif 'error' in message.tags %}
+                            bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300
+                        {% elif 'warning' in message.tags %}
+                            bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300
+                        {% else %}
+                            bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200
+                        {% endif %}">
                         {{ message }}
                     </div>
                 {% endfor %}
             </div>
         {% endif %}
 
-        <!-- Form -->
         <form method="POST" class="space-y-4">
             {% csrf_token %}
             
             <div>
-                <label class="block text-sm font-medium mb-1">
+                <label class="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
                     Email
                 </label>
                 <input
@@ -44,28 +47,27 @@
                     value="{{ email|default:'' }}"
                     placeholder="Enter your email"
                     required
-                    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+                    class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:placeholder-slate-500"
                 >
             </div>
 
             <button
                 type="submit"
-                class="w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition"
+                class="w-full rounded-lg bg-brand-600 py-2 text-white transition hover:bg-brand-700"
             >
                 Resend Verification Email
             </button>
         </form>
 
-        <!-- Footer -->
-        <div class="text-center mt-4 text-sm text-gray-600">
+        <div class="mt-4 text-center text-sm text-slate-600 dark:text-slate-400">
             Already verified?
-            <a href="{% url 'accounts:login' %}" class="text-blue-600 hover:underline">
+            <a href="{% url 'accounts:login' %}" class="text-brand-600 hover:underline dark:text-brand-400">
                 Login
             </a>
         </div>
 
     </div>
-
 </div>
+
 {% include 'accounts/footer.html' %}
 {% endblock %}

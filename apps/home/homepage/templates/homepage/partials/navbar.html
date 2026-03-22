@@ -4,18 +4,8 @@
     <div class="mx-auto flex h-16 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
          x-data="{ navOpen: false, openDropdown: null }">
 
-        <div class="flex items-center gap-3">
-            <a href="/" class="flex items-center gap-3">
-                <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-600 text-white shadow-soft">
-                    <i class="fas fa-gem text-sm"></i>
-                </div>
-                <div class="hidden sm:block">
-                    <p class="text-sm font-semibold text-slate-900 dark:text-white">{{ site_information.site_name|default:"ROInsight" }}</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">{{ site_information.description|default:"ROInsight" }}</p>
-                </div>
-            </a>
-        </div>
-
+        {% include 'homepage/partials/logo.html' %}
+        
         <nav class="hidden items-center gap-2 lg:flex">
             
             <div x-data="{ lang: false }" class="relative" @click.away="lang = false">

@@ -270,3 +270,50 @@ class JobTitleAdmin(admin.ModelAdmin):
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ("name",)
     search_fields = ("name",)
+
+
+# -----------------------------
+# Notification
+# -----------------------------
+from .models import Notification, NotificationRecipient
+
+
+class NotificationRecipientInline(admin.TabularInline):
+    model = NotificationRecipient
+    extra = 0
+    readonly_fields = ("user", "is_read", "read_at", "created_at")
+    can_delete = False
+
+
+@admin.register(Notification)
+class NotificationAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "level",
+        "created_by",
+        "send_to_all",
+        "created_at",
+    )
+    list_filter = ("level", "send_to_all", "created_at")
+    search_fields = ("title", "message", "created_by__email")
+    readonly_fields = ("created_at",)
+    inlines = [NotificationRecipientInline]
+
+
+@admin.register(NotificationRecipient)
+class NotificationRecipientAdmin(admin.ModelAdmin):
+    list_display = (
+        "notification",
+        "user",
+        "is_read",
+        "read_at",
+        "created_at",
+    )
+    list_filter = ("is_read", "created_at", "read_at")
+    search_fields = (
+        "notification__title",
+        "user__email",
+        "user__first_name",
+        "user__last_name",
+    )
+    readonly_fields = ("created_at",)

@@ -87,13 +87,13 @@ class SiteInformationAdditional(Extensions, TranslatableModel):
 		return str(self.site.name)
 	
 	def get_about_url(self):
-		return reverse('about_us')
+		return reverse('homepage:about_us')
 
 	def get_privacy_url(self):
-		return reverse('privacy_policy')
+		return reverse('homepage:privacy_policy')
 
 	def get_terms_url(self):
-		return reverse('terms_of_service')
+		return reverse('homepage:terms_of_service')
 
 
 class Marketing(TranslatableModel, BaseContent):
@@ -104,7 +104,7 @@ class Marketing(TranslatableModel, BaseContent):
 		return str(self.name)
 	
 	def get_absolute_url(self):
-		return reverse('marketing-detail', args=[str(self.slug)])
+		return reverse('homepage:marketing-detail', args=[str(self.slug)])
 	
 	def save(self, *args, **kwargs):
 		if self.image and self.image.name:
@@ -123,7 +123,7 @@ class Service(BaseContent, TranslatableModel):
 		return str(self.name)
 	
 	def get_absolute_url(self):
-		return reverse('service-detail', args=[str(self.slug)])
+		return reverse('homepage:service-detail', args=[str(self.slug)])
 	
 	def save(self, *args, **kwargs):
 		if self.image and self.image.name:
@@ -142,7 +142,7 @@ class Feature(BaseContent, TranslatableModel):
 		return str(self.name)
 	
 	def get_absolute_url(self):
-		return reverse('feature-detail', args=[str(self.slug)])
+		return reverse('homepage:feature-detail', args=[str(self.slug)])
 	
 	def save(self, *args, **kwargs):
 		if self.image and self.image.name:
@@ -161,7 +161,7 @@ class Framework(BaseContent, TranslatableModel):
 		return str(self.name)
 	
 	def get_absolute_url(self):
-		return reverse('framework-detail', args=[str(self.slug)])
+		return reverse('homepage:framework-detail', args=[str(self.slug)])
 	
 	def save(self, *args, **kwargs):
 		if self.image and self.image.name:
@@ -182,7 +182,7 @@ class BusinessCategory(BaseContent, TranslatableModel):
 		return str(self.name)
 	
 	def get_absolute_url(self):
-		return reverse('product-category-detail', args=[str(self.slug)])
+		return reverse('homepage:product-category-detail', args=[str(self.slug)])
 	
 	def save(self, *args, **kwargs):
 		if self.image and self.image.name:
@@ -205,7 +205,7 @@ class Offering(BaseContent, TranslatableModel):
 		return str(self.name)
 	
 	def get_absolute_url(self):
-		return reverse('offering-detail', args=[str(self.slug)])
+		return reverse('homepage:offering-detail', args=[str(self.slug)])
 	
 	def save(self, *args, **kwargs):
 		if self.image and self.image.name:
@@ -236,7 +236,7 @@ class Project(BaseContent, TranslatableModel):
 		return str(self.name)
 	
 	def get_absolute_url(self):
-		return reverse('project-detail', args=[str(self.slug)])
+		return reverse('homepage:project-detail', args=[str(self.slug)])
 	
 	def save(self, *args, **kwargs):
 
@@ -371,7 +371,7 @@ class TeamMember(BaseContent, TranslatableModel):
 		return f"{str(self.name)} - {self.job_title}"
 	
 	def get_absolute_url(self):
-		return reverse('teammember-detail', args=[str(self.slug)])
+		return reverse('homepage:teammember-detail', args=[str(self.slug)])
 	
 	def save(self, *args, **kwargs):
 		if self.image and self.image.name:
@@ -407,7 +407,7 @@ class Testimonial(BaseContent, TranslatableModel):
 		return f"{str(self.name)} - {self.company}"
 	
 	def get_absolute_url(self):
-		return reverse('testimonial-detail', args=[str(self.slug)])
+		return reverse('homepage:testimonial-detail', args=[str(self.slug)])
 	
 	def save(self, *args, **kwargs):
 		if self.image and self.image.name:

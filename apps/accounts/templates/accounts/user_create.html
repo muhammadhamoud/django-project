@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %}Create User{% endblock %}
+{% block navbar %}
+    {% include 'dashboard/partials/navbar.html' with page_title='Create User' page_subtitle='Add a new user and assign roles and properties' %}
+{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-5xl space-y-6">
+    <div>
+        <h1 class="text-2xl font-bold text-slate-900 dark:text-white">Create User</h1>
+        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            Create a new user and assign properties within your allowed scope.
+        </p>
+    </div>
+
+    <section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft dark:border-slate-800 dark:bg-slate-900">
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+
+            <div class="grid gap-6 sm:grid-cols-2">
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">First Name</label>
+                    <input type="text" name="first_name" class="w-full rounded-2xl border border-slate-300 px-4 py-3 dark:border-slate-700 dark:bg-slate-950 dark:text-white" required>
+                </div>
+
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Last Name</label>
+                    <input type="text" name="last_name" class="w-full rounded-2xl border border-slate-300 px-4 py-3 dark:border-slate-700 dark:bg-slate-950 dark:text-white" required>
+                </div>
+            </div>
+
+            <div class="grid gap-6 sm:grid-cols-2">
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
+                    <input type="email" name="email" class="w-full rounded-2xl border border-slate-300 px-4 py-3 dark:border-slate-700 dark:bg-slate-950 dark:text-white" required>
+                </div>
+
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Password</label>
+                    <input type="password" name="password" class="w-full rounded-2xl border border-slate-300 px-4 py-3 dark:border-slate-700 dark:bg-slate-950 dark:text-white" required>
+                </div>
+            </div>
+
+            <div class="grid gap-6 sm:grid-cols-3">
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Company</label>
+                    <select name="company" class="w-full rounded-2xl border border-slate-300 px-4 py-3 dark:border-slate-700 dark:bg-slate-950 dark:text-white">
+                        <option value="">Select company</option>
+                        {% for company in companies %}
+                            <option value="{{ company.id }}">{{ company.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Department</label>
+                    <select name="department" class="w-full rounded-2xl border border-slate-300 px-4 py-3 dark:border-slate-700 dark:bg-slate-950 dark:text-white">
+                        <option value="">Select department</option>
+                        {% for department in departments %}
+                            <option value="{{ department.id }}">{{ department.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Job Title</label>
+                    <select name="job_title" class="w-full rounded-2xl border border-slate-300 px-4 py-3 dark:border-slate-700 dark:bg-slate-950 dark:text-white">
+                        <option value="">Select job title</option>
+                        {% for job_title in job_titles %}
+                            <option value="{{ job_title.id }}">{{ job_title.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Roles</label>
+                <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {% for role in roles %}
+                    <label class="flex items-center gap-3 rounded-2xl border border-slate-200 p-3 dark:border-slate-700">
+                        <input type="checkbox" name="roles" value="{{ role.id }}">
+                        <span class="text-sm text-slate-700 dark:text-slate-300">{{ role.name }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div>
+                <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Properties</label>
+                <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {% for property in available_properties %}
+                    <label class="flex items-center gap-3 rounded-2xl border border-slate-200 p-3 dark:border-slate-700">
+                        <input type="checkbox" name="properties" value="{{ property.id }}">
+                        <span class="text-sm text-slate-700 dark:text-slate-300">{{ property }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+                <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                    You can only assign properties that belong to your own profile.
+                </p>
+            </div>
+
+            <div class="flex justify-end">
+                <button type="submit" class="rounded-2xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white shadow-soft hover:bg-brand-700">
+                    Create User
+                </button>
+            </div>
+        </form>
+    </section>
+</div>
+{% endblock %}

@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model, update_session_auth_hash
@@ -19,7 +21,7 @@ from django.conf import settings
 
 from accounts.models import CustomUser
 from utils import Util
-
+from django.db import transaction
 
 User = get_user_model()
 
@@ -192,6 +194,94 @@ def verify_email_view(request):
     except CustomUser.DoesNotExist:
         messages.error(request, "User not found.")
         return redirect("accounts:login")
+
+
+@login_required
+@transaction.atomic
+def user_create_view(request):
+    profile = request.user.profile
+
+    allowed = (
+        profile.roles.filter(code="supervisor").exists()
+        or profile.roles.filter(code="super_admin").exists()
+        or request.user.is_superuser
+    )
+
+    if (
+        request.user.is_superuser
+        or request.user.is_admin
+        or profile.roles.filter(code="super_admin").exists()
+    ):
+        assignable_roles = Role.objects.all()
+    else:
+        assignable_roles = Role.objects.exclude(code="super_admin")
+
+
+    if not allowed:
+        messages.error(request, "Permission denied.")
+        return redirect("dashboard:home")
+
+    available_properties = profile.properties.all()
+
+    if request.method == "POST":
+        email = request.POST.get("email", "").strip()
+        first_name = request.POST.get("first_name", "").strip()
+        last_name = request.POST.get("last_name", "").strip()
+        password = request.POST.get("password", "").strip()
+
+        company_id = request.POST.get("company") or None
+        department_id = request.POST.get("department") or None
+        job_title_id = request.POST.get("job_title") or None
+        role_ids = request.POST.getlist("roles")
+        property_ids = request.POST.getlist("properties")
+
+        if not email or not first_name or not last_name or not password:
+            messages.error(request, "All required fields must be filled.")
+            return redirect("accounts:user_create")
+
+        if CustomUser.objects.filter(email=email).exists():
+            messages.error(request, "A user with this email already exists.")
+            return redirect("accounts:user_create")
+
+        user = CustomUser.objects.create_user(
+            email=email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+            is_active=True,
+        )
+
+        user_profile = user.profile
+        user_profile.company_id = company_id
+        user_profile.department_id = department_id
+        user_profile.job_title_id = job_title_id
+
+        allowed_property_ids = set(available_properties.values_list("id", flat=True))
+        selected_property_ids = [pid for pid in property_ids if int(pid) in allowed_property_ids]
+
+        selected_properties = Property.objects.filter(id__in=selected_property_ids)
+        user_profile.properties.set(selected_properties)
+        
+
+
+        # print(assignable_roles)
+
+        selected_roles = assignable_roles.filter(id__in=role_ids)
+        user_profile.roles.set(selected_roles)
+
+        user_profile.save()
+
+        messages.success(request, "User created successfully.")
+        return redirect("accounts:user_detail", id=user.id)
+
+    return render(request, "accounts/user_create.html", {
+        "companies": Company.objects.all(),
+        "departments": Department.objects.all(),
+        "job_titles": JobTitle.objects.all(),
+        "roles": assignable_roles,
+        "available_properties": available_properties,
+    })
+
 
 # =====================================================
 # LOGIN
@@ -449,16 +539,28 @@ def user_detail_view(request, id):
         messages.error(request, "Permission denied")
         return redirect("accounts:user_list")
 
+    current_profile = request.user.profile
+
     user = get_object_or_404(
         CustomUser.objects.filter(
-            profile__properties__in=request.user.profile.properties.all()
+            profile__properties__in=current_profile.properties.all()
         ).distinct(),
         id=id
     )
 
     profile = user.profile
-    available_properties = request.user.profile.properties.all()
+    available_properties = current_profile.properties.all()
     can_edit = permission_required("user.edit")().has_permission(request, None)
+
+    # Decide what roles the CURRENT logged-in user is allowed to assign
+    if (
+        request.user.is_superuser
+        or request.user.is_admin
+        or current_profile.roles.filter(code="super_admin").exists()
+    ):
+        assignable_roles = Role.objects.all()
+    else:
+        assignable_roles = Role.objects.exclude(code="super_admin")
 
     if request.method == "POST":
         if not can_edit:
@@ -474,17 +576,17 @@ def user_detail_view(request, id):
         profile.job_title_id = request.POST.get("job_title") or None
         profile.disabled = request.POST.get("disabled") == "on"
 
+        # Restrict roles to only assignable roles
         role_ids = request.POST.getlist("roles")
-        profile.roles.set(role_ids)
+        allowed_role_ids = assignable_roles.values_list("id", flat=True)
+        valid_roles = Role.objects.filter(id__in=role_ids).filter(id__in=allowed_role_ids)
+        profile.roles.set(valid_roles)
 
+        # Restrict properties to only the current user's properties
         selected_properties = request.POST.getlist("properties")
-        allowed_ids = available_properties.values_list("id", flat=True)
+        allowed_property_ids = available_properties.values_list("id", flat=True)
 
-        properties = Property.objects.filter(
-            id__in=selected_properties
-        ).filter(
-            id__in=allowed_ids
-        )
+        properties = Property.objects.filter(id__in=selected_properties).filter(id__in=allowed_property_ids)
 
         profile.properties.set(properties)
         profile.save()
@@ -500,9 +602,75 @@ def user_detail_view(request, id):
         "companies": Company.objects.all(),
         "departments": Department.objects.all(),
         "job_titles": JobTitle.objects.all(),
-        "roles": Role.objects.all(),
+        "roles": assignable_roles,
         "can_edit": can_edit,
     })
+
+# @login_required
+# def user_detail_view(request, id):
+#     if not permission_required("user.view")().has_permission(request, None):
+#         messages.error(request, "Permission denied")
+#         return redirect("accounts:user_list")
+
+#     user = get_object_or_404(
+#         CustomUser.objects.filter(
+#             profile__properties__in=request.user.profile.properties.all()
+#         ).distinct(),
+#         id=id
+#     )
+
+#     profile = user.profile
+#     available_properties = request.user.profile.properties.all()
+#     can_edit = permission_required("user.edit")().has_permission(request, None)
+
+#     if request.method == "POST":
+#         if not can_edit:
+#             messages.error(request, "Permission denied")
+#             return redirect("accounts:user_list")
+
+#         user.first_name = request.POST.get("first_name", user.first_name)
+#         user.last_name = request.POST.get("last_name", user.last_name)
+#         user.save()
+
+#         profile.company_id = request.POST.get("company") or None
+#         profile.department_id = request.POST.get("department") or None
+#         profile.job_title_id = request.POST.get("job_title") or None
+#         profile.disabled = request.POST.get("disabled") == "on"
+
+#         role_ids = request.POST.getlist("roles")
+#         profile.roles.set(role_ids)
+
+#         selected_properties = request.POST.getlist("properties")
+#         allowed_ids = available_properties.values_list("id", flat=True)
+
+#         properties = Property.objects.filter(
+#             id__in=selected_properties
+#         ).filter(
+#             id__in=allowed_ids
+#         )
+
+#         if profile.roles.filter(code="super_admin").exists():
+#             assignable_roles = Role.objects.all()
+#         else:
+#             assignable_roles = Role.objects.exclude(code="super_admin")
+
+#         profile.properties.set(properties)
+#         profile.save()
+
+#         messages.success(request, "User updated successfully")
+#         return redirect("accounts:user_detail", id=str(user.id))
+
+#     return render(request, "accounts/user_detail.html", {
+#         "user_obj": user,
+#         "profile": profile,
+#         "available_properties": available_properties,
+#         "assigned_properties": profile.properties.all(),
+#         "companies": Company.objects.all(),
+#         "departments": Department.objects.all(),
+#         "job_titles": JobTitle.objects.all(),
+#         "roles": assignable_roles,
+#         "can_edit": can_edit,
+#     })
 
 
 # @login_required
@@ -672,3 +840,99 @@ def profile_view(request):
         "job_titles": JobTitle.objects.all(),
     }
     return render(request, "accounts/profile.html", context)
+
+
+
+# =====================================================
+# NOTIFICATIONS
+# =====================================================
+
+from .models import Notification, NotificationRecipient, CustomUser
+from accounts.utils import send_notification
+
+
+@login_required
+def notification_center_view(request):
+    notifications = NotificationRecipient.objects.filter(
+        user=request.user
+    ).select_related("notification")
+
+    unread_count = notifications.filter(is_read=False).count()
+
+    return render(request, "accounts/notification_center.html", {
+        "notifications": notifications,
+        "unread_count": unread_count,
+    })
+
+
+@login_required
+def notification_mark_read_view(request, pk):
+    item = get_object_or_404(
+        NotificationRecipient,
+        pk=pk,
+        user=request.user
+    )
+    if not item.is_read:
+        item.is_read = True
+        item.read_at = timezone.now()
+        item.save(update_fields=["is_read", "read_at"])
+
+    if item.notification.link:
+        return redirect(item.notification.link)
+
+    return redirect("accounts:notification_center")
+
+
+@login_required
+def notification_mark_all_read_view(request):
+    NotificationRecipient.objects.filter(
+        user=request.user,
+        is_read=False
+    ).update(is_read=True, read_at=timezone.now())
+
+    messages.success(request, "All notifications marked as read.")
+    return redirect("accounts:notification_center")
+
+
+@login_required
+def notification_send_view(request):
+    # You can tighten this with your permission system
+    allowed = request.user.is_superuser
+    if not allowed:
+        messages.error(request, "Permission denied.")
+        return redirect("dashboard:home")
+
+    users = CustomUser.objects.filter(is_active=True).order_by("first_name", "email")
+
+    if request.method == "POST":
+        title = request.POST.get("title", "").strip()
+        message_text = request.POST.get("message", "").strip()
+        level = request.POST.get("level", "info")
+        link = request.POST.get("link", "").strip() or None
+        alert = request.POST.get("alert", "no").strip()
+        send_to_all = request.POST.get("send_to_all") == "on"
+        user_ids = request.POST.getlist("users")
+
+        if not title or not message_text:
+            messages.error(request, "Title and message are required.")
+            return redirect("accounts:notification_send")
+        selected_users = CustomUser.objects.filter(id__in=user_ids, is_active=True)
+        
+
+        send_notification(
+            title=title,
+            message=message_text,
+            users=selected_users,
+            created_by=request.user,
+            level=level,
+            link=link,
+            alert=True if alert=="yes" else False,
+            send_to_all=send_to_all,
+        )
+
+        messages.success(request, "Notification sent successfully.")
+        return redirect("accounts:notification_center")
+
+    return render(request, "accounts/notification_send.html", {
+        "users": users,
+    })

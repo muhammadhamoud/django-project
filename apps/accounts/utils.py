@@ -11,6 +11,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from accounts.models import Notification, NotificationRecipient
+
 User = get_user_model()
 
 
@@ -286,3 +288,35 @@ class IsUsersPermission(permissions.BasePermission):
             return True
         elif request.method in method:
             return request.user.role.id <= 4
+        
+
+
+from django.contrib.auth import get_user_model
+from django.utils import timezone
+
+User = get_user_model()
+
+
+def send_notification(title, message, users=None, created_by=None, level="info", link=None, alert=False,send_to_all=False):
+    notification = Notification.objects.create(
+        title=title,
+        message=message,
+        level=level,
+        link=link,
+        alert=alert,
+        created_by=created_by,
+        send_to_all=send_to_all,
+    )
+
+    if send_to_all:
+        users = User.objects.filter(is_active=True)
+
+    if users is None:
+        return notification
+
+    recipient_rows = [
+        NotificationRecipient(notification=notification, user=user)
+        for user in users
+    ]
+    NotificationRecipient.objects.bulk_create(recipient_rows, ignore_conflicts=True)
+    return notification

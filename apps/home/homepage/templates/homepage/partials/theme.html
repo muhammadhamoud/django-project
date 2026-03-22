@@ -1,0 +1,67 @@
+<div
+    x-data="{ themeMenuOpen: false, closeTimer: null }"
+    @mouseenter="clearTimeout(closeTimer); themeMenuOpen = true"
+    @mouseleave="closeTimer = setTimeout(() => themeMenuOpen = false, 120)"
+    class="relative hidden md:block"
+>
+    <button
+        type="button"
+        class="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white"
+    >
+        <i class="fas fa-palette text-brand-600 dark:text-brand-400"></i>
+        <span x-text="theme === 'light' ? 'Light' : (theme === 'dark' ? 'Dark' : 'Auto')"></span>
+        <i class="fas fa-chevron-down text-[10px]"></i>
+    </button>
+
+    <div
+        x-show="themeMenuOpen"
+        x-transition
+        x-cloak
+        class="absolute right-0 z-50 mt-3 w-56 rounded-2xl border border-slate-200 bg-white p-2 shadow-panel dark:border-slate-700 dark:bg-slate-900"
+    >
+        <button
+            type="button"
+            @click="setTheme('light')"
+            class="flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-sm transition"
+            :class="theme === 'light'
+                ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white'
+                : 'text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800'"
+        >
+            <span class="flex items-center gap-3">
+                <i class="fas fa-sun w-4 text-center"></i>
+                <span>Light</span>
+            </span>
+            <i x-show="theme === 'light'" class="fas fa-check text-xs"></i>
+        </button>
+
+        <button
+            type="button"
+            @click="setTheme('dark')"
+            class="mt-1 flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-sm transition"
+            :class="theme === 'dark'
+                ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white'
+                : 'text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800'"
+        >
+            <span class="flex items-center gap-3">
+                <i class="fas fa-moon w-4 text-center"></i>
+                <span>Dark</span>
+            </span>
+            <i x-show="theme === 'dark'" class="fas fa-check text-xs"></i>
+        </button>
+
+        <button
+            type="button"
+            @click="setTheme('auto')"
+            class="mt-1 flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-sm transition"
+            :class="theme === 'auto'
+                ? 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white'
+                : 'text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800'"
+        >
+            <span class="flex items-center gap-3">
+                <i class="fas fa-desktop w-4 text-center"></i>
+                <span>Auto</span>
+            </span>
+            <i x-show="theme === 'auto'" class="fas fa-check text-xs"></i>
+        </button>
+    </div>
+</div>

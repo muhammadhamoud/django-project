@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 
 
@@ -62,6 +63,8 @@ class ReportGroup(BaseModel):
 
         return self.allowed_properties.filter(id=property_obj.id).exists()
 
+    def get_absolute_url(self):
+        return reverse("reports:report_list", args=[self.slug])
 
 class Report(BaseModel):
     group = models.ForeignKey(
@@ -102,3 +105,6 @@ class Report(BaseModel):
             return True
 
         return self.allowed_properties.filter(id=property_obj.id).exists()
+    
+    def get_absolute_url(self):
+        return reverse("reports:report_detail", args=[self.group.slug, self.slug])

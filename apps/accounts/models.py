@@ -371,7 +371,61 @@ class UserPropertyAccessMixin:
         return context
 
 
+class Notification(models.Model):
+    LEVEL_CHOICES = (
+        ("info", "Info"),
+        ("success", "Success"),
+        ("warning", "Warning"),
+        ("error", "Error"),
+    )
 
+    title = models.CharField(max_length=200)
+    message = models.TextField()
+    level = models.CharField(max_length=20, choices=LEVEL_CHOICES, default="info")
+    link = models.CharField(max_length=300, blank=True, null=True)
+    alert = models.BooleanField(default=False)
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="created_notifications"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    send_to_all = models.BooleanField(default=False)
+    
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return self.title
+
+
+class NotificationRecipient(models.Model):
+    notification = models.ForeignKey(
+        Notification,
+        on_delete=models.CASCADE,
+        related_name="recipients"
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="notification_items"
+    )
+    is_read = models.BooleanField(default=False)
+    read_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        unique_together = ("notification", "user")
+
+    def __str__(self):
+        return f"{self.user.email} - {self.notification.title}"
+
+    def get_absolute_url(self):
+        return reverse("accounts:notification_center")
 
 
 

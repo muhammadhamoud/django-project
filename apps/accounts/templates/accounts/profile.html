@@ -4,7 +4,7 @@
 {% block title %}{{request.user.first_name}} {{request.user.last_name}}{% endblock %}
 {% block navbar %}
     {% with full_name=request.user.first_name|add:' '|add:request.user.last_name %}
-        {% include 'dashboard/partials/navbar.html' with page_title='User Profile' page_subtitle=full_name %}
+        {% include 'dashboard/partials/navbar.html' with page_title=full_name page_subtitle='Manage your personal information, account settings, and password' %}
     {% endwith %}
 {% endblock %}
 

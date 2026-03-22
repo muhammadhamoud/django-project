@@ -1,0 +1,27 @@
+<div class="flex items-center gap-3 overflow-hidden">
+    <a href="/" class="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white/10">
+        {% if site_metadata.logo %}
+            <img
+                src="{{ site_metadata.logo.url }}"
+                alt="{{ site_information.name|default:'Logo' }}"
+                class="h-full w-full object-cover"
+            >
+            
+        {% else %}
+            <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-brand-500 to-violet-600 text-sm font-bold text-white">
+                {{ site_information.name|default:site_information.name|slice:":1"|upper }}
+            </div>
+        {% endif %}
+    </a>
+
+    <div x-show="sidebarExpanded" x-transition class="min-w-0">
+        <h1 class="truncate text-base font-bold tracking-wide text-slate-900 dark:text-white">
+            {{ site_information.name|default:"ROInsight" }}
+        </h1>
+        {% if site_information.description%}
+        <p class="truncate text-xs text-slate-400">
+            {{ site_information.description }}
+        </p>
+        {% endif %}
+    </div>
+</div>

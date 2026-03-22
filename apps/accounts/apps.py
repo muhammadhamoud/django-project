@@ -6,3 +6,6 @@ class AccountsConfig(AppConfig):
 
     # def ready(self):
     #     import accounts.signals
+
+    def ready(self):
+        import accounts.signals_notifications

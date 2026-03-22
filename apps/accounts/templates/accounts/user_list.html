@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Users{% endblock %}
+{% block navbar %}
+    {% include 'dashboard/partials/navbar.html' with page_title='User Management' page_subtitle='Control users, permissions, and assignments' %}
+{% endblock %}
 
 {% block content %}
 
@@ -222,14 +225,15 @@
                                     >
                                         View
                                     </a>
+                                    <a
+                                        href="{% url 'accounts:user_detail' user.id %}"
+                                        class="inline-flex items-center rounded-lg bg-amber-600 px-3 py-2 text-xs font-medium text-white transition hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600"
+                                    >
+                                        Edit
+                                    </a>
 
                                     {% if perms.user.edit %}
-                                        <a
-                                            href="{% url 'accounts:user_detail' user.id %}"
-                                            class="inline-flex items-center rounded-lg bg-amber-600 px-3 py-2 text-xs font-medium text-white transition hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600"
-                                        >
-                                            Edit
-                                        </a>
+
                                     {% endif %}
                                 </div>
                             </td>
