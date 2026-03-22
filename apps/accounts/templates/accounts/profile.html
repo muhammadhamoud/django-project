@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{request.user.first_name}} {{request.user.last_name}}{% endblock %}
+{% block navbar %}
+    {% with full_name=request.user.first_name|add:' '|add:request.user.last_name %}
+        {% include 'dashboard/partials/navbar.html' with page_title='User Profile' page_subtitle=full_name %}
+    {% endwith %}
+{% endblock %}
+
+{% block main_class %}overflow-x-hidden{% endblock %}
+
+{% block content %}
+
+
+<div class="mx-auto max-w-7xl space-y-8">
+    <div class="grid gap-8 pt-6 xl:grid-cols-3">
+
+        <!-- Profile summary -->
+        <aside class="space-y-6 xl:col-span-1">
+            <div class="rounded-3xl border border-slate-200/70 bg-white p-6 shadow-soft dark:border-slate-800 dark:bg-slate-900">
+                <div class="flex flex-col items-center text-center">
+                    <div class="flex h-24 w-24 items-center justify-center rounded-full bg-brand-600 text-2xl font-bold text-white shadow-soft">
+                        {{ request.user.first_name|default:request.user.email|slice:":1"|upper }}{{ request.user.last_name|slice:":1"|upper }}
+                    </div>
+
+                    <h2 class="mt-4 text-xl font-bold text-slate-900 dark:text-white">
+                        {{ request.user.first_name }} {{ request.user.last_name }}
+                    </h2>
+
+                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                        {{ request.user.email }}
+                    </p>
+                </div>
+
+                <div class="mt-6 space-y-4 border-t border-slate-200 pt-6 dark:border-slate-800">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Company</p>
+                        <p class="mt-1 text-sm text-slate-900 dark:text-white">
+                            {{ profile_obj.company|default:"-" }}
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Department</p>
+                        <p class="mt-1 text-sm text-slate-900 dark:text-white">
+                            {{ profile_obj.department|default:"-" }}
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Job Title</p>
+                        <p class="mt-1 text-sm text-slate-900 dark:text-white">
+                            {{ profile_obj.job_title|default:"-" }}
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Status</p>
+                        <p class="mt-1 text-sm">
+                            {% if request.user.is_active %}
+                                <span class="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">
+                                    Active
+                                </span>
+                            {% else %}
+                                <span class="inline-flex rounded-full bg-rose-100 px-3 py-1 text-rose-700 dark:bg-rose-500/10 dark:text-rose-400">
+                                    Inactive
+                                </span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Forms -->
+        <div class="space-y-8 xl:col-span-2">
+
+            <!-- Update profile -->
+            <section class="rounded-3xl border border-slate-200/70 bg-white p-6 shadow-soft dark:border-slate-800 dark:bg-slate-900 sm:p-8">
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-slate-900 dark:text-white">Profile Information</h2>
+                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                        Update your personal information.
+                    </p>
+                </div>
+
+                <form method="post" class="space-y-6">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="profile">
+
+                    <div class="grid gap-6 sm:grid-cols-2">
+                        <div>
+                            <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">First Name</label>
+                            <input
+                                type="text"
+                                name="first_name"
+                                value="{{ request.user.first_name }}"
+                                class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                                required
+                            >
+                        </div>
+
+                        <div>
+                            <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Last Name</label>
+                            <input
+                                type="text"
+                                name="last_name"
+                                value="{{ request.user.last_name }}"
+                                class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
+                        <input
+                            type="email"
+                            value="{{ request.user.email }}"
+                            class="w-full cursor-not-allowed rounded-2xl border border-slate-200 bg-slate-100 px-4 py-3 text-sm text-slate-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400"
+                            disabled
+                        >
+                        <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">Email cannot be changed.</p>
+                    </div>
+
+                    <div class="grid gap-6 sm:grid-cols-3">
+                        <div>
+                            <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Company</label>
+                            <select
+                                name="company"
+                                class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                            >
+                                <option value="">Select company</option>
+                                {% for company in companies %}
+                                <option value="{{ company.id }}" {% if profile_obj.company_id == company.id %}selected{% endif %}>
+                                    {{ company.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Department</label>
+                            <select
+                                name="department"
+                                class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                            >
+                                <option value="">Select department</option>
+                                {% for department in departments %}
+                                <option value="{{ department.id }}" {% if profile_obj.department_id == department.id %}selected{% endif %}>
+                                    {{ department.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Job Title</label>
+                            <select
+                                name="job_title"
+                                class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                            >
+                                <option value="">Select job title</option>
+                                {% for job_title in job_titles %}
+                                <option value="{{ job_title.id }}" {% if profile_obj.job_title_id == job_title.id %}selected{% endif %}>
+                                    {{ job_title.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button
+                            type="submit"
+                            class="inline-flex items-center gap-2 rounded-2xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-brand-700"
+                        >
+                            <i class="fas fa-save text-xs"></i>
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Change password -->
+            <section class="rounded-3xl border border-slate-200/70 bg-white p-6 shadow-soft dark:border-slate-800 dark:bg-slate-900 sm:p-8">
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-slate-900 dark:text-white">Change Password</h2>
+                    <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                        Use a strong password that you do not use elsewhere.
+                    </p>
+                </div>
+
+                <form method="post" class="space-y-6">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="password">
+
+                    <div>
+                        <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Current Password</label>
+                        <input
+                            type="password"
+                            name="old_password"
+                            class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                            required
+                        >
+                        {% if password_form.old_password.errors %}
+                            <p class="mt-2 text-sm text-rose-600 dark:text-rose-400">{{ password_form.old_password.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="grid gap-6 sm:grid-cols-2">
+                        <div>
+                            <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">New Password</label>
+                            <input
+                                type="password"
+                                name="new_password1"
+                                class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                                required
+                            >
+                            {% if password_form.new_password1.errors %}
+                                <p class="mt-2 text-sm text-rose-600 dark:text-rose-400">{{ password_form.new_password1.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <div>
+                            <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Confirm New Password</label>
+                            <input
+                                type="password"
+                                name="new_password2"
+                                class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                                required
+                            >
+                            {% if password_form.new_password2.errors %}
+                                <p class="mt-2 text-sm text-rose-600 dark:text-rose-400">{{ password_form.new_password2.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {% if password_form.non_field_errors %}
+                        <div class="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700 dark:border-rose-900/40 dark:bg-rose-950/30 dark:text-rose-300">
+                            {{ password_form.non_field_errors.0 }}
+                        </div>
+                    {% endif %}
+
+                    <div class="flex justify-end">
+                        <button
+                            type="submit"
+                            class="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+                        >
+                            <i class="fas fa-key text-xs"></i>
+                            Update Password
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+
+/auth/register/
+{
+  "email": "admin@test.com",
+  "first_name": "Admin",
+  "last_name": "User",
+  "password": "12345678"
+}
+
+/auth/login/
+{
+  "email": "admin@test.com",
+  "password": "12345678"
+}
+
+CREATE User (Supervisor Test)
+{
+  "email": "staff@test.com",
+  "first_name": "Staff",
+  "last_name": "User",
+  "password": "12345678",
+  "property_id": 1
+}
+
+GET /users/?property_id=1
+
+GET Single User
+GET /users/{uuid}/?property_id=1
+
+GET /profile/
+
+PATCH /profile/
+

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="mt-6 flex justify-center">
+
+
+<div class="w-full max-w-lg bg-white shadow-lg rounded-xl p-6">
+
+    <h4 class="text-xl font-semibold mb-4">
+        My Account
+    </h4>
+
+    <div class="space-y-3 text-sm">
+
+        <p>
+            <span class="font-medium text-gray-700">Email:</span>
+            <span class="text-gray-900">{{ user.email }}</span>
+        </p>
+
+        <p>
+            <span class="font-medium text-gray-700">ID:</span>
+            <span class="text-gray-900">{{ user.id }}</span>
+        </p>
+
+    </div>
+
+</div>
+
+
+</div>
+
+{% endblock %}

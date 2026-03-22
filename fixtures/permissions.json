@@ -1,0 +1,98 @@
+[
+  {
+    "model": "accounts.permission",
+    "pk": 1,
+    "fields": {
+      "code": "user.create",
+      "name": "Create User",
+      "group": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "is_deleted": false
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 2,
+    "fields": {
+      "code": "user.view",
+      "name": "View User",
+      "group": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "is_deleted": false
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 3,
+    "fields": {
+      "code": "user.edit",
+      "name": "Edit User",
+      "group": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "is_deleted": false
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 4,
+    "fields": {
+      "code": "user.delete",
+      "name": "Delete User",
+      "group": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "is_deleted": false
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 5,
+    "fields": {
+      "code": "property.assign",
+      "name": "Assign Property",
+      "group": 2,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "is_deleted": false
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 6,
+    "fields": {
+      "code": "property.view",
+      "name": "View Property",
+      "group": 2,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "is_deleted": false
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 7,
+    "fields": {
+      "code": "report.view",
+      "name": "View Reports",
+      "group": 3,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "is_deleted": false
+    }
+  },
+  {
+    "model": "accounts.permission",
+    "pk": 8,
+    "fields": {
+      "code": "report.export",
+      "name": "Export Reports",
+      "group": 3,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "is_deleted": false
+    }
+  }
+]

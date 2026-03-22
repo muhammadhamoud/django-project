@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container px-4 py-5">
+    <section class="mb-4 ">
+        <h2 class="pb-2 border-bottom">Let's Get in Touch</h2>
+        <p class="text-muted mt-0 mb-5">
+            Do you have any questions or inquiries? Please don't hesitate to reach out to us directly. 
+            Our dedicated team is here to assist you and will respond promptly to your messages, 
+            usually within just a few hours. We look forward to hearing from you!
+        </p>
+        <div class="row">
+            <div class="col mb-md-0 mb-5">
+                <form id="contact-form" name="contact-form" method="post" action="{% url 'contact_view' %}"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- {{form.as_p}} -->
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ form.name.label_tag }}
+                            {{ form.name }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.email.label_tag }}
+                            {{ form.email }}
+                        </div>
+
+                        <div class="col-md-4">
+                            {{ form.phone.label_tag }}
+                            {{ form.phone }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-5">
+
+                            {{ form.subject.label_tag }}
+                            {{ form.subject }}
+                            {{ form.message.label_tag }}
+                            {{ form.message }}
+                        </div>
+                        <div class="col-md-12">
+                            <div class="text-md-right">
+                                <button class="btn btn-lg btn-success" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                    </div>
+                </form>
+                <div class="status"></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

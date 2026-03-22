@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="text-center mt-5">
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Message Sent Successfully!</h4>
+        <p>Thank you for getting in touch with us. We have received your message and will respond as soon as possible.</p>
+        <hr>
+        <p class="mb-0">In the meantime, feel free to explore more on our website <a href="{% url 'index' %}" class="alert-link">here</a>.</p>
+    </div>
+</div>
+{% endblock %}

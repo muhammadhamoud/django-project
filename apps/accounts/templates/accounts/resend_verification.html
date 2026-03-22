@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Resend Verification{% endblock %}
+
+{% block contenthomepage %}
+{% include 'accounts/header.html' %}
+<div class="min-h-[80vh] flex items-center justify-center">
+
+    <div class="w-full max-w-md bg-white shadow-lg rounded-xl p-6">
+
+        <h3 class="text-xl font-semibold text-center mb-4">
+            Resend Verification Email
+        </h3>
+
+        <p class="text-sm text-gray-600 text-center mb-4">
+            Enter your email address and we will send you a new verification link.
+        </p>
+
+        <!-- Messages -->
+        {% if messages %}
+            <div class="space-y-2 mb-4">
+                {% for message in messages %}
+                    <div class="px-4 py-2 rounded text-sm
+                        {% if 'success' in message.tags %}bg-green-100 text-green-800
+                        {% elif 'error' in message.tags %}bg-red-100 text-red-800
+                        {% elif 'warning' in message.tags %}bg-yellow-100 text-yellow-800
+                        {% else %}bg-gray-100 text-gray-800{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Form -->
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            
+            <div>
+                <label class="block text-sm font-medium mb-1">
+                    Email
+                </label>
+                <input
+                    type="email"
+                    name="email"
+                    value="{{ email|default:'' }}"
+                    placeholder="Enter your email"
+                    required
+                    class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+                >
+            </div>
+
+            <button
+                type="submit"
+                class="w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition"
+            >
+                Resend Verification Email
+            </button>
+        </form>
+
+        <!-- Footer -->
+        <div class="text-center mt-4 text-sm text-gray-600">
+            Already verified?
+            <a href="{% url 'accounts:login' %}" class="text-blue-600 hover:underline">
+                Login
+            </a>
+        </div>
+
+    </div>
+
+</div>
+{% include 'accounts/footer.html' %}
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}{{ report.title }}{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    
+    <nav class="flex items-center text-sm text-slate-500 dark:text-slate-400" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center gap-2">
+            <li>
+                <a href="{% url 'reports:group_list' %}" class="transition hover:text-slate-700 dark:hover:text-slate-200">
+                    Reports
+                </a>
+            </li>
+
+            <li class="text-slate-400 dark:text-slate-500">
+                <i class="fas fa-chevron-right text-xs"></i>
+            </li>
+
+            <li>
+                <a href="{% url 'reports:report_list' report.group.slug %}" class="transition hover:text-slate-700 dark:hover:text-slate-200">
+                    {{ report.group.title }}
+                </a>
+            </li>
+
+            <li class="text-slate-400 dark:text-slate-500">
+                <i class="fas fa-chevron-right text-xs"></i>
+            </li>
+
+            <li class="font-medium text-slate-700 dark:text-slate-200" aria-current="page">
+                {{ report.title }}
+            </li>
+        </ol>
+    </nav>
+
+    <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+
+        <!-- <div id="powerbi-report-container" class="h-[78vh] w-full"></div> -->
+        <div class="aspect-[16/9] w-full">
+            <iframe src="https://app.fabric.microsoft.com/view?r=eyJrIjoiMGZmZDJiNzMtMTU2Yi00NzhhLTg5MDMtMDA2N2IxOTI2NjIxIiwidCI6ImE5NDUyNTg2LTJmNGMtNGNiMS04ZDJlLTI2ODkyODllZTcyNiIsImMiOjl9" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+
+
+        <!-- {% if powerbi_config.report_id and powerbi_config.embed_url and powerbi_config.embed_token %}
+        <div id="powerbi-report-container" class="h-[78vh] w-full"></div>
+        {% elif report.powerbi_embed_url %}
+            <div class="aspect-[16/9] w-full">
+                <iframe
+                    title="{{ report.title }}"
+                    width="100%"
+                    height="100%"
+                    src="{{ report.powerbi_embed_url }}"
+                    frameborder="0"
+                    allowfullscreen="true">
+                </iframe>
+            </div>
+        {% else %}
+            <div class="flex h-[400px] items-center justify-center text-sm text-slate-500 dark:text-slate-400">
+                Power BI report configuration is incomplete.
+            </div>
+        {% endif %} -->
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/powerbi-client@2.23.1/dist/powerbi.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const reportId = "{{ powerbi_config.report_id|default:''|escapejs }}";
+        const embedUrl = "{{ powerbi_config.embed_url|default:''|escapejs }}";
+        const embedToken = "{{ powerbi_config.embed_token|default:''|escapejs }}";
+
+        if (!reportId || !embedUrl || !embedToken) {
+            return;
+        }
+
+        const container = document.getElementById("powerbi-report-container");
+        if (!container || !window["powerbi-client"]) {
+            return;
+        }
+
+        const models = window["powerbi-client"].models;
+        const powerbi = new window["powerbi-client"].service.Service(
+            window["powerbi-client"].factories.hpmFactory,
+            window["powerbi-client"].factories.wpmpFactory,
+            window["powerbi-client"].factories.routerFactory
+        );
+
+        const config = {
+            type: "report",
+            id: reportId,
+            embedUrl: embedUrl,
+            accessToken: embedToken,
+            tokenType: models.TokenType.Embed,
+            settings: {
+                panes: {
+                    filters: { visible: false },
+                    pageNavigation: { visible: true }
+                },
+                navContentPaneEnabled: true
+            }
+        };
+
+        powerbi.embed(container, config);
+    });
+</script>
+{% endblock %}
+
+
+

@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+{% block title %}Users{% endblock %}
+
+{% block content %}
+
+<div class="space-y-6" x-data="{ filtersOpen: false }">
+    <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
+        <button
+            type="button"
+            @click="filtersOpen = !filtersOpen"
+            class="flex w-full items-center justify-between px-4 py-4 text-left"
+        >
+            <div>
+                <h2 class="text-sm font-semibold text-gray-900 dark:text-gray-100">Filters</h2>
+                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                    Show or hide search filters
+                </p>
+            </div>
+
+            <svg
+                class="h-5 w-5 text-gray-500 transition-transform duration-200 dark:text-gray-400"
+                :class="{ 'rotate-180': filtersOpen }"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"></path>
+            </svg>
+        </button>
+
+        <div x-show="filtersOpen" x-collapse class="border-t border-gray-200 dark:border-gray-800">
+            <form method="get" class="p-4">
+                <input type="hidden" name="page" value="1">
+
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+                    <div>
+                        <label for="email" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                            Email
+                        </label>
+                        <input
+                            type="text"
+                            id="email"
+                            name="email"
+                            value="{{ filters.email }}"
+                            placeholder="Search email"
+                            class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-900"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="first_name" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                            First Name
+                        </label>
+                        <input
+                            type="text"
+                            id="first_name"
+                            name="first_name"
+                            value="{{ filters.first_name }}"
+                            placeholder="Search first name"
+                            class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-900"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="last_name" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                            Last Name
+                        </label>
+                        <input
+                            type="text"
+                            id="last_name"
+                            name="last_name"
+                            value="{{ filters.last_name }}"
+                            placeholder="Search last name"
+                            class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-900"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="company" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                            Company
+                        </label>
+                        <input
+                            type="text"
+                            id="company"
+                            name="company"
+                            value="{{ filters.company }}"
+                            placeholder="Search company"
+                            class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-900"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="department" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                            Department
+                        </label>
+                        <input
+                            type="text"
+                            id="department"
+                            name="department"
+                            value="{{ filters.department }}"
+                            placeholder="Search department"
+                            class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-900"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="job_title" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                            Job Title
+                        </label>
+                        <input
+                            type="text"
+                            id="job_title"
+                            name="job_title"
+                            value="{{ filters.job_title }}"
+                            placeholder="Search job title"
+                            class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-900"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="role" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                            Role
+                        </label>
+                        <input
+                            type="text"
+                            id="role"
+                            name="role"
+                            value="{{ filters.role }}"
+                            placeholder="Search role"
+                            class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-blue-400 dark:focus:ring-blue-900"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="disabled" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                            Disabled
+                        </label>
+                        <select
+                            id="disabled"
+                            name="disabled"
+                            class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-900"
+                        >
+                            <option value="">All</option>
+                            <option value="yes" {% if filters.disabled == "yes" %}selected{% endif %}>Yes</option>
+                            <option value="no" {% if filters.disabled == "no" %}selected{% endif %}>No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <button
+                        type="submit"
+                        class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800"
+                    >
+                        Apply Filters
+                    </button>
+
+                    <a
+                        href="{% url 'accounts:user_list' %}"
+                        class="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                    >
+                        Reset
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
+                <thead class="bg-gray-50 dark:bg-gray-800/60">
+                    <tr>
+                        <th class="px-4 py-4 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">Email</th>
+                        <th class="px-4 py-4 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">First Name</th>
+                        <th class="px-4 py-4 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">Last Name</th>
+                        <th class="px-4 py-4 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">Company</th>
+                        <th class="px-4 py-4 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">Department</th>
+                        <th class="px-4 py-4 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">Job Title</th>
+                        <th class="px-4 py-4 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">Role</th>
+                        <th class="px-4 py-4 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">Disabled</th>
+                        <th class="px-4 py-4 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                    {% for user in page_obj %}
+                        <tr class="transition hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700 dark:text-gray-200">{{ user.email }}</td>
+                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700 dark:text-gray-200">{{ user.first_name|default:"-" }}</td>
+                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700 dark:text-gray-200">{{ user.last_name|default:"-" }}</td>
+                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700 dark:text-gray-200">{{ user.profile.company.name|default:"-" }}</td>
+                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700 dark:text-gray-200">{{ user.profile.department.name|default:"-" }}</td>
+                            <td class="whitespace-nowrap px-4 py-4 text-sm text-gray-700 dark:text-gray-200">{{ user.profile.job_title|default:"-" }}</td>
+                            <td class="px-4 py-4 text-sm text-gray-700 dark:text-gray-200">
+                                {% for role in user.profile.roles.all %}
+                                    <span class="mr-1 inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-200">
+                                        {{ role.name }}
+                                    </span>
+                                {% empty %}
+                                    -
+                                {% endfor %}
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-4 text-sm">
+                                {% if user.is_active %}
+                                    <span class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-1 text-xs font-medium text-green-700 dark:bg-green-900/40 dark:text-green-300">
+                                        No
+                                    </span>
+                                {% else %}
+                                    <span class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-1 text-xs font-medium text-red-700 dark:bg-red-900/40 dark:text-red-300">
+                                        Yes
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td class="whitespace-nowrap px-4 py-4 text-sm">
+                                <div class="flex items-center gap-2">
+                                    <a
+                                        href="{% url 'accounts:user_detail' user.id %}"
+                                        class="inline-flex items-center rounded-lg bg-blue-600 px-3 py-2 text-xs font-medium text-white transition hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
+                                    >
+                                        View
+                                    </a>
+
+                                    {% if perms.user.edit %}
+                                        <a
+                                            href="{% url 'accounts:user_detail' user.id %}"
+                                            class="inline-flex items-center rounded-lg bg-amber-600 px-3 py-2 text-xs font-medium text-white transition hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600"
+                                        >
+                                            Edit
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="9" class="px-4 py-8 text-center text-sm text-gray-500 dark:text-gray-400">
+                                No users found.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white px-4 py-4 shadow-sm dark:border-gray-800 dark:bg-gray-900 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+            Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} users
+        </p>
+
+        <div class="flex flex-wrap items-center gap-2">
+            
+            <form method="get" class="flex items-center gap-3">
+                <input type="hidden" name="page" value="1">
+                <input type="hidden" name="email" value="{{ filters.email }}">
+                <input type="hidden" name="first_name" value="{{ filters.first_name }}">
+                <input type="hidden" name="last_name" value="{{ filters.last_name }}">
+                <input type="hidden" name="company" value="{{ filters.company }}">
+                <input type="hidden" name="department" value="{{ filters.department }}">
+                <input type="hidden" name="job_title" value="{{ filters.job_title }}">
+                <input type="hidden" name="role" value="{{ filters.role }}">
+                <input type="hidden" name="disabled" value="{{ filters.disabled }}">
+
+                <div>
+                    <select
+                        onchange="this.form.submit()"
+                        id="page_size"
+                        name="page_size"
+                        class="h-9 appearance-none rounded-lg border border-gray-300 bg-white pl-3 pr-9 text-sm font-medium text-gray-700 transition hover:bg-gray-50 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 dark:focus:border-blue-400 dark:focus:ring-blue-900"
+                    >
+                        {% for size in allowed_page_sizes %}
+                            <option value="{{ size }}" {% if page_size == size %}selected{% endif %}>
+                                {{ size }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </form>
+            {% if page_obj.has_previous %}
+                <a
+                    href="?page=1&page_size={{ page_size }}&email={{ filters.email|urlencode }}&first_name={{ filters.first_name|urlencode }}&last_name={{ filters.last_name|urlencode }}&company={{ filters.company|urlencode }}&department={{ filters.department|urlencode }}&job_title={{ filters.job_title|urlencode }}&role={{ filters.role|urlencode }}&disabled={{ filters.disabled|urlencode }}"
+                    class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+                >
+                    First
+                </a>
+
+                <a
+                    href="?page={{ page_obj.previous_page_number }}&page_size={{ page_size }}&email={{ filters.email|urlencode }}&first_name={{ filters.first_name|urlencode }}&last_name={{ filters.last_name|urlencode }}&company={{ filters.company|urlencode }}&department={{ filters.department|urlencode }}&job_title={{ filters.job_title|urlencode }}&role={{ filters.role|urlencode }}&disabled={{ filters.disabled|urlencode }}"
+                    class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+                >
+                    Previous
+                </a>
+            {% endif %}
+
+            <span class="rounded-lg bg-gray-100 px-3 py-2 text-sm font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-200">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a
+                    href="?page={{ page_obj.next_page_number }}&page_size={{ page_size }}&email={{ filters.email|urlencode }}&first_name={{ filters.first_name|urlencode }}&last_name={{ filters.last_name|urlencode }}&company={{ filters.company|urlencode }}&department={{ filters.department|urlencode }}&job_title={{ filters.job_title|urlencode }}&role={{ filters.role|urlencode }}&disabled={{ filters.disabled|urlencode }}"
+                    class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+                >
+                    Next
+                </a>
+
+                <a
+                    href="?page={{ page_obj.paginator.num_pages }}&page_size={{ page_size }}&email={{ filters.email|urlencode }}&first_name={{ filters.first_name|urlencode }}&last_name={{ filters.last_name|urlencode }}&company={{ filters.company|urlencode }}&department={{ filters.department|urlencode }}&job_title={{ filters.job_title|urlencode }}&role={{ filters.role|urlencode }}&disabled={{ filters.disabled|urlencode }}"
+                    class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+                >
+                    Last
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

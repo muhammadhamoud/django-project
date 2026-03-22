@@ -1,0 +1,368 @@
+{% extends "base.html" %}
+{% block title %}User Detail{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-5xl space-y-6">
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">User Detail</h1>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+                View user information{% if can_edit %} and update details{% endif %}.
+            </p>
+        </div>
+
+        <a
+            href="{% url 'accounts:user_list' %}"
+            class="inline-flex items-center rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+        >
+            Back to Users
+        </a>
+    </div>
+
+    <form method="post" class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+        {% csrf_token %}
+
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <!-- Email - readonly -->
+            <div>
+                <label for="email" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Email
+                </label>
+                <input
+                    type="email"
+                    id="email"
+                    value="{{ user_obj.email }}"
+                    readonly
+                    class="w-full cursor-not-allowed rounded-xl border border-gray-300 bg-gray-50 px-4 py-2.5 text-sm text-gray-700 opacity-80 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
+                >
+            </div>
+
+            <!-- First Name -->
+            <div>
+                <label for="first_name" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    First Name
+                </label>
+                <input
+                    type="text"
+                    id="first_name"
+                    name="first_name"
+                    value="{{ user_obj.first_name }}"
+                    {% if not can_edit %}readonly{% endif %}
+                    class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-900 {% if not can_edit %}cursor-not-allowed opacity-80{% endif %}"
+                >
+            </div>
+
+            <!-- Last Name -->
+            <div>
+                <label for="last_name" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Last Name
+                </label>
+                <input
+                    type="text"
+                    id="last_name"
+                    name="last_name"
+                    value="{{ user_obj.last_name }}"
+                    {% if not can_edit %}readonly{% endif %}
+                    class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-900 {% if not can_edit %}cursor-not-allowed opacity-80{% endif %}"
+                >
+            </div>
+
+            <!-- Company -->
+            <div>
+                <label for="company" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Company
+                </label>
+                <select
+                    id="company"
+                    name="company"
+                    {% if not can_edit %}disabled{% endif %}
+                    class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-900 {% if not can_edit %}cursor-not-allowed opacity-80{% endif %}"
+                >
+                    <option value="">Select company</option>
+                    {% for company in companies %}
+                        <option value="{{ company.id }}" {% if profile.company_id == company.id %}selected{% endif %}>
+                            {{ company.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Department -->
+            <div>
+                <label for="department" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Department
+                </label>
+                <select
+                    id="department"
+                    name="department"
+                    {% if not can_edit %}disabled{% endif %}
+                    class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-900 {% if not can_edit %}cursor-not-allowed opacity-80{% endif %}"
+                >
+                    <option value="">Select department</option>
+                    {% for department in departments %}
+                        <option value="{{ department.id }}" {% if profile.department_id == department.id %}selected{% endif %}>
+                            {{ department.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Job Title -->
+            <div>
+                <label for="job_title" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Job Title
+                </label>
+                <select
+                    id="job_title"
+                    name="job_title"
+                    {% if not can_edit %}disabled{% endif %}
+                    class="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-900 {% if not can_edit %}cursor-not-allowed opacity-80{% endif %}"
+                >
+                    <option value="">Select job title</option>
+                    {% for job_title in job_titles %}
+                        <option value="{{ job_title.id }}" {% if profile.job_title_id == job_title.id %}selected{% endif %}>
+                            {{ job_title.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Disabled -->
+            <div>
+                <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Disabled
+                </label>
+                <label class="inline-flex items-center gap-3 rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 {% if not can_edit %}cursor-not-allowed opacity-80{% endif %}">
+                    <input
+                        type="checkbox"
+                        name="disabled"
+                        class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700"
+                        {% if profile.disabled %}checked{% endif %}
+                        {% if not can_edit %}disabled{% endif %}
+                    >
+                    <span>Mark this user as disabled</span>
+                </label>
+            </div>
+
+            <!-- Roles -->
+            <!-- <div class="md:col-span-2">
+                <label for="roles" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Roles
+                </label>
+                <select
+                    id="roles"
+                    name="roles"
+                    multiple
+                    {% if not can_edit %}disabled{% endif %}
+                    class="min-h-[140px] w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-900 {% if not can_edit %}cursor-not-allowed opacity-80{% endif %}"
+                >
+                    {% for role in roles %}
+                        <option value="{{ role.id }}" {% if role in profile.roles.all %}selected{% endif %}>
+                            {{ role.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                    Hold Ctrl (Windows) or Command (Mac) to select multiple roles.
+                </p>
+            </div> -->
+
+            <div class="md:col-span-2">
+    <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+        Role
+    </label>
+
+    <div class="relative" id="role-dropdown-wrapper">
+        <button
+            type="button"
+            id="role-dropdown-button"
+            {% if not can_edit %}disabled{% endif %}
+            class="flex w-full items-center justify-between rounded-xl border border-gray-300 bg-white px-4 py-3 text-left text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-900 {% if not can_edit %}cursor-not-allowed opacity-80{% endif %}"
+            onclick="toggleRoleDropdown()"
+        >
+            <span id="selected-role-label">
+                {% with selected_role=profile.roles.first %}
+                    {% if selected_role %}
+                        {{ selected_role.name }}
+                    {% else %}
+                        Select role
+                    {% endif %}
+                {% endwith %}
+            </span>
+            <svg class="ml-2 h-4 w-4 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+
+        <div
+            id="role-dropdown-menu"
+            class="absolute z-20 mt-2 hidden max-h-64 w-full overflow-y-auto rounded-xl border border-gray-300 bg-white p-2 shadow-lg dark:border-gray-700 dark:bg-gray-800"
+        >
+            {% for role in roles %}
+                <label class="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">
+                    <input
+                        type="radio"
+                        name="roles"
+                        value="{{ role.id }}"
+                        class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700"
+                        {% if role in profile.roles.all %}checked{% endif %}
+                        {% if not can_edit %}disabled{% endif %}
+                        onchange="selectRoleLabel(this, '{{ role.name|escapejs }}')"
+                    >
+                    <span>{{ role.name }}</span>
+                </label>
+            {% endfor %}
+        </div>
+    </div>
+
+    <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+        Select one role only.
+    </p>
+</div>
+
+            <!-- Properties -->
+            <!-- <div class="md:col-span-2">
+                <label for="properties" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Properties
+                </label>
+                <select
+                    id="properties"
+                    name="properties"
+                    multiple
+                    {% if not can_edit %}disabled{% endif %}
+                    class="min-h-[180px] w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-900 {% if not can_edit %}cursor-not-allowed opacity-80{% endif %}"
+                >
+                    {% for property in available_properties %}
+                        <option value="{{ property.id }}" {% if property in assigned_properties %}selected{% endif %}>
+                            {{ property.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                    Only properties you are allowed to assign are shown here.
+                </p>
+            </div>
+        </div> -->
+
+        <!-- Properties -->
+        <div class="md:col-span-2">
+            <div class="mb-2 flex items-center justify-between">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Properties
+                </label>
+
+                {% if can_edit %}
+                    <label class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                        <input
+                            type="checkbox"
+                            id="select_all_properties"
+                            class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700"
+                            onchange="toggleAllProperties(this)"
+                        >
+                        <span>Select All</span>
+                    </label>
+                {% endif %}
+            </div>
+
+            <div class="max-h-72 overflow-y-auto rounded-xl border border-gray-300 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 {% if not can_edit %}opacity-80{% endif %}">
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {% for property in available_properties %}
+                        <label class="inline-flex items-center gap-3 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-800 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 {% if can_edit %}cursor-pointer{% else %}cursor-not-allowed{% endif %}">
+                            <input
+                                type="checkbox"
+                                name="properties"
+                                value="{{ property.id }}"
+                                class="property-checkbox h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700"
+                                {% if property in assigned_properties %}checked{% endif %}
+                                {% if not can_edit %}disabled{% endif %}
+                                onchange="updateSelectAllProperties()"
+                            >
+                            <span>{{ property.name }}</span>
+                        </label>
+                    {% empty %}
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            No properties available.
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                Only properties you are allowed to assign are shown here.
+            </p>
+        </div>
+
+        <div class="mt-6 flex items-center justify-end gap-3">
+            <a
+                href="{% url 'accounts:user_list' %}"
+                class="inline-flex items-center rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+            >
+                Back
+            </a>
+
+            {% if can_edit %}
+                <button
+                    type="submit"
+                    class="inline-flex items-center rounded-xl bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
+                >
+                    Update User
+                </button>
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+
+<script>
+    function toggleAllProperties(source) {
+        const checkboxes = document.querySelectorAll(".property-checkbox");
+        checkboxes.forEach(function (checkbox) {
+            if (!checkbox.disabled) {
+                checkbox.checked = source.checked;
+            }
+        });
+    }
+
+    function updateSelectAllProperties() {
+        const selectAll = document.getElementById("select_all_properties");
+        const checkboxes = Array.from(document.querySelectorAll(".property-checkbox:not(:disabled)"));
+
+        if (!selectAll || checkboxes.length === 0) return;
+
+        const allChecked = checkboxes.every(function (checkbox) {
+            return checkbox.checked;
+        });
+
+        selectAll.checked = allChecked;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        updateSelectAllProperties();
+    });
+</script>
+
+<script>
+    function toggleRoleDropdown() {
+        const button = document.getElementById("role-dropdown-button");
+        if (button.disabled) return;
+
+        const menu = document.getElementById("role-dropdown-menu");
+        menu.classList.toggle("hidden");
+    }
+
+    function selectRoleLabel(input, roleName) {
+        document.getElementById("selected-role-label").textContent = roleName;
+        document.getElementById("role-dropdown-menu").classList.add("hidden");
+    }
+
+    document.addEventListener("click", function (event) {
+        const wrapper = document.getElementById("role-dropdown-wrapper");
+        const menu = document.getElementById("role-dropdown-menu");
+
+        if (!wrapper.contains(event.target)) {
+            menu.classList.add("hidden");
+        }
+    });
+</script>
+
+{% endblock %}

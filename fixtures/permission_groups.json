@@ -1,0 +1,32 @@
+[
+  {
+    "model": "accounts.permissiongroup",
+    "pk": 1,
+    "fields": {
+      "name": "User Management",
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "is_deleted": false
+    }
+  },
+  {
+    "model": "accounts.permissiongroup",
+    "pk": 2,
+    "fields": {
+      "name": "Property Management",
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "is_deleted": false
+    }
+  },
+  {
+    "model": "accounts.permissiongroup",
+    "pk": 3,
+    "fields": {
+      "name": "Reporting",
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "is_deleted": false
+    }
+  }
+]

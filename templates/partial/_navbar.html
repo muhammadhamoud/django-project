@@ -1,0 +1,108 @@
+{% load static i18n %}
+
+<!-- Alpine.js required -->
+
+<script defer src="https://unpkg.com/alpinejs"></script>
+
+<nav x-data="{ open:false, profile:false, lang:false }"
+     class="fixed top-0 w-full z-50 backdrop-blur bg-blue-600 border-b">
+
+
+<div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+
+        <!-- Logo -->
+        <a href="{% url 'index' %}" class="flex items-center space-x-2 font-semibold text-lg">
+            {% if site_information.logo %}
+                <img src="{{ site_information.logo.url }}" class="h-8 w-8 object-contain">
+            {% endif %}
+            <span>{{ site_information.name }}</span>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-6">
+
+            <a href="#" class="text-gray-700 hover:text-black">Users</a>
+            <a href="#" class="text-gray-700 hover:text-black">Reports</a>
+
+            <!-- Language -->
+            <div class="relative" @click.away="lang=false">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+
+                <button @click="lang=!lang"
+                        class="text-gray-700 hover:text-black text-sm">
+                    {{ LANGUAGE_CODE|upper }}
+                </button>
+
+                <div x-show="lang" x-transition
+                     class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow border">
+                    {% for language in languages %}
+                    <a href="/{{ language.code }}/"
+                       class="block px-4 py-2 text-sm hover:bg-gray-100
+                       {% if language.code == LANGUAGE_CODE %}bg-gray-100 font-medium{% endif %}">
+                        {{ language.name_local }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Profile -->
+            <div class="relative" @click.away="profile=false">
+                <button @click="profile=!profile"
+                        class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-gray-600 text-sm"></i>
+                    </div>
+                </button>
+
+                <div x-show="profile" x-transition
+                     class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow border">
+
+
+                    <a href="{% url 'accounts:profile' %}"
+                       class="block px-4 py-2 text-sm hover:bg-gray-100">
+                        Profile
+                    </a>
+
+                    <div class="border-t"></div>
+
+                    <a href="{% url 'accounts:logout' %}"
+                       class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                        Logout
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Mobile Button -->
+        <button @click="open=!open" class="md:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path x-show="!open" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                <path x-show="open" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+
+    </div>
+</div>
+
+<!-- Mobile Menu -->
+<div x-show="open" x-transition class="md:hidden bg-white border-t px-4 py-4 space-y-3">
+
+    <a href="#" class="block text-gray-700">Users</a>
+    <a href="#" class="block text-gray-700">Reports</a>
+
+    <div class="border-t pt-3"></div>
+
+    <a href="{% url 'accounts:profile' %}" class="block text-gray-700">Profile</a>
+    <a href="{% url 'accounts:logout' %}" class="block text-red-600">Logout</a>
+
+</div>
+
+
+</nav>

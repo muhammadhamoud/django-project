@@ -1,0 +1,172 @@
+[
+  {
+    "model": "reports.reportgroup",
+    "pk": 1,
+    "fields": {
+      "title": "Topline Financials",
+      "key": "TOPLINE_FINANCIALS",
+      "color": "emerald",
+      "slug": "topline-financials",
+      "description": "Executive summary reporting for topline revenue, budget performance, and profitability.",
+      "image": null,
+      "icon": "fa-chart-line",
+      "is_active": true,
+      "sort_order": 1,
+      "created_at": "2026-03-21T00:00:00Z",
+      "updated_at": "2026-03-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "reports.reportgroup",
+    "pk": 2,
+    "fields": {
+      "title": "Distribution",
+      "key": "DISTRIBUTION",
+      "color": "blue",
+      "slug": "distribution",
+      "description": "Channel contribution, booking sources, and distribution cost reporting.",
+      "image": null,
+      "icon": "fa-share-nodes",
+      "is_active": true,
+      "sort_order": 2,
+      "created_at": "2026-03-21T00:00:00Z",
+      "updated_at": "2026-03-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "reports.reportgroup",
+    "pk": 3,
+    "fields": {
+      "title": "Segmentation",
+      "key": "SEGMENTATION",
+      "color": "violet",
+      "slug": "segmentation",
+      "description": "Business mix reporting by market segment, source, and rate category.",
+      "image": null,
+      "icon": "fa-layer-group",
+      "is_active": true,
+      "sort_order": 3,
+      "created_at": "2026-03-21T00:00:00Z",
+      "updated_at": "2026-03-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "reports.reportgroup",
+    "pk": 4,
+    "fields": {
+      "title": "Forecasting & Budget",
+      "key": "FORECASTING_BUDGET",
+      "color": "amber",
+      "slug": "forecasting-budget",
+      "description": "Forward-looking revenue, occupancy, ADR, and budget tracking reports.",
+      "image": null,
+      "icon": "fa-calendar-days",
+      "is_active": true,
+      "sort_order": 4,
+      "created_at": "2026-03-21T00:00:00Z",
+      "updated_at": "2026-03-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "reports.reportgroup",
+    "pk": 5,
+    "fields": {
+      "title": "Account Management",
+      "key": "ACCOUNT_MANAGEMENT",
+      "color": "indigo",
+      "slug": "account-management",
+      "description": "Production and performance reporting for accounts, agencies, and corporate clients.",
+      "image": null,
+      "icon": "fa-briefcase",
+      "is_active": true,
+      "sort_order": 5,
+      "created_at": "2026-03-21T00:00:00Z",
+      "updated_at": "2026-03-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "reports.reportgroup",
+    "pk": 6,
+    "fields": {
+      "title": "Booking Activity & Patterns",
+      "key": "BOOKING_ACTIVITY_PATTERNS",
+      "color": "cyan",
+      "slug": "booking-activity-patterns",
+      "description": "Pickup, pace, booking behavior, lead time, and stay pattern reports.",
+      "image": null,
+      "icon": "fa-calendar-check",
+      "is_active": true,
+      "sort_order": 6,
+      "created_at": "2026-03-21T00:00:00Z",
+      "updated_at": "2026-03-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "reports.reportgroup",
+    "pk": 7,
+    "fields": {
+      "title": "Cancellation & No-Show",
+      "key": "CANCELLATION_NO_SHOW",
+      "color": "rose",
+      "slug": "cancellation-no-show",
+      "description": "Reports focused on cancellations, no-shows, wash, and refund behaviors.",
+      "image": null,
+      "icon": "fa-ban",
+      "is_active": true,
+      "sort_order": 7,
+      "created_at": "2026-03-21T00:00:00Z",
+      "updated_at": "2026-03-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "reports.reportgroup",
+    "pk": 8,
+    "fields": {
+      "title": "Pricing & Inventory",
+      "key": "PRICING_INVENTORY",
+      "color": "orange",
+      "slug": "pricing-inventory",
+      "description": "Rate strategy, inventory controls, restrictions, and room availability reports.",
+      "image": null,
+      "icon": "fa-tags",
+      "is_active": true,
+      "sort_order": 8,
+      "created_at": "2026-03-21T00:00:00Z",
+      "updated_at": "2026-03-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "reports.reportgroup",
+    "pk": 9,
+    "fields": {
+      "title": "Demand, Supply & Market Share",
+      "key": "DEMAND_SUPPLY_MARKET_SHARE",
+      "color": "teal",
+      "slug": "demand-supply-market-share",
+      "description": "Demand trends, supply constraints, and market benchmark reporting.",
+      "image": null,
+      "icon": "fa-chart-area",
+      "is_active": true,
+      "sort_order": 9,
+      "created_at": "2026-03-21T00:00:00Z",
+      "updated_at": "2026-03-21T00:00:00Z"
+    }
+  },
+  {
+    "model": "reports.reportgroup",
+    "pk": 10,
+    "fields": {
+      "title": "Geo Source & Market Mix",
+      "key": "GEO_SOURCE_MARKET_MIX",
+      "color": "sky",
+      "slug": "geo-source-market-mix",
+      "description": "Source market and geographic contribution reporting.",
+      "image": null,
+      "icon": "fa-globe",
+      "is_active": true,
+      "sort_order": 10,
+      "created_at": "2026-03-21T00:00:00Z",
+      "updated_at": "2026-03-21T00:00:00Z"
+    }
+  }
+]

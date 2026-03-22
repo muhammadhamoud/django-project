@@ -1,0 +1,71 @@
+[
+    {
+        "model": "properties.property",
+        "pk": 1,
+        "fields": {
+            "hotel_code": "DEMO-HOTEL-001",
+            "resort_code": "DEMO-RESORT-001",
+            "name": "Demo Hotel One",
+            "begin_date": "2026-01-01",
+            "end_date": null,
+            "chain_mode": "DEMO",
+            "country_mode": "UAE",
+            "currency": "AED",
+            "currency_format": "AED {amount}",
+            "catering_currency": "AED",
+            "catering_currency_format": "AED {amount}",
+            "short_date_format": "DD/MM/YYYY",
+            "long_date_format": "DD MMM YYYY",
+            "time_format": "HH:mm",
+            "time_zone": "Asia/Dubai",
+            "created_at": "2026-01-01T00:00:00Z",
+            "updated_at": "2026-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "properties.property",
+        "pk": 2,
+        "fields": {
+            "hotel_code": "DEMO-HOTEL-002",
+            "resort_code": "DEMO-RESORT-002",
+            "name": "Demo Resort Two",
+            "begin_date": "2026-01-01",
+            "end_date": null,
+            "chain_mode": "DEMO",
+            "country_mode": "UAE",
+            "currency": "AED",
+            "currency_format": "AED {amount}",
+            "catering_currency": "AED",
+            "catering_currency_format": "AED {amount}",
+            "short_date_format": "DD/MM/YYYY",
+            "long_date_format": "DD MMM YYYY",
+            "time_format": "HH:mm",
+            "time_zone": "Asia/Dubai",
+            "created_at": "2026-01-01T00:00:00Z",
+            "updated_at": "2026-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "properties.property",
+        "pk": 3,
+        "fields": {
+            "hotel_code": "DEMO-HOTEL-003",
+            "resort_code": "DEMO-RESORT-003",
+            "name": "Demo Beach Resort",
+            "begin_date": "2026-01-01",
+            "end_date": null,
+            "chain_mode": "DEMO",
+            "country_mode": "UAE",
+            "currency": "AED",
+            "currency_format": "AED {amount}",
+            "catering_currency": "AED",
+            "catering_currency_format": "AED {amount}",
+            "short_date_format": "DD/MM/YYYY",
+            "long_date_format": "DD MMM YYYY",
+            "time_format": "HH:mm",
+            "time_zone": "Asia/Dubai",
+            "created_at": "2026-01-01T00:00:00Z",
+            "updated_at": "2026-01-01T00:00:00Z"
+        }
+    }
+]

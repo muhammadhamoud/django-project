@@ -1,0 +1,116 @@
+{% load static i18n tailwind_tags %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- SEO -->
+    <meta name="description" content="ROInsight Enlightening Data, Empowering Insights">
+    <meta name="author" content="Muhammad Alhamoud">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+    <!-- Tailwind -->
+    {% tailwind_css %}
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static '/assets/img/favicons/favicon.ico' %}">
+
+    <title>
+        {{ site_information.site_name|default:"ROInsight" }} |
+        {% block title %}{% endblock %}
+    </title>
+
+    {% block head %}{% endblock %}
+    {% block styles %}{% endblock %}
+
+
+</head>
+
+<body class="bg-gray-50 text-gray-900 antialiased">
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="bg-white shadow-sm border-b">
+
+
+        <!-- Messages -->
+        {% block messages %}
+        {% if messages %}
+        <div class="max-w-7xl mx-auto px-4 py-3 space-y-2">
+            {% for message in messages %}
+            <div class="px-4 py-3 rounded-lg text-sm font-medium
+                    {% if message.tags == 'success' %}
+                        bg-green-100 text-green-800
+                    {% elif message.tags == 'error' %}
+                        bg-red-100 text-red-800
+                    {% elif message.tags == 'warning' %}
+                        bg-yellow-100 text-yellow-800
+                    {% else %}
+                        bg-gray-100 text-gray-800
+                    {% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endblock %}
+
+        {% block navbar %}
+        {% comment %}{% include "partial/_navbar.html" %}{% endcomment %}
+        {% endblock %}
+
+
+    </header>
+
+    <!-- ================= MAIN LAYOUT ================= -->
+
+    <div class="max-w-7xl mx-auto px-4 py-6 mt-16">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+            <!-- Sidebar -->
+            <!-- <aside class="lg:col-span-1">
+                {% block sidebar %}{% endblock %}
+            </aside> -->
+            
+            <!-- Main -->
+            <main class="lg:col-span-4">
+                {% block content %}{% endblock %}
+            </main>
+
+        </div>
+    </div>
+
+    <!-- Extra Section -->
+
+    <section class="max-w-7xl mx-auto px-4 py-6">
+        {% block content1 %}{% endblock %}
+    </section>
+
+    {% block footer %}
+    {% include "partial/_footer.html" %}
+    {% endblock %}
+
+    <!-- ================= SCRIPTS ================= -->
+
+    {% load custom_static_tags %}
+    {{ include_js_scripts|safe }}
+
+    {% block scripts %}{% endblock %}
+    {% block extrascripts %}{% endblock %}
+
+</body>
+
+</html>

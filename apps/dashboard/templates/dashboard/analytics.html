@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Analytics{% endblock %}
+{% block page_title %}Analytics Center{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {% include 'dashboard/partials/stat_card.html' with title='Traffic Growth' value='28.4%' trend='+4.2% from last period' icon='↗' icon_bg='bg-emerald-500/10 text-emerald-300' trend_color='text-emerald-300' %}
+        {% include 'dashboard/partials/stat_card.html' with title='Avg Session' value='08:24' trend='High engagement duration' icon='◌' icon_bg='bg-cyan-500/10 text-cyan-300' trend_color='text-cyan-300' %}
+        {% include 'dashboard/partials/stat_card.html' with title='Bounce Rate' value='21.8%' trend='Improved landing quality' icon='↓' icon_bg='bg-amber-500/10 text-amber-300' trend_color='text-amber-300' %}
+        {% include 'dashboard/partials/stat_card.html' with title='Goal Completions' value='1,904' trend='+12 new today' icon='★' icon_bg='bg-brand-500/10 text-brand-300' trend_color='text-brand-300' %}
+    </section>
+
+    <section class="grid gap-6 lg:grid-cols-2">
+        <div class="rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-panel">
+            <h3 class="text-lg font-semibold">Audience Segments</h3>
+            <p class="mt-1 text-sm text-slate-400">Segment distribution overview</p>
+            <div class="mt-6 space-y-4">
+                <div><div class="mb-2 flex justify-between text-sm"><span>Enterprise</span><span>46%</span></div><div class="h-3 rounded-full bg-slate-800"><div class="h-3 w-[46%] rounded-full bg-gradient-to-r from-brand-500 to-violet-500"></div></div></div>
+                <div><div class="mb-2 flex justify-between text-sm"><span>SMB</span><span>31%</span></div><div class="h-3 rounded-full bg-slate-800"><div class="h-3 w-[31%] rounded-full bg-gradient-to-r from-cyan-500 to-sky-500"></div></div></div>
+                <div><div class="mb-2 flex justify-between text-sm"><span>Startup</span><span>15%</span></div><div class="h-3 rounded-full bg-slate-800"><div class="h-3 w-[15%] rounded-full bg-gradient-to-r from-emerald-500 to-teal-500"></div></div></div>
+                <div><div class="mb-2 flex justify-between text-sm"><span>Other</span><span>8%</span></div><div class="h-3 rounded-full bg-slate-800"><div class="h-3 w-[8%] rounded-full bg-gradient-to-r from-amber-400 to-orange-500"></div></div></div>
+            </div>
+        </div>
+
+        {% include 'dashboard/partials/activity_feed.html' with activity_title='Analytics Events' activity_subtitle='Tracking and insight updates' activities=analytics_activities %}
+    </section>
+</div>
+{% endblock %}

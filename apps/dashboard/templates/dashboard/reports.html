@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Reports{% endblock %}
+{% block page_title %}Reports Library{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <section class="grid gap-6 lg:grid-cols-3">
+        <div class="rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-panel lg:col-span-2">
+            <h3 class="text-lg font-semibold">Generated Reports</h3>
+            <p class="mt-1 text-sm text-slate-400">Latest exported insights and summaries</p>
+            <div class="mt-6 grid gap-4 md:grid-cols-2">
+                <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-5">
+                    <p class="text-sm text-slate-400">Revenue Summary</p>
+                    <h4 class="mt-2 text-xl font-semibold">Q1 Executive Report</h4>
+                    <p class="mt-2 text-sm text-slate-400">Updated 2 hours ago</p>
+                    <button class="mt-4 rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-900">Open Report</button>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-5">
+                    <p class="text-sm text-slate-400">Operations</p>
+                    <h4 class="mt-2 text-xl font-semibold">System Stability Review</h4>
+                    <p class="mt-2 text-sm text-slate-400">Updated today</p>
+                    <button class="mt-4 rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-900">Open Report</button>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-5">
+                    <p class="text-sm text-slate-400">Marketing</p>
+                    <h4 class="mt-2 text-xl font-semibold">Campaign Attribution</h4>
+                    <p class="mt-2 text-sm text-slate-400">Updated yesterday</p>
+                    <button class="mt-4 rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-900">Open Report</button>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-5">
+                    <p class="text-sm text-slate-400">Users</p>
+                    <h4 class="mt-2 text-xl font-semibold">Retention Cohort Analysis</h4>
+                    <p class="mt-2 text-sm text-slate-400">Updated 3 days ago</p>
+                    <button class="mt-4 rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-900">Open Report</button>
+                </div>
+            </div>
+        </div>
+
+        {% include 'dashboard/partials/activity_feed.html' with activity_title='Report Activity' activity_subtitle='Exports and scheduled updates' activities=report_activities %}
+    </section>
+
+    {% include 'dashboard/partials/table.html' with table_title='Scheduled Reports' table_subtitle='Recurring reports across teams' table_rows=report_rows %}
+</div>
+{% endblock %}

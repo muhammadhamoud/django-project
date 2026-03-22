@@ -1,0 +1,83 @@
+{% load i18n %}
+
+<section id="offerings" class="relative overflow-hidden rounded-[2rem] border border-slate-200/70 bg-gradient-to-br from-white via-slate-50 to-brand-50/40 px-6 py-14 shadow-soft dark:border-slate-800 dark:from-slate-900 dark:via-slate-950 dark:to-brand-950/20 sm:px-8 lg:px-12">
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute -top-16 -left-16 h-56 w-56 rounded-full bg-brand-200/40 blur-3xl dark:bg-brand-500/10"></div>
+        <div class="absolute -bottom-16 -right-16 h-64 w-64 rounded-full bg-indigo-200/40 blur-3xl dark:bg-indigo-500/10"></div>
+    </div>
+
+    <div class="relative">
+        {% if offerings %}
+            {% with hero_offering=offerings.0 side_offerings=offerings|slice:"1:4" %}
+                <div class="grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
+                    
+                    <!-- Hero content from latest offering -->
+                    <div class="max-w-2xl">
+                        <h2 class="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
+                            {{ hero_offering.name }}
+                        </h2>
+
+                        <p class="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg">
+                            {{ hero_offering.description|safe }}
+                        </p>
+
+                        {% if hero_offering.get_absolute_url %}
+                        <div class="mt-8">
+                            <a href="{{ hero_offering.get_absolute_url }}"
+                               class="inline-flex items-center gap-2 rounded-2xl bg-brand-600 px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-brand-700">
+                                {% trans "Explore offering" %}
+                                <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Next three offerings -->
+                    <div class="grid gap-5 sm:grid-cols-1">
+                        {% for offering in side_offerings %}
+                        <article class="group relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white/85 p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-panel dark:border-slate-800 dark:bg-slate-900/80">
+                            <div class="absolute right-0 top-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full bg-brand-100/70 blur-2xl dark:bg-brand-500/10"></div>
+
+                            <div class="relative">
+                                <div class="flex items-start gap-4">
+                                    <div class="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-100 dark:bg-brand-500/10 dark:text-brand-400 dark:ring-brand-500/20">
+                                        {% if offering.icon %}
+                                            <i class="{{ offering.icon }} text-lg"></i>
+                                        {% else %}
+                                            <i class="fas fa-layer-group text-lg"></i>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="min-w-0">
+                                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">
+                                            {{ offering.name }}
+                                        </h3>
+
+                                        <p class="mt-2 text-sm leading-7 text-slate-600 dark:text-slate-300">
+                                            {{ offering.description|safe|truncatewords:18 }}
+                                        </p>
+
+                                        {% if offering.get_absolute_url %}
+                                        <div class="mt-4">
+                                            <a href="{{ offering.get_absolute_url }}"
+                                               class="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300">
+                                                {% trans "Learn more" %}
+                                                <i class="fas fa-arrow-right text-xs transition group-hover:translate-x-0.5"></i>
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endwith %}
+        {% else %}
+            <div class="mx-auto max-w-2xl rounded-3xl border border-dashed border-slate-300 bg-white/70 px-6 py-10 text-center text-slate-500 dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-400">
+                {% trans "No offerings available yet." %}
+            </div>
+        {% endif %}
+    </div>
+</section>

@@ -1,0 +1,132 @@
+{% load i18n static %}
+
+<section id="features-storefront" class="space-y-6 overflow-hidden" x-data="featuresStorefrontCarousel()">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+            <span class="inline-flex items-center rounded-full border border-brand-200 bg-brand-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-brand-700 dark:border-brand-500/20 dark:bg-brand-500/10 dark:text-brand-300">
+                {% trans "Storefront" %}
+            </span>
+            <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                {% trans "Explore Features" %}
+            </h2>
+            <p class="mt-2 max-w-2xl text-sm leading-7 text-slate-600 dark:text-slate-300 sm:text-base">
+                {% trans "Discover the core features that power our solutions and create better digital experiences." %}
+            </p>
+        </div>
+
+        {% if features %}
+        <div class="flex items-center gap-3">
+            <button
+                type="button"
+                @click="prev()"
+                class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-700 shadow-soft transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+                aria-label="{% trans 'Previous features' %}"
+            >
+                <i class="fas fa-chevron-left text-sm"></i>
+            </button>
+
+            <button
+                type="button"
+                @click="next()"
+                class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-700 shadow-soft transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+                aria-label="{% trans 'Next features' %}"
+            >
+                <i class="fas fa-chevron-right text-sm"></i>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if features %}
+    <div class="relative max-w-full overflow-hidden">
+        <div
+            x-ref="track"
+            class="flex max-w-full gap-6 overflow-x-auto scroll-smooth pb-4 snap-x snap-mandatory"
+            style="scrollbar-width: none; -ms-overflow-style: none;"
+        >
+            {% for feature in features %}
+            <article class="group relative w-[88%] shrink-0 snap-start overflow-hidden rounded-[1.75rem] border border-slate-200/80 bg-white shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-panel dark:border-slate-800 dark:bg-slate-900 sm:w-[340px] lg:w-[360px]">
+                <div class="absolute inset-x-0 top-0 h-28 bg-gradient-to-br from-brand-100 via-white to-slate-50 dark:from-brand-500/10 dark:via-slate-900 dark:to-slate-900"></div>
+
+                <div class="relative p-6">
+                    <div class="mb-5 flex h-16 w-16 items-center justify-center rounded-3xl bg-brand-50 text-brand-600 ring-1 ring-brand-100 shadow-soft dark:bg-brand-500/10 dark:text-brand-400 dark:ring-brand-500/20">
+                        {% if feature.icon %}
+                            <i class="{{ feature.icon }} text-2xl"></i>
+                        {% else %}
+                            <i class="fas fa-star text-2xl"></i>
+                        {% endif %}
+                    </div>
+
+                    <div class="min-w-0">
+                        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600 dark:text-brand-400">
+                            {% trans "Feature" %}
+                        </p>
+                        <h3 class="mt-1 text-xl font-bold text-slate-900 dark:text-white">
+                            {% if feature.name %}
+                                {{ feature.name }}
+                            {% else %}
+                                {% trans "Feature" %}
+                            {% endif %}
+                        </h3>
+                    </div>
+
+                    <p class="mt-4 min-h-[96px] text-sm leading-7 text-slate-600 dark:text-slate-300">
+                        {% if feature.description %}
+                            {{ feature.description|striptags|truncatewords:20 }}
+                        {% else %}
+                            {% trans "A powerful feature crafted to improve user experience, efficiency, and business performance." %}
+                        {% endif %}
+                    </p>
+
+                    <div class="mt-6 flex items-center justify-between gap-3">
+                        <span class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+                            {% trans "View feature" %}
+                        </span>
+
+                        {% if feature.get_absolute_url %}
+                        <a
+                            href="{{ feature.get_absolute_url }}"
+                            class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+                        >
+                            {% trans "Open" %}
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+
+    <style>
+        #features-storefront [x-ref="track"]::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+
+    {% else %}
+    <div class="rounded-3xl border border-dashed border-slate-300 bg-white/60 p-8 text-center text-slate-500 dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-400">
+        {% trans "No features available yet." %}
+    </div>
+    {% endif %}
+</section>
+
+<script>
+    function featuresStorefrontCarousel() {
+        return {
+            prev() {
+                if (!this.$refs.track) return;
+                const card = this.$refs.track.querySelector('article');
+                const amount = card ? (card.offsetWidth + 24) : 380;
+                this.$refs.track.scrollBy({ left: -amount, behavior: 'smooth' });
+            },
+            next() {
+                if (!this.$refs.track) return;
+                const card = this.$refs.track.querySelector('article');
+                const amount = card ? (card.offsetWidth + 24) : 380;
+                this.$refs.track.scrollBy({ left: amount, behavior: 'smooth' });
+            }
+        }
+    }
+</script>
