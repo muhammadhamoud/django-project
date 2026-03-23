@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+{% block navbar %}
+    {% include 'dashboard/partials/navbar.html' with page_title='Expected Files' page_subtitle='Track generated expected files and whether they were found on time.' %}
+{% endblock %}
+{% block content %}
+<div class="min-h-screen">
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+
+    <div class="mb-6 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800">
+      <form method="get" class="grid grid-cols-1 gap-4 md:grid-cols-4">
+        <div>
+          <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Search</label>
+          <input
+            type="text"
+            name="q"
+            value="{{ request.GET.q }}"
+            placeholder="Rule, property, source..."
+            class="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:border-slate-500 focus:outline-none dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:placeholder-slate-500 dark:focus:border-slate-500"
+          >
+        </div>
+
+        <div>
+          <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Status</label>
+          <select
+            name="status"
+            class="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-800 focus:border-slate-500 focus:outline-none dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-slate-500"
+          >
+            <option value="">All</option>
+            <option value="pending" {% if request.GET.status == "pending" %}selected{% endif %}>Pending</option>
+            <option value="found" {% if request.GET.status == "found" %}selected{% endif %}>Found</option>
+            <option value="missing" {% if request.GET.status == "missing" %}selected{% endif %}>Missing</option>
+            <option value="late" {% if request.GET.status == "late" %}selected{% endif %}>Late</option>
+            <option value="skipped" {% if request.GET.status == "skipped" %}selected{% endif %}>Skipped</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Expected Date</label>
+          <input
+            type="date"
+            name="expected_date"
+            value="{{ request.GET.expected_date }}"
+            class="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-800 focus:border-slate-500 focus:outline-none dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-slate-500"
+          >
+        </div>
+
+        <div class="flex items-end gap-3">
+          <button
+            type="submit"
+            class="inline-flex w-full items-center justify-center rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
+          >
+            Filter
+          </button>
+          <a
+            href="{% url 'data:expected_file_list' %}"
+            class="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+          >
+            Reset
+          </a>
+        </div>
+      </form>
+    </div>
+
+    <div class="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-800">
+          <thead class="bg-slate-50 dark:bg-slate-950/60">
+            <tr>
+              <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Rule</th>
+              <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Property</th>
+              <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Source</th>
+              <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Expected Date</th>
+              <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Expected Filename</th>
+              <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Found File</th>
+              <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Status</th>
+            </tr>
+          </thead>
+
+          <tbody class="divide-y divide-slate-100 bg-white dark:divide-slate-800 dark:bg-slate-900">
+            {% for item in expected_files %}
+            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/60">
+              <td class="px-6 py-4">
+                <div class="font-medium text-slate-900 dark:text-slate-100">{{ item.rule }}</div>
+              </td>
+              <td class="px-6 py-4 text-sm text-slate-700 dark:text-slate-300">
+                {{ item.property }}
+              </td>
+              <td class="px-6 py-4 text-sm text-slate-700 dark:text-slate-300">
+                {{ item.source }}
+              </td>
+              <td class="px-6 py-4 text-sm text-slate-700 dark:text-slate-300">
+                {{ item.expected_date }}
+              </td>
+              <td class="px-6 py-4 text-sm text-slate-700 dark:text-slate-300">
+                {{ item.expected_filename|default:"-" }}
+              </td>
+              <td class="px-6 py-4 text-sm text-slate-700 dark:text-slate-300">
+                {% if item.incoming_file %}
+                  <div class="font-medium text-slate-900 dark:text-slate-100">{{ item.incoming_file.file_name }}</div>
+                  <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">{{ item.found_at|date:"Y-m-d H:i" }}</div>
+                {% else %}
+                  <span class="text-slate-500 dark:text-slate-400">-</span>
+                {% endif %}
+              </td>
+              <td class="px-6 py-4">
+                {% if item.status == "found" %}
+                  <span class="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">Found</span>
+                {% elif item.status == "missing" %}
+                  <span class="inline-flex rounded-full bg-rose-100 px-3 py-1 text-xs font-semibold text-rose-700 dark:bg-rose-500/15 dark:text-rose-300">Missing</span>
+                {% elif item.status == "late" %}
+                  <span class="inline-flex rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-500/15 dark:text-amber-300">Late</span>
+                {% elif item.status == "pending" %}
+                  <span class="inline-flex rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-700 dark:bg-sky-500/15 dark:text-sky-300">Pending</span>
+                {% elif item.status == "skipped" %}
+                  <span class="inline-flex rounded-full bg-slate-200 px-3 py-1 text-xs font-semibold text-slate-700 dark:bg-slate-700 dark:text-slate-200">Skipped</span>
+                {% else %}
+                  <span class="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 dark:bg-slate-700 dark:text-slate-200">{{ item.status }}</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="7" class="px-6 py-12 text-center">
+                <div class="text-sm font-medium text-slate-700 dark:text-slate-200">No expected files found.</div>
+                <div class="mt-1 text-sm text-slate-500 dark:text-slate-400">Expected files will appear here after generation.</div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {% if is_paginated %}
+    <div class="mt-6 flex items-center justify-between">
+      <div class="text-sm text-slate-600 dark:text-slate-400">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </div>
+
+      <div class="flex items-center gap-2">
+        {% if page_obj.has_previous %}
+          <a
+            href="?page={{ page_obj.previous_page_number }}"
+            class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+          >
+            Previous
+          </a>
+        {% endif %}
+
+        <span class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white dark:bg-slate-100 dark:text-slate-900">
+          {{ page_obj.number }}
+        </span>
+
+        {% if page_obj.has_next %}
+          <a
+            href="?page={{ page_obj.next_page_number }}"
+            class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+          >
+            Next
+          </a>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}

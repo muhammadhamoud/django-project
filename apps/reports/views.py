@@ -1,37 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
-
 from .models import ReportGroup, Report
-from properties.models import Property
-from django.core.exceptions import PermissionDenied
-from django.db import models
-
-
-def get_allowed_properties_for_user(user):
-    if user.is_superuser or getattr(user, "is_admin", False):
-        return Property.objects.all()
-
-    if not hasattr(user, "profile"):
-        return Property.objects.none()
-
-    return user.profile.properties.filter(is_active=True).distinct()
-
-
-def get_selected_property_for_user(request, user, allowed_properties):
-    property_id = request.GET.get("property")
-
-    if not allowed_properties.exists():
-        return None
-
-    if not property_id:
-        return allowed_properties.first()
-
-    selected_property = allowed_properties.filter(id=property_id).first()
-    if not selected_property:
-        raise PermissionDenied("You do not have access to this property.")
-    return selected_property
-
+from .services.report_filters import get_allowed_properties_for_user, get_selected_property_for_user
+from reports.services.report_filters import get_report_queryset_for_user
 
 
 @login_required
@@ -249,3 +221,45 @@ def report_detail_view(request, group_slug, report_slug):
 #         }
 #     })
 
+
+from django.http import JsonResponse
+from django.db.models import Q
+from reports.services.report_filters import get_report_queryset_for_user
+
+
+@login_required
+def report_autocomplete(request):
+    query = request.GET.get("q", "").strip()
+
+    if not query:
+        return JsonResponse({"results": []})
+
+    reports_qs, allowed_properties, selected_property = get_report_queryset_for_user(
+        request,
+        request.user,
+    )
+
+    if not selected_property:
+        return JsonResponse({"results": []})
+
+    reports = (
+        reports_qs.filter(
+            Q(title__icontains=query) |
+            Q(slug__icontains=query) |
+            Q(group__title__icontains=query) |
+            Q(group__title__icontains=query) |
+            Q(description__icontains=query)
+        )
+        .order_by("group__title", "title")[:10]
+    )
+
+    return JsonResponse({
+        "results": [
+            {
+                "name": report.title,
+                "url": report.get_absolute_url(),
+                "group": getattr(report.group, "title", None) or getattr(report.group, "name", ""),
+            }
+            for report in reports
+        ]
+    })

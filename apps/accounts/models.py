@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.urls import reverse
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.utils.translation import gettext_lazy as _
 from core.handle_images import compress_image
@@ -307,30 +308,6 @@ class MetaIndexes:
     indexes = [
         models.Index(fields=["email"]),
     ]
-
-
-
-# from django.conf import settings
-# class UserPropertyAccess(models.Model):
-#     user = models.ForeignKey(
-#         settings.AUTH_USER_MODEL,
-#         on_delete=models.CASCADE,
-#         related_name="property_accesses",
-#     )
-#     property = models.ForeignKey(
-#         Property,
-#         on_delete=models.CASCADE,
-#         related_name="user_accesses",
-#     )
-#     is_default = models.BooleanField(default=False)
-
-#     class Meta:
-#         unique_together = [("user", "property")]
-
-#     def __str__(self):
-#         return f"{self.user} -> {self.property}"
-    
-
 
 from django.core.exceptions import PermissionDenied
 from properties.models import Property

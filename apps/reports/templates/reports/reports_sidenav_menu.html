@@ -7,15 +7,15 @@
         x-data="{ open: false, closeTimer: null }"
         @mouseenter="clearTimeout(closeTimer); open = true"
         @mouseleave="closeTimer = setTimeout(() => open = false, 120)"
-        class="space-y-2"
+        class="space-y-1"
     >
         <a
             href="{{ group.url }}"
-            class="flex w-full items-center justify-between rounded-2xl px-3 py-3 text-left text-[13px] font-semibold text-slate-700 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white"
+            class="flex w-full items-center justify-between rounded-2xl px-3 text-left text-[13px] font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white"
         >
             <span class="flex items-center gap-3">
-                <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-{{ group.color }}-100 text-{{ group.color }}-700 dark:bg-{{ group.color }}-500/10 dark:text-{{ group.color }}-400">
-                    <i class="fas {{ group.icon }} w-5 text-center"></i>
+                <span class="flex h-8 w-8 items-center justify-center rounded-xl bg-{{ group.color }}-100 text-{{ group.color }}-700 dark:bg-{{ group.color }}-500/10 dark:text-{{ group.color }}-400">
+                    <i class="fas {{ group.icon }} w-4 text-center"></i>
                 </span>
 
                 <span x-show="sidebarExpanded" x-transition>{{ group.title }}</span>

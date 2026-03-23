@@ -28,6 +28,7 @@ APPLICATION_BATH = [
     os.path.join(BASE_DIR, 'apps', 'mappings'),
     os.path.join(BASE_DIR, 'apps', 'reports'),
     os.path.join(BASE_DIR, 'apps', 'dashboard'),
+    os.path.join(BASE_DIR, 'apps', 'data'),
     os.path.join(BASE_DIR, 'apps', 'home'),
     os.path.join(BASE_DIR, 'apps', 'core'),
     # os.path.join(BASE_DIR, 'apps', 'ecommerce'),
@@ -44,6 +45,7 @@ NEW_APPS = [
     'reports',
     'mappings',
     'dashboard',
+    'data',
     # Home
     'homepage',
     # 'communication',
@@ -385,3 +387,7 @@ CELERY_CACHE_BACKEND = 'default'
 #         'LOCATION': 'my_cache_table',
 #     }
 # }
+
+
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7  # 7 days in seconds
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
