@@ -9,8 +9,9 @@
         class="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white"
     >
         <i class="fas fa-database"></i>
-        <span>Data</span>
-        <i class="fas fa-chevron-down text-[10px]"></i>
+        <span class="inline-block w-8 text-left">Data</span>
+            <i class="fas fa-chevron-down text-xs transition duration-200"
+              :class="open ? 'rotate-180' : ''"></i>
     </button>
 
     <div

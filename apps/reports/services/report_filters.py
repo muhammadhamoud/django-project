@@ -1,7 +1,6 @@
 # reports/services/report_filters.py
 
 from django.db.models import Q
-
 from properties.models import Property
 from django.core.exceptions import PermissionDenied
 from reports.models import Report

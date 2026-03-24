@@ -531,7 +531,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 
 from properties.models import Property
-from .models import CustomUser, Company, Department, JobTitle, Role, Permission
+from accounts.models import CustomUser, Company, Department, JobTitle, Role, Permission
 
 @login_required
 def user_detail_view(request, id):
@@ -847,7 +847,7 @@ def profile_view(request):
 # NOTIFICATIONS
 # =====================================================
 
-from .models import Notification, NotificationRecipient, CustomUser
+from accounts.models import Notification, NotificationRecipient, CustomUser
 from accounts.utils import send_notification
 
 

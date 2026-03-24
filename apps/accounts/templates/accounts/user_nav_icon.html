@@ -25,7 +25,7 @@
             {{ request.user.first_name|default:request.user.email|slice:":1"|upper }}{{ request.user.last_name|slice:":1"|upper }}
         </div>
 
-        <i class="fas fa-chevron-down text-xs text-slate-400 transition duration-200"
+        <i class="fas fa-chevron-down text-xs transition duration-200"
            :class="open ? 'rotate-180' : ''"></i>
     </button>
 

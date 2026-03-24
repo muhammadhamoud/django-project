@@ -25,7 +25,7 @@ else:
 APPLICATION_BATH = [
     os.path.join(BASE_DIR, 'apps', 'accounts'),
     os.path.join(BASE_DIR, 'apps', 'properties'),
-    os.path.join(BASE_DIR, 'apps', 'mappings'),
+    os.path.join(BASE_DIR, 'apps', 'settings'),
     os.path.join(BASE_DIR, 'apps', 'reports'),
     os.path.join(BASE_DIR, 'apps', 'dashboard'),
     os.path.join(BASE_DIR, 'apps', 'data'),
@@ -43,9 +43,14 @@ NEW_APPS = [
     'accounts',
     'properties',
     'reports',
-    'mappings',
     'dashboard',
     'data',
+    'settings',
+
+    # 'mappings',
+    # 'segments',
+    # 'mappers',
+    # Mappings
     # Home
     'homepage',
     # 'communication',

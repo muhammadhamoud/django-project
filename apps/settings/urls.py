@@ -1,26 +1,33 @@
 from django.urls import path
-# 
+# from settings.views.segments import (
+#     DetailSegmentCreateView,
+#     DetailSegmentUpdateView,
+#     SegmentMappingTableView,
+#     SubSegmentMappingTableView,
+#     DetailSegmentMappingTableView,
+# )
 
-app_name = "segments"
+app_name = "settings"
+
 
 from django.urls import path
-from .views import (
-    DetailSegmentCreateView,
-    DetailSegmentUpdateView,
-    SegmentMappingTableView,
-    SubSegmentMappingTableView,
-    DetailSegmentMappingTableView,
+from view.segments import (
+    segment_group_manage_view
 )
 
-app_name = "segments"
-
 urlpatterns = [
-    path("mapping/", SegmentMappingTableView.as_view(), name="mapping-table"),
-    path("mapping/subsegments/", SubSegmentMappingTableView.as_view(), name="subsegment-mapping-table"),
-    path("mapping/detailsegments/", DetailSegmentMappingTableView.as_view(), name="detailsegment-mapping-table"),
+    path("segment-groups/manage/", segment_group_manage_view, name="segment-group-manage"),
+]
 
-    path("detailsegments/create/assign/", DetailSegmentCreateView.as_view(), name="detailsegment-assign-create"),
-    path("detailsegments/<int:pk>/assign/edit/", DetailSegmentUpdateView.as_view(), name="detailsegment-assign-update"),
+
+
+urlpatterns += [
+    # path("mapping/", SegmentMappingTableView.as_view(), name="mapping-table"),
+    # path("mapping/subsegments/", SubSegmentMappingTableView.as_view(), name="subsegment-mapping-table"),
+    # path("mapping/detailsegments/", DetailSegmentMappingTableView.as_view(), name="detailsegment-mapping-table"),
+
+    # path("detailsegments/create/assign/", DetailSegmentCreateView.as_view(), name="detailsegment-assign-create"),
+    # path("detailsegments/<int:pk>/assign/edit/", DetailSegmentUpdateView.as_view(), name="detailsegment-assign-update"),
 ]
 
 

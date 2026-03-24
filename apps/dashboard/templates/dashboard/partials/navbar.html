@@ -1,9 +1,12 @@
-<header class="sticky top-0 z-20 border-b border-slate-200/70 bg-white/70 glass dark:border-white/10 dark:bg-slate-950/60">
+<header id="top-header"
+    class="fixed top-0 right-0 z-20 border-b border-slate-200/70 bg-white/70 glass dark:border-white/10 dark:bg-slate-950/60">
     <div class="flex h-20 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <div class="flex items-center gap-3">
-            <button @click="mobileSidebarOpen = true" class="inline-flex rounded-2xl border border-slate-200 bg-white/70 p-2.5 text-slate-700 lg:hidden dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
+            <button @click="mobileSidebarOpen = true"
+                class="inline-flex rounded-2xl border border-slate-200 bg-white/70 p-2.5 text-slate-700 lg:hidden dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
             </button>
 
@@ -18,25 +21,40 @@
 
         </div>
 
+
+
         <div class="flex items-center gap-3">
 
-            {% include 'reports/report_navbar_menu.html' %}
-            {% include 'data/data_manager_nav.html' %}
-            {% include 'homepage/partials/theme.html' %}
-            {% include "reports/report_filter.html" %}
-            
-            <div class="relative">
-                <a
-                    href="#"
+            <!-- <div class="relative">
+                <a href="#"
                     class="relative inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white/70 text-slate-700 shadow-soft transition hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
-                    aria-label="Helps"
-                >
+                    aria-label="Helps">
                     <i class="fas fa-exclamation text-base"></i>
                 </a>
-            </div>
+            </div> -->
 
-            {% include 'accounts/notification_nav.html' %}
+
             {% include 'accounts/user_nav_icon.html' %}
+            
+            {% comment %}
+            
+            {% include 'homepage/partials/theme.html' %}
+            {% include 'reports/report_navbar_menu.html' %}
+            {% include 'data/data_manager_nav.html' %}
+            {% include 'accounts/notification_nav.html' %}
+            {% include "reports/report_filter.html" %}
+
+
+
+            
+
+            {% endcomment %}
+
+
+            
+
+
         </div>
+
     </div>
 </header>

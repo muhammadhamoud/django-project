@@ -11,6 +11,11 @@ call "C:\Users\muhammad.hamoud\Desktop\ng\backend\venv\scripts\activate"
 python manage.py tailwind start
 
 python manage.py makemigrations & python manage.py migrate
+python manage.py showmigrations
+@REM fix migrations
+python manage.py migrate settings zero --fake
+python manage.py migrate settings
+
 
 python manage.py shell -c "from reports.models import Report, ReportGroup; Report.objects.all().delete(); ReportGroup.objects.all().delete()"
 

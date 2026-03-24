@@ -1,24 +1,31 @@
 from django import forms
 from django.forms import modelformset_factory
 
-from .models import SegmentGroup, Segment, SubSegment, DetailSegment
+from ..models.segments import SegmentGroup, Segment, SubSegment, DetailSegment
+from properties.models import Property
 
 
 class TailwindMixin:
     def apply_tailwind_classes(self):
         base = (
             "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 "
-            "text-sm text-slate-900 shadow-sm focus:border-blue-500 "
-            "focus:outline-none focus:ring-2 focus:ring-blue-200"
+            "text-sm text-slate-900 shadow-sm transition "
+            "focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 "
+            "dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 "
+            "dark:placeholder:text-slate-500 dark:focus:border-blue-400 dark:focus:ring-blue-500/30"
         )
-        checkbox = "h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+        checkbox = (
+            "h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 "
+            "dark:border-slate-600 dark:bg-slate-900 dark:text-blue-500 dark:focus:ring-blue-400"
+        )
 
         for field_name, field in self.fields.items():
             widget = field.widget
+            current = widget.attrs.get("class", "")
+
             if isinstance(widget, forms.CheckboxInput):
-                widget.attrs["class"] = checkbox
+                widget.attrs["class"] = f"{current} {checkbox}".strip()
             else:
-                current = widget.attrs.get("class", "")
                 widget.attrs["class"] = f"{current} {base}".strip()
 
 
@@ -40,11 +47,13 @@ class SegmentTableForm(TailwindMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         property_obj = kwargs.pop("property_obj", None)
         super().__init__(*args, **kwargs)
+
         if property_obj:
             self.fields["group"].queryset = SegmentGroup.objects.filter(
                 property=property_obj,
                 is_active=True,
             ).order_by("sort_order", "name")
+
         self.apply_tailwind_classes()
 
 
@@ -56,11 +65,13 @@ class SubSegmentTableForm(TailwindMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         property_obj = kwargs.pop("property_obj", None)
         super().__init__(*args, **kwargs)
+
         if property_obj:
             self.fields["segment"].queryset = Segment.objects.filter(
                 group__property=property_obj,
                 is_active=True,
             ).select_related("group").order_by("group__sort_order", "sort_order", "name")
+
         self.apply_tailwind_classes()
 
 
@@ -72,13 +83,18 @@ class DetailSegmentTableForm(TailwindMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         property_obj = kwargs.pop("property_obj", None)
         super().__init__(*args, **kwargs)
+
         if property_obj:
             self.fields["sub_segment"].queryset = SubSegment.objects.filter(
                 segment__group__property=property_obj,
                 is_active=True,
             ).select_related("segment", "segment__group").order_by(
-                "segment__group__sort_order", "segment__sort_order", "sort_order", "name"
+                "segment__group__sort_order",
+                "segment__sort_order",
+                "sort_order",
+                "name",
             )
+
         self.apply_tailwind_classes()
 
 
@@ -104,13 +120,7 @@ DetailSegmentFormSet = modelformset_factory(
 )
 
 
-from django import forms
-
-from .models import SegmentGroup, Segment, SubSegment, DetailSegment
-from properties.models import Property
-
-
-class DetailSegmentAssignmentForm(forms.ModelForm):
+class DetailSegmentAssignmentForm(TailwindMixin, forms.ModelForm):
     property = forms.ModelChoiceField(
         queryset=Property.objects.none(),
         required=True,
@@ -148,10 +158,6 @@ class DetailSegmentAssignmentForm(forms.ModelForm):
 
         self.fields["property"].queryset = allowed_properties
 
-        property_obj = None
-        group_obj = None
-        segment_obj = None
-
         if self.is_bound:
             property_id = self.data.get("property")
             group_id = self.data.get("group")
@@ -182,6 +188,7 @@ class DetailSegmentAssignmentForm(forms.ModelForm):
             property_obj = group.property
 
             self.fields["property"].initial = property_obj
+
             self.fields["group"].queryset = SegmentGroup.objects.filter(
                 property=property_obj,
                 is_active=True,
@@ -199,6 +206,8 @@ class DetailSegmentAssignmentForm(forms.ModelForm):
                 is_active=True,
             ).order_by("sort_order", "name")
             self.fields["sub_segment"].initial = sub_segment
+
+        self.apply_tailwind_classes()
 
     def clean(self):
         cleaned_data = super().clean()

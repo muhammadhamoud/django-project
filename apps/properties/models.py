@@ -53,6 +53,8 @@ class Property(models.Model):
 
     class Meta:
         ordering = ["hotel_code"]
+        verbose_name = "Property"
+        verbose_name_plural = "Properties"
 
     def __str__(self):
         return f"{self.hotel_code} - {self.name}" if self.name else self.hotel_code

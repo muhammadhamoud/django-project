@@ -84,3 +84,6 @@ def property_permission_required(code):
         def __init__(self):
             super().__init__(code)
     return CustomPermission
+
+
+

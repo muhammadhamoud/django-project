@@ -320,3 +320,6 @@ def send_notification(title, message, users=None, created_by=None, level="info",
     ]
     NotificationRecipient.objects.bulk_create(recipient_rows, ignore_conflicts=True)
     return notification
+
+
+
