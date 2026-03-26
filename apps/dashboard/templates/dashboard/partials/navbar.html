@@ -25,25 +25,25 @@
 
         <div class="flex items-center gap-3">
 
-            <!-- <div class="relative">
+
+
+
+            
+            {% include 'homepage/partials/theme.html' %}
+            {% include 'reports/report_navbar_menu.html' %}
+            
+            {% include 'data/data_manager_nav.html' %}
+            {% include "reports/report_filter.html" %}
+            <div class="relative">
                 <a href="#"
                     class="relative inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white/70 text-slate-700 shadow-soft transition hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
                     aria-label="Helps">
                     <i class="fas fa-exclamation text-base"></i>
                 </a>
-            </div> -->
-
-
-            {% include 'accounts/user_nav_icon.html' %}
-            
-            {% comment %}
-            
-            {% include 'homepage/partials/theme.html' %}
-            {% include 'reports/report_navbar_menu.html' %}
-            {% include 'data/data_manager_nav.html' %}
+            </div>
             {% include 'accounts/notification_nav.html' %}
-            {% include "reports/report_filter.html" %}
-
+            {% include 'accounts/user_nav_icon.html' %}
+            {% comment %}
 
 
             

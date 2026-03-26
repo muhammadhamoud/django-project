@@ -1,30 +1,40 @@
 <div class="my-2 border-t border-slate-200 dark:border-slate-700"></div>
 
-<div class="space-y-6">
+<div class="space-y-2">
     {% for group in report_menu %}
-
     <div
         x-data="{ open: false, closeTimer: null }"
         @mouseenter="clearTimeout(closeTimer); open = true"
         @mouseleave="closeTimer = setTimeout(() => open = false, 120)"
-        class="space-y-1"
     >
         <a
             href="{{ group.url }}"
-            class="flex w-full items-center justify-between rounded-2xl px-3 text-left text-[13px] font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white"
+            class="flex w-full items-center justify-between rounded-2xl px-3 py-2 text-left text-[13px] font-medium transition
+            {% if request.path == group.url %}
+                bg-gradient-to-r from-brand-600 to-violet-600 text-white shadow-panel
+            {% else %}
+                text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white
+            {% endif %}"
         >
             <span class="flex items-center gap-3">
-                <span class="flex h-8 w-8 items-center justify-center rounded-xl bg-{{ group.color }}-100 text-{{ group.color }}-700 dark:bg-{{ group.color }}-500/10 dark:text-{{ group.color }}-400">
+                <span class="flex h-8 w-8 items-center justify-center rounded-xl
+                    {% if request.path == group.url %}
+                        bg-white/10 text-white
+                    {% else %}
+                        bg-{{ group.color }}-100 text-{{ group.color }}-700 dark:bg-{{ group.color }}-500/10 dark:text-{{ group.color }}-400
+                    {% endif %}">
                     <i class="fas {{ group.icon }} w-4 text-center"></i>
                 </span>
-
                 <span class="sidebar-label">{{ group.title }}</span>
             </span>
 
-            <i class="sidebar-label fas fa-chevron-right text-[11px] text-slate-400"></i>
-
+            <i class="sidebar-label fas fa-chevron-right text-[11px]
+                {% if request.path == group.url %}
+                    text-white/80
+                {% else %}
+                    text-slate-400
+                {% endif %}"></i>
         </a>
     </div>
-
     {% endfor %}
 </div>

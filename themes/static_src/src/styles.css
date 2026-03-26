@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@plugin "./daisyui.mjs";
 /**
   * A catch-all path to Django template files, JavaScript, and Python files
   * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
@@ -7,4 +7,26 @@
   * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
   * the scope of this path.
   */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-50:  #edeff1;
+  --color-brand-100: #d7dce0;
+  --color-brand-200: #b8c0c8;
+  --color-brand-300: #909da8;
+  --color-brand-400: #5f7282;
+  --color-brand-500: #213b52;
+  --color-brand-600: #1e354a;
+  --color-brand-700: #1a2e40;
+  --color-brand-800: #152634;
+  --color-brand-900: #101e29;
+  --color-brand-950: #0c151e;
+
+  --shadow-soft: 0 10px 30px rgba(2, 6, 23, 0.08);
+  --shadow-panel: 0 8px 30px rgba(15, 23, 42, 0.18);
+}
+
 @source "../../../**/*.{html,py,js}";
+

@@ -48,14 +48,10 @@ class SegmentGroupForm(forms.ModelForm):
             ),
         }
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        if "DELETE" in self.fields:
-            self.fields["DELETE"].widget.attrs.update({"class": CHECKBOX_CLASSES})
-
 
 class BaseSegmentGroupFormSet(BaseModelFormSet):
+    required_new_row_fields = ["code", "name"]
+
     def clean(self):
         super().clean()
 
@@ -63,26 +59,58 @@ class BaseSegmentGroupFormSet(BaseModelFormSet):
             return
 
         seen_codes = set()
+        has_empty_new_row = False
 
         for form in self.forms:
-            if not getattr(form, "cleaned_data", None):
+            if not hasattr(form, "cleaned_data") or not form.cleaned_data:
                 continue
 
             if form.cleaned_data.get("DELETE"):
                 continue
 
+            instance_pk = form.cleaned_data.get("id")
             property_obj = form.cleaned_data.get("property")
-            code = (form.cleaned_data.get("code") or "").strip().lower()
+            code = (form.cleaned_data.get("code") or "").strip()
+            name = (form.cleaned_data.get("name") or "").strip()
+            sort_order = form.cleaned_data.get("sort_order")
 
-            if not property_obj or not code:
-                continue
+            is_new_row = not instance_pk
 
-            key = (property_obj.pk, code)
-            if key in seen_codes:
-                raise ValidationError(
-                    "Duplicate segment group codes are not allowed for the same property."
-                )
-            seen_codes.add(key)
+            if is_new_row:
+                has_any_user_value = any([
+                    code,
+                    name,
+                    sort_order not in (None, ""),
+                ])
+
+                if not has_any_user_value:
+                    has_empty_new_row = True
+                    continue
+
+                missing_required = []
+                for field_name in self.required_new_row_fields:
+                    value = form.cleaned_data.get(field_name)
+                    if value in (None, ""):
+                        missing_required.append(field_name)
+
+                if missing_required:
+                    readable = ", ".join(missing_required)
+                    raise ValidationError(
+                        f"New rows must include: {readable}."
+                    )
+
+            if property_obj and code:
+                key = (property_obj.pk, code.lower())
+                if key in seen_codes:
+                    raise ValidationError(
+                        "Duplicate segment group codes are not allowed for the same property."
+                    )
+                seen_codes.add(key)
+
+        if has_empty_new_row:
+            raise ValidationError(
+                "Empty rows are not allowed. Please fill the new row or remove it before saving."
+            )
 
 
 SegmentGroupFormSet = modelformset_factory(

@@ -1,0 +1,37 @@
+(select count(1) from room where resort=pms_p.resort and room_category>0 and (pseudo_yn='N' or pseudo_yn is null))
+TO_CHAR(pms_p.business_date, 'YYYY-MM-DD')
+TO_CHAR(systimestamp, 'YYYY-MM-DD HH24:MI:SS.FFTZR')
+(SELECT value FROM v$NLS_PARAMETERS WHERE parameter='NLS_NUMERIC_CHARACTERS')
+COUNTRY_CODE
+PROPERTY_TIMEZONE
+(select PARAMETER_VALUE from application_parameters where PARAMETER_NAME='DATABASE_TIMEZONE_REGION' and rownum=1)
+(select TO_CHAR(SYSTIMESTAMP, 'TZR') FROM dual)
+TO_CHAR(SESSIONTIMEZONE)
+trim(export_data_p.get_parameter('DAYS'))
+myown number
+(SELECT version || ' ' || epatchlevel FROM (SELECT version, epatchlevel FROM INSTALLED_APP  WHERE application = 'OPERA PMS' ORDER BY installed_date DESC) WHERE ROWNUM = 1)
+(SELECT parameter_value FROM application_parameters WHERE parameter_name='RATE HEADER MULTIPLE ROOM TRN CODE LINKAGE' AND resort=pms_p.resort)
+(SELECT parameter_value FROM application_parameters WHERE parameter_name='RESERVATION_PACE' AND resort=pms_p.resort)
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,banner||',|#')).EXTRACT('//text()').getclobval()||'{|#', 1, 31999) FROM V$VERSION)
+(SELECT parameter_value FROM application_parameters WHERE parameter_name='DFLT_TRAN_CODE' AND resort=pms_p.resort)
+
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,tc.trx_code||';[|'||replace(tc.description,'|',chr(32))||';[|'||tc.tax_inclusive_yn||';[|'||tc.trx_code_type||',|#')).EXTRACT('//text()').getclobval()||'{|#',1,31999)FROM trx$_codes tc WHERE tc.trx_code IN(SELECT DISTINCT trx_code FROM rate_header WHERE resort=pms_p.resort UNION SELECT DISTINCT trx_code FROM rate_transactions WHERE resort=pms_p.resort UNION SELECT DISTINCT dept_code FROM resort_products_view WHERE resort=pms_p.resort)AND tc.resort=pms_p.resort)
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,tcr.trx_code_generator||';[|'||tcr.trx_code||';[|'||tcr.tcr_type||';[|'||tcr.amount||';[|'||tcr.percentage||';[|'||tcr.percentage_base_code||';[|'||tcr.udf_function||';[|'||trim(tcr.result_included_in_sum_array)||';[|'||calculation_sequence||';[|'||tcr.tc_group_generator||';[|'||tcr.amount_FROM_schedule_yn||';[|'||tcr.tc_group||';[|'||tcr.tc_subgroup||';[|'||tcr.tc_subgroup_generator||',|#')).EXTRACT('//text()').getclobval()||'{|#',1,31999)FROM trx_class_relationships tcr WHERE(tcr.trx_code_generator IS NULL OR tcr.trx_code_generator IN(SELECT distinct trx_code FROM rate_header WHERE resort=pms_p.resort UNION SELECT DISTINCT trx_code FROM rate_transactions WHERE resort=pms_p.resort UNION SELECT distinct dept_code FROM resort_products_view WHERE resort=pms_p.resort))AND tcr.resort=pms_p.resort)
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,tcps.trx_code||';[|'||start_date||';[|'||name_tax_type||';[|'||amount||';[|'||percentage||';[|'||percentage_base_code||';[|'||udf_function||';[|'||tc_group||';[|'||currency||';[|'||tc_subgroup||',|#')).EXTRACT('//text()').getclobval()||'{|#',1,31999)FROM trx$_code_price_schedules tcps WHERE tcps.resort=pms_p.resort)
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,rh.rate_codes||';[|'||rh.rate_category||';[|'||rh.currency_code||';[|'||trx_code||';[|'||complimentary_yn||';[|'||house_use_yn||',|#')).EXTRACT('//text()').getclobval()||'{|#',1,31999)FROM(SELECT TO_CHAR(XMLAGG(XMLELEMENT(E,rh.rate_code||'|(;')).EXTRACT('//text()').getclobval())as rate_codes,rh.rate_category,rh.currency_code,rh.trx_code,NVL(complimentary_yn,'N')AS complimentary_yn,NVL(house_use_yn,'N')AS house_use_yn FROM rate_header rh WHERE resort=pms_p.resort AND rate_code IN(SELECT rden.rate_code FROM reservation_name rn,reservation_daily_element_name rden WHERE rn.resv_name_id=rden.resv_name_id AND rn.resort=pms_p.resort AND rden.resort=pms_p.resort AND rden.reservation_date BETWEEN rn.trunc_begin_date AND rn.trunc_end_date AND(rn.update_date BETWEEN pms_p.business_date-rtrim(export_data_p.get_parameter('DAYS'))AND sysdate+2 OR(rn.resv_status IN('WALKIN','CHECKED IN')AND rn.trunc_end_date>pms_p.business_date-1)))GROUP BY rh.rate_category,rh.currency_code,rh.trx_code,complimentary_yn,house_use_yn)rh)
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,room_category||';[|'||label||';[|'||room_class||';[|'||replace(short_description,'|',chr(32))||';[|'||NVL2(psuedo_room_type,'Y','N')||';[|'||number_rooms||';[|'||max_occupancy||';[|'||NVL(SUITE_YN,'N')||',|#')).EXTRACT('//text()').getclobval()||'{|#',1,31999)FROM resort$_room_category WHERE resort=pms_p.resort)
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,COMBINATION_ROOM_CATEGORY||';[|'||COMPONENT_ROOM_CATEGORY||';[|'||QUANTITY||',|#')).EXTRACT('//text()').getclobval()||'{|#',1,31999)FROM RESORT_ROOM_CAT_COMBINATIONS WHERE resort=pms_p.resort)
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,market_code||';[|'||replace(description,'|',chr(32))||';[|'||parent_market_code||',|#')).EXTRACT('//text()').getclobval()||'{|#',1,31999)FROM resort$_markets WHERE resort=pms_p.resort)
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,source_code||';[|'||replace(description,'|',chr(32))||';[|'||parent_source_code||',|#')).EXTRACT('//text()').getclobval()||'{|#',1,31999)FROM resort_origins_of_booking WHERE resort=pms_p.resort)
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,attribute_code||';[|'||replace(description,'|',chr(32))||',|#')).EXTRACT('//text()').getclobval()||'{|#',1,31999)FROM entity_detail WHERE entity_name='CHANNEL')
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,product||';[|'||currency_code||';[|'||decode(calculation_rule,'F','F','A','A','C','C','P','P')||';[|'||CASE WHEN(print_separate_yn='N' AND add_to_rate_yn='N')THEN 'Y' ELSE 'N' END||';[|'||resort_rate_product_setup.get_dept_code(resort,product)||';[|'||NVL(resort_rate_product_setup.get_dept_tax_flag(resort,product),'N')||';[|'||FORECAST_NEXT_DAY_YN||',|#')).EXTRACT('//text()').getclobval()||'{|#',1,31999)FROM resort_products WHERE resort=pms_p.resort AND product IN(SELECT product FROM reservation_product_prices rpr,reservation_name rn WHERE rn.update_date BETWEEN pms_p.business_date-rtrim(export_data_p.get_parameter('DAYS'))AND sysdate+2 AND rn.resort=pms_p.resort AND rpr.resv_name_id=rn.resv_name_id AND rpr.resort=pms_p.resort))
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,ev||';[|'||tc||';[|'||decode(et,'ROOM_TYPE','T','C')||';[|'||rate_codes||',|#').EXTRACT('//text()')).getclobval()||'{|#',1,31999)FROM(SELECT entity_value ev,entity_type et,trx_code tc,XMLAGG(XMLELEMENT(E,rate_code||'|(;')).EXTRACT('//text()').getclobval()AS rate_codes FROM rate_transactions WHERE resort=pms_p.resort GROUP BY entity_value,entity_type,trx_code))
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,parameter_name||';[|'||parameter_value||';[|'||parameter_group||';[|'||parameter_type||',|#')).EXTRACT('//text()').getclobval()||'{|#',1,31999)FROM application_parameters WHERE resort=pms_p.resort AND update_date BETWEEN pms_p.business_date-rtrim(export_data_p.get_parameter('DAYS'))AND sysdate+2)
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,version||';[|'||epatchlevel||';[|'||TO_CHAR(installed_date,'YYYY-MM-DD')||',|#')).EXTRACT('//text()').getclobval()||'{|#',1,31999)FROM installed_app_log WHERE application='OPERA PMS' AND installed_date BETWEEN pms_p.business_date-rtrim(export_data_p.get_parameter('DAYS'))AND sysdate+2)
+
+
+
+
+SELECT SUBSTR(XMLAGG(XMLELEMENT(E,market_code||';[|'||replace(description,'|',chr(32))||';[|'||parent_market_code||',|#')).EXTRACT('//text()').getclobval()||'{|#',1,31999)FROM resort$_markets WHERE resort=pms_p.resort
+
+(SELECT SUBSTR(XMLAGG(XMLELEMENT(E,(market_code||';[|'||REPLACE(description,'|',CHR(32))||';[|'||parent_market_code||',|#'))).EXTRACT('//text()').getclobval()||'{|#',1,31999) FROM resort$_markets WHERE resort=pms_p.resort)

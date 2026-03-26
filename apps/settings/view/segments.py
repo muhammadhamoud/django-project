@@ -121,3 +121,5 @@ def segment_group_manage_view(request):
             "page_size": page_size,
         },
     )
+
+

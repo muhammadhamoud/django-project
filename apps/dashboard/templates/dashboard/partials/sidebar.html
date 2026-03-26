@@ -42,41 +42,48 @@
     <div class="flex-1 overflow-y-auto px-4 py-6">
         <div class="space-y-8">
             <div>
-                <p class="sidebar-section-label mb-3 px-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Main</p>
-                <nav class="space-y-2">
+                <p class="sidebar-section-label mb-3 px-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+                    Main
+                </p>
 
+                <nav class="space-y-2">
                     <a href="{% url 'dashboard:home' %}"
-                    class="flex w-full items-center justify-between rounded-2xl px-3 py-3 text-left text-sm font-semibold transition {% if request.resolver_match.url_name == 'home' %}bg-gradient-to-r from-brand-600 to-violet-600 text-white shadow-panel{% else %}text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white{% endif %}">
+                    class="flex w-full items-center justify-between rounded-2xl px-3 py-2 text-left text-[13px] font-medium transition {% if request.resolver_match.url_name == 'home' %}bg-gradient-to-r from-brand-600 to-violet-600 text-white shadow-panel{% else %}text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white{% endif %}">
                         <span class="flex items-center gap-3">
-                            <span class="flex h-9 w-9 items-center justify-center rounded-xl {% if request.resolver_match.url_name == 'home' %}bg-white/10 text-white{% else %}bg-sky-100 text-sky-700 dark:bg-sky-500/10 dark:text-sky-400{% endif %}">
-                                <i class="fas fa-chart-line w-5 text-center"></i>
+                            <span class="flex h-8 w-8 items-center justify-center rounded-xl {% if request.resolver_match.url_name == 'home' %}bg-white/10 text-white{% else %}bg-sky-100 text-sky-700 dark:bg-sky-500/10 dark:text-sky-400{% endif %}">
+                                <i class="fas fa-chart-line w-4 text-center"></i>
                             </span>
                             <span class="sidebar-label">Overview</span>
                         </span>
+
+                        <i class="sidebar-label fas fa-chevron-right text-[11px] {% if request.resolver_match.url_name == 'home' %}text-white/80{% else %}text-slate-400{% endif %}"></i>
                     </a>
 
                     <a href="{% url 'dashboard:analytics' %}"
-                    class="flex w-full items-center justify-between rounded-2xl px-3 py-3 text-left text-sm font-semibold transition {% if request.resolver_match.url_name == 'analytics' %}bg-gradient-to-r from-brand-600 to-violet-600 text-white shadow-panel{% else %}text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white{% endif %}">
+                    class="flex w-full items-center justify-between rounded-2xl px-3 py-2 text-left text-[13px] font-medium transition {% if request.resolver_match.url_name == 'analytics' %}bg-gradient-to-r from-brand-600 to-violet-600 text-white shadow-panel{% else %}text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white{% endif %}">
                         <span class="flex items-center gap-3">
-                            <span class="flex h-9 w-9 items-center justify-center rounded-xl {% if request.resolver_match.url_name == 'analytics' %}bg-white/10 text-white{% else %}bg-violet-100 text-violet-700 dark:bg-violet-500/10 dark:text-violet-400{% endif %}">
-                                <i class="fas fa-chart-pie w-5 text-center"></i>
+                            <span class="flex h-8 w-8 items-center justify-center rounded-xl {% if request.resolver_match.url_name == 'analytics' %}bg-white/10 text-white{% else %}bg-violet-100 text-violet-700 dark:bg-violet-500/10 dark:text-violet-400{% endif %}">
+                                <i class="fas fa-chart-pie w-4 text-center"></i>
                             </span>
                             <span class="sidebar-label">Analytics</span>
                         </span>
+
+                        <i class="sidebar-label fas fa-chevron-right text-[11px] {% if request.resolver_match.url_name == 'analytics' %}text-white/80{% else %}text-slate-400{% endif %}"></i>
                     </a>
 
                     <a href="{% url 'reports:group_list' %}"
-                    class="flex w-full items-center justify-between rounded-2xl px-3 py-3 text-left text-sm font-semibold transition {% if request.resolver_match.url_name == 'group_list' %}bg-gradient-to-r from-brand-600 to-violet-600 text-white shadow-panel{% else %}text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white{% endif %}">
+                    class="flex w-full items-center justify-between rounded-2xl px-3 py-2 text-left text-[13px] font-medium transition {% if request.resolver_match.url_name == 'group_list' %}bg-gradient-to-r from-brand-600 to-violet-600 text-white shadow-panel{% else %}text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white{% endif %}">
                         <span class="flex items-center gap-3">
-                            <span class="flex h-9 w-9 items-center justify-center rounded-xl {% if request.resolver_match.url_name == 'group_list' %}bg-white/10 text-white{% else %}bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400{% endif %}">
-                                <i class="fas fa-file-alt w-5 text-center"></i>
+                            <span class="flex h-8 w-8 items-center justify-center rounded-xl {% if request.resolver_match.url_name == 'group_list' %}bg-white/10 text-white{% else %}bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400{% endif %}">
+                                <i class="fas fa-file-alt w-4 text-center"></i>
                             </span>
                             <span class="sidebar-label">Report Groups</span>
                         </span>
+
+                        <i class="sidebar-label fas fa-chevron-right text-[11px] {% if request.resolver_match.url_name == 'group_list' %}text-white/80{% else %}text-slate-400{% endif %}"></i>
                     </a>
 
                     {% include 'reports/reports_sidenav_menu.html' %}
-
                 </nav>
             </div>
         </div>
