@@ -20,6 +20,8 @@ from view.segments import (
 from settings.view.views import segment_category_view, segment_group_view
 
 urlpatterns = [
+    path("settings-main/", settings_menu_list_view, name="settings_main"),
+    
     path("settings-menu/", settings_menu_list_view, name="menu_list"),
     path("settings-menu/<slug:slug>/", settings_menu_items_view, name="menu_items"),
     
