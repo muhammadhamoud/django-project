@@ -1,12 +1,14 @@
 call "C:\Users\muhammad.hamoud\Desktop\ng\backend\venv\scripts\activate"
 
-@REM call python manage.py loaddata permission_groups.json
-@REM call python manage.py loaddata permissions.json
-@REM call python manage.py loaddata role_templates.json
-@REM call python manage.py loaddata roles.json
-@REM call python manage.py loaddata properties.json
+@REM python manage.py loaddata permission_groups.json
+@REM python manage.py loaddata permissions.json
+@REM python manage.py loaddata role_templates.json
+@REM python manage.py loaddata roles.json
+@REM python manage.py loaddata properties.json
 @REM python manage.py loaddata report_groups.json
 @REM python manage.py loaddata reports.json
+
+python manage.py loaddata permission_groups.json & python manage.py loaddata permissions.json & python manage.py loaddata role_templates.json & python manage.py loaddata roles.json & python manage.py loaddata properties.json & python manage.py loaddata report_groups.json & python manage.py loaddata reports.json
 
 python manage.py tailwind start
 
@@ -105,3 +107,27 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/muhammadhamoud/django-project.git
 git push -u origin main
+
+
+
+git add * & git commit -m "second commit" & git push
+
+from config.wsgi import application
+
+import pymysql
+pymysql.install_as_MySQLdb()
+
+grep -R "install_as_MySQLdb\|pymysql" /home/hamoudsc/roinsight.com
+
+import pymysql
+pymysql.version_info = (2, 2, 1, "final", 0)
+pymysql.__version__ = "2.2.1"
+pymysql.install_as_MySQLdb()
+
+python manage.py dumpdata --exclude accounts.CustomUser --indent 2 > fixtures/site_data.json
+
+--exclude contenttypes 
+
+set PYTHONUTF8=1
+set PYTHONIOENCODING=utf-8
+python manage.py dumpdata homepage --indent 2 --output homepage.json

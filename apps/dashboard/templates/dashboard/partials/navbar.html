@@ -34,7 +34,7 @@
                 </svg>
             </button>
 
-            <div>
+            <div class="hidden md:block">
                 <h2 class="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl dark:text-white">
                     {{ page_title|default:"Dashboard Overview" }}
                 </h2>
@@ -66,7 +66,7 @@
 </header>
 
 <div id="page-loader" class="pointer-events-none fixed z-[60] h-1 overflow-hidden">
-    <div id="page-loader-bar" class="h-full w-0 bg-blue-500 transition-all duration-300 ease-out"></div>
+    <div id="page-loader-bar" class="h-full w-0 bg-brand-500 transition-all duration-300 ease-out"></div>
 </div>
 
 

@@ -1,0 +1,2413 @@
+[
+{
+  "model": "homepage.siteinformationtranslation",
+  "pk": 3,
+  "fields": {
+    "language_code": "en",
+    "name": "ROInsight",
+    "description": "Smarter Tools Better Decisions",
+    "master": 2
+  }
+},
+{
+  "model": "homepage.siteinformationtranslation",
+  "pk": 4,
+  "fields": {
+    "language_code": "ar",
+    "name": "ROInsight",
+    "description": "أذكى مما تتخيل",
+    "master": 2
+  }
+},
+{
+  "model": "homepage.siteinformation",
+  "pk": 2,
+  "fields": {
+    "created": "2026-03-21T19:34:34.416Z",
+    "modified": "2026-03-22T15:22:10.780Z",
+    "company_name": "ROI Technology LLC.",
+    "keywords": "nan",
+    "license_number": "1208878",
+    "vat_number": "nan",
+    "register_number": "994842",
+    "is_featured": false,
+    "is_published": true
+  }
+},
+{
+  "model": "homepage.sitemetadata",
+  "pk": 5,
+  "fields": {
+    "created": "2026-03-21T19:34:34.542Z",
+    "modified": "2026-03-22T15:22:10.780Z",
+    "site": 2,
+    "logo": "home/logo.png",
+    "icon": null,
+    "address": "UAE, Dubai, DIFC, Sheikh Zayed Road, Emirates Tower",
+    "telephone": "97143202204",
+    "mobile": "971503250175",
+    "fax": null,
+    "email": "support@roinsight.com",
+    "website": "https://www.roinsight.com",
+    "sales_email": "support@roinsight.com",
+    "technical_email": "support@roinsight.com",
+    "accounts_email": "support@roinsight.com",
+    "facebook": "https://www.roinsight.com",
+    "twitter": "https://www.roinsight.com",
+    "instagram": "https://www.roinsight.com",
+    "github": "https://www.roinsight.com",
+    "linkedin": "https://www.roinsight.com",
+    "whatsapp": "https://wa.me/971503250175?text=I'm%20interested%20in%20cuttern",
+    "googlemap": "https://www.roinsight.com",
+    "youtube": "https://www.roinsight.com",
+    "medium": "https://www.roinsight.com",
+    "other_social": "https://www.roinsight.com"
+  }
+},
+{
+  "model": "homepage.siteinformationadditionaltranslation",
+  "pk": 1,
+  "fields": {
+    "language_code": "en",
+    "about_us": "about us",
+    "privacy_policy": "privacy",
+    "terms_of_service": "term of service",
+    "tagline": "data that make differances",
+    "master": 1
+  }
+},
+{
+  "model": "homepage.siteinformationadditional",
+  "pk": 1,
+  "fields": {
+    "created": "2026-03-22T15:06:08.732Z",
+    "modified": "2026-03-22T15:06:08.732Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 49,
+  "fields": {
+    "language_code": "en",
+    "name": "Unlock The Power Of Your Data",
+    "description": "Our business intelligence tool makes it easy to access and analyze your company's data, giving you the insights, you need to make better decisions and drive growth.",
+    "master": 25
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 50,
+  "fields": {
+    "language_code": "ar",
+    "name": "اطلق قوة بياناتك",
+    "description": "تجعل أداة الذكاء التجاري لدينا من السهل الوصول إلى بيانات شركتك وتحليلها، مما يمنحك الإبصار الذي تحتاجه لاتخاذ قرارات أفضل وتحقيق النمو.",
+    "master": 25
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 51,
+  "fields": {
+    "language_code": "en",
+    "name": "Stay Ahead Of The Competition",
+    "description": "With our business intelligence tool, you'll have real-time access to market trends, competitor activity, and customer behavior, giving you a competitive edge in even the toughest markets.",
+    "master": 26
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 52,
+  "fields": {
+    "language_code": "ar",
+    "name": "كن في مقدمة المنافسة",
+    "description": "مع أداة الذكاء التجاري لدينا، ستحصل على الوصول إلى اتجاهات السوق ونشاط المنافسين وسلوك العملاء في الوقت الفعلي، مما يمنحك ميزة تنافسية حتى في أصعب الأسواق.",
+    "master": 26
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 53,
+  "fields": {
+    "language_code": "en",
+    "name": "Make Better Decisions, Faster",
+    "description": "Our business intelligence tool delivers actionable insights in real time, so you can make informed decisions quickly and confidently.",
+    "master": 27
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 54,
+  "fields": {
+    "language_code": "ar",
+    "name": "اتخذ قرارات أفضل وبشكل أسرع",
+    "description": "توفر أداة الذكاء التجاري لدينا رؤى قابلة للتنفيذ في الوقت الفعلي، بحيث يمكنك اتخاذ قرارات مستنيرة بسرعة وثقة.",
+    "master": 27
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 55,
+  "fields": {
+    "language_code": "en",
+    "name": "Simplify Your Workflow",
+    "description": "Our user-friendly interface and intuitive design make it easy to navigate complex data and analytics, streamlining your workflow and saving you time.",
+    "master": 28
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 56,
+  "fields": {
+    "language_code": "ar",
+    "name": "بسّط سير العمل الخاص بك",
+    "description": "تصميمنا الودي وتصميمنا البديهي يجعلان من السهل التنقل في البيانات والتحليلات المعقدة، مما يبسط سير عملك ويوفر لك الوقت.",
+    "master": 28
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 57,
+  "fields": {
+    "language_code": "en",
+    "name": "Empower Your Team",
+    "description": "Our business intelligence tool is designed to be used by everyone in your organization, not just data analysts. This means your entire team can benefit from the insights and analytics it provides.",
+    "master": 29
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 58,
+  "fields": {
+    "language_code": "ar",
+    "name": "قوي فريقك",
+    "description": "صُممت أداة الذكاء التجاري لدينا لاستخدامها من قبل الجميع في منظمتك، وليس فقط محللي البيانات. هذا يعني أن فريقك بأكمله يمكن أن يستفيد من الرؤى والتحليلات التي تقدمها.",
+    "master": 29
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 59,
+  "fields": {
+    "language_code": "en",
+    "name": "See The Big Picture",
+    "description": "Our business intelligence tool allows you to see your company's performance at a glance, so you can identify areas for improvement and capitalize on new opportunities.",
+    "master": 30
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 60,
+  "fields": {
+    "language_code": "ar",
+    "name": "رؤية الصورة الكبيرة",
+    "description": "تسمح لك أداة الذكاء التجاري لدينا برؤية أداء شركتك بلمحة، بحيث يمكنك تحديد المجالات التي يمكن تحسينها والاستفادة من الفرص الجديدة.",
+    "master": 30
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 61,
+  "fields": {
+    "language_code": "en",
+    "name": "Take Control Of Your Finances",
+    "description": "Our business intelligence tool gives you a complete picture of your company's finances, from revenue and expenses to cash flow and profit margins. With this information at your fingertips, you can make smarter financial decisions and drive growth.",
+    "master": 31
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 62,
+  "fields": {
+    "language_code": "ar",
+    "name": "تحكم في أمورك المالية",
+    "description": "تمنحك أداة الذكاء التجاري لدينا صورة كاملة عن الأمور المالية لشركتك، من الإيرادات والمصاريف إلى التدفق النقدي وهوامش الربح. بفضل هذه المعلومات التي بين يديك، يمكنك اتخاذ قرارات مالية أكثر ذكاءً وتحقيق النمو.",
+    "master": 31
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 63,
+  "fields": {
+    "language_code": "en",
+    "name": "Customizable And Scalable",
+    "description": "Our business intelligence tool can be tailored to your unique needs and scaled to accommodate your company's growth, ensuring that you always have the insights you need to succeed.",
+    "master": 32
+  }
+},
+{
+  "model": "homepage.marketingtranslation",
+  "pk": 64,
+  "fields": {
+    "language_code": "ar",
+    "name": "قابل للتخصيص ومُمكّن للتوسيع",
+    "description": "يمكن تخصيص أداة الذكاء التجاري لدينا لتلبية احتياجاتك الفريدة وتوسيعها لمواكبة نمو شركتك، مما يضمن أنك دائمًا معتمد على الرؤى التي تحتاج إليها لتحقيق النجاح.",
+    "master": 32
+  }
+},
+{
+  "model": "homepage.marketing",
+  "pk": 25,
+  "fields": {
+    "slug": "unlock-the-power-of-your-data",
+    "image": "images/marketing/unlock-the-power-of-your-data_BMkxktd.jfif",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:39.305Z",
+    "modified": "2026-03-21T19:34:39.390Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.marketing",
+  "pk": 26,
+  "fields": {
+    "slug": "stay-ahead-of-the-competition",
+    "image": "images/marketing/stay-ahead-of-the-competition_k1XZvhb.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:39.390Z",
+    "modified": "2026-03-21T19:34:39.489Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.marketing",
+  "pk": 27,
+  "fields": {
+    "slug": "make-better-decisions-faster",
+    "image": "images/marketing/make-better-decisions-faster_ob7ytYV.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:39.499Z",
+    "modified": "2026-03-21T19:34:39.594Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.marketing",
+  "pk": 28,
+  "fields": {
+    "slug": "simplify-your-workflow",
+    "image": "images/marketing/simplify-your-workflow_RFSnM0X.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:39.600Z",
+    "modified": "2026-03-21T19:34:39.694Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.marketing",
+  "pk": 29,
+  "fields": {
+    "slug": "empower-your-team",
+    "image": "images/marketing/empower-your-team_8MYQn6F.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:39.700Z",
+    "modified": "2026-03-21T19:34:39.793Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.marketing",
+  "pk": 30,
+  "fields": {
+    "slug": "see-the-big-picture",
+    "image": "images/marketing/see-the-big-picture_nqkvUqP.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:39.800Z",
+    "modified": "2026-03-21T19:34:39.882Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.marketing",
+  "pk": 31,
+  "fields": {
+    "slug": "take-control-of-your-finances",
+    "image": "images/marketing/take-control-of-your-finances_pEYjeHZ.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:39.887Z",
+    "modified": "2026-03-21T19:34:39.971Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.marketing",
+  "pk": 32,
+  "fields": {
+    "slug": "customizable-and-scalable",
+    "image": "images/marketing/customizable-and-scalable_HyntVBD.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:39.971Z",
+    "modified": "2026-03-21T19:34:40.055Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 73,
+  "fields": {
+    "language_code": "en",
+    "name": "System Integration Services",
+    "description": "Unlock your business's true potential with our cutting-edge System Integration Services. Seamlessly connect and optimize your IT systems, streamlining workflows and data flow for unparalleled efficiency and productivity. Embrace the power of interconnectedness with SIS.",
+    "master": 37
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 74,
+  "fields": {
+    "language_code": "ar",
+    "name": "خدمات التكامل النظامي",
+    "description": "قم بإطلاق إمكانيات عملك الحقيقية مع خدمات التكامل النظامي المتقدمة لدينا. قم بتوصيل أنظمتك الحاسوبية وتحسينها بسلاسة ، مما يسهل سير العمل وتدفق البيانات لتحقيق كفاءة وإنتاجية لا مثيل لهما. تحتضن قوة الترابط مع SIS.",
+    "master": 37
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 75,
+  "fields": {
+    "language_code": "en",
+    "name": "Business Intelligence Tool",
+    "description": "Empower your team with actionable insights using our Business Intelligence Tool. Visualize complex data with ease, make informed decisions, and drive growth. Stay ahead of the competition with BIT's intuitive reports and real-time analytics.",
+    "master": 38
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 76,
+  "fields": {
+    "language_code": "ar",
+    "name": "أداة ذكاء الأعمال",
+    "description": "قم بتمكين فريقك من البيانات القابلة للتنفيذ باستخدام أداة ذكاء الأعمال لدينا. قم بتصور البيانات المعقدة بسهولة ، واتخاذ القرارات المستنيرة ، ودفع النمو. كن دائمًا في المقدمة مع تقارير BIT البديهية والتحليلات في الوقت الفعلي.",
+    "master": 38
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 77,
+  "fields": {
+    "language_code": "en",
+    "name": "Advanced Automation Solutions",
+    "description": "Experience the future of automation with our Advanced Automation Solutions. Leverage AI and machine learning to streamline repetitive tasks, increase accuracy, and supercharge your productivity. Embrace the next generation of efficiency with AAS.",
+    "master": 39
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 78,
+  "fields": {
+    "language_code": "ar",
+    "name": "حلول الأتمتة المتقدمة",
+    "description": "اختبر مستقبل الأتمتة مع حلول الأتمتة المتقدمة لدينا. استفد من الذكاء الاصطناعي وتعلم الآلة لتسريع المهام المتكررة وزيادة الدقة وتعزيز إنتاجيتك. اعتنق الجيل التالي من الكفاءة مع AAS.",
+    "master": 39
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 79,
+  "fields": {
+    "language_code": "en",
+    "name": "Performance Monitoring Systems",
+    "description": "Never miss a beat with our Performance Monitoring Systems. Monitor and optimize your critical IT infrastructure in real-time, ensuring peak performance and availability. Stay ahead of potential issues with PMS's proactive insights.",
+    "master": 40
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 80,
+  "fields": {
+    "language_code": "ar",
+    "name": "أنظمة مراقبة الأداء",
+    "description": "لا تفوت أبدًا فرصة مع أنظمة مراقبة الأداء لدينا. راقب وحسن أداء بنيتك التحتية الحاسوبية الحيوية في الوقت الفعلي ، مما يضمن الأداء القصوى والتوافر. تحلو بالأمام من المشاكل المحتملة مع رؤى PMS النشطة.",
+    "master": 40
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 81,
+  "fields": {
+    "language_code": "en",
+    "name": "Tracking Solutions Systems",
+    "description": "Track, secure, and optimize your assets effortlessly with our Tracking Solutions Systems. Harness the power of real-time data to enhance logistics, improve security, and maximize resource utilization. Take control of your assets with TSS.",
+    "master": 41
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 82,
+  "fields": {
+    "language_code": "ar",
+    "name": "أنظمة حلول التتبع",
+    "description": "تتبع وآمن وحسن استغلال أصولك بسهولة مع أنظمة حلول التتبع لدينا. استفد من قوة البيانات في الوقت الفعلي لتعزيز اللوجستيات وتحسين الأمان وتحقيق أقصى استفادة من الموارد. تحكم في أصولك مع TSS.",
+    "master": 41
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 83,
+  "fields": {
+    "language_code": "en",
+    "name": "Data Portability Solutions",
+    "description": "Unleash the freedom of data movement with our Data Portability Solutions. Seamlessly transfer your data between platforms without hassle, ensuring data integrity and privacy. Empower your users with DPS's seamless data portability.",
+    "master": 42
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 84,
+  "fields": {
+    "language_code": "ar",
+    "name": "حلول النقل للبيانات",
+    "description": "أطلق سر الحركة الحرة للبيانات مع حلول النقل للبيانات لدينا. قم بنقل بياناتك بين المنصات بسلاسة دون عناء ، مما يضمن سلامة البيانات والخصوصية. قم بتمكين مستخدميك مع قابلية نقل البيانات السلسة لـ DPS.",
+    "master": 42
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 85,
+  "fields": {
+    "language_code": "en",
+    "name": "Real-Time Database Systems",
+    "description": "Stay ahead in a fast-paced world with our Real-Time Database Systems. Access critical information instantly and make informed decisions in real-time. Drive performance and agility with RTDB's lightning-fast data retrieval.",
+    "master": 43
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 86,
+  "fields": {
+    "language_code": "ar",
+    "name": "أنظمة قاعدة البيانات الفورية",
+    "description": "ابقى في المقدمة في عالم سريع الخطى مع أنظمة قاعدة البيانات الفورية لدينا. احصل على المعلومات الحاسمة على الفور واتخذ القرارات المستنيرة في الوقت الفعلي. قم بتعزيز الأداء والرشاقة مع استرجاع البيانات السريع لـ RTDB.",
+    "master": 43
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 87,
+  "fields": {
+    "language_code": "en",
+    "name": "Digital Transformation System",
+    "description": "Embrace the future of business with our Digital Transformation System. Propel your organization forward by optimizing processes, enhancing customer experiences, and staying ahead of the digital curve. Empower your business with DTS.",
+    "master": 44
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 88,
+  "fields": {
+    "language_code": "ar",
+    "name": "نظام التحول الرقمي",
+    "description": "احتضن مستقبل الأعمال مع نظام التحول الرقمي لدينا. قم بدفع منظمتك للأمام من خلال تحسين العمليات وتعزيز تجارب العملاء والبقاء في المقدمة من التطور الرقمي. قم بتمكين عملك مع DTS.",
+    "master": 44
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 89,
+  "fields": {
+    "language_code": "en",
+    "name": "Transaction Processing System",
+    "description": "Efficiency meets reliability with our Transaction Processing System. Handle high volumes of transactions seamlessly and securely, ensuring smooth operations and satisfied customers. Experience unparalleled transactional performance with TPS.",
+    "master": 45
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 90,
+  "fields": {
+    "language_code": "ar",
+    "name": "نظام معالجة المعاملات",
+    "description": "تلتقي الكفاءة بالموثوقية مع نظام معالجة المعاملات لدينا. تتعامل مع مجموعات كبيرة من المعاملات بسهولة وبأمان ، مما يضمن عمليات سلسة وعملاء راضين. اختبر أداء المعاملات غير المسبوق مع TPS.",
+    "master": 45
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 91,
+  "fields": {
+    "language_code": "en",
+    "name": "Management Information System",
+    "description": "Empower your management team with our intuitive Management Information System. Access key insights and performance metrics in a snap, enabling data-driven decision-making and strategic planning. Elevate your management with MIS.",
+    "master": 46
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 92,
+  "fields": {
+    "language_code": "ar",
+    "name": "نظام معلومات الإدارة",
+    "description": "قم بتمكين فريق الإدارة الخاص بك بنظام معلومات الإدارة البديهي لدينا. الوصول إلى البيانات الرئيسية ومؤشرات الأداء بسرعة ، مما يمكن من اتخاذ القرارات المستنيرة بناءً على البيانات والتخطيط الاستراتيجي. قم بتعزيز إدارتك مع MIS.",
+    "master": 46
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 93,
+  "fields": {
+    "language_code": "en",
+    "name": "Decision Support System",
+    "description": "Make the right choices every time with our Decision Support System. Analyze complex data, explore multiple scenarios, and unlock valuable insights to guide your decisions confidently. Trust DSS to be your ultimate decision-making companion.",
+    "master": 47
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 94,
+  "fields": {
+    "language_code": "ar",
+    "name": "نظام دعم القرارات",
+    "description": "اجعل الاختيارات الصحيحة في كل مرة مع نظام دعم القرارات لدينا. قم بتحليل البيانات المعقدة ، واستكشاف السيناريوهات المتعددة ، وفتح الرؤى القيمة لتوجيه قراراتك بثقة. ثق بـ DSS ليكون رفيقك النهائي في اتخاذ القرارات.",
+    "master": 47
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 95,
+  "fields": {
+    "language_code": "en",
+    "name": "Executive Support System",
+    "description": "Executive decision-making simplified with our Executive Support System. Get high-level reports, real-time updates, and critical KPIs at your fingertips. Stay agile and lead your organization to success with ESS.",
+    "master": 48
+  }
+},
+{
+  "model": "homepage.servicetranslation",
+  "pk": 96,
+  "fields": {
+    "language_code": "ar",
+    "name": "نظام دعم التنفيذيات",
+    "description": "تبسيط اتخاذ القرارات التنفيذية مع نظام دعم التنفيذيات لدينا. احصل على تقارير مستوى عال ، وتحديثات في الوقت الفعلي ، والمؤشرات الحرجة في متناول يديك. ابق على الرشاقة وقد منظمتك نحو النجاح مع ESS.",
+    "master": 48
+  }
+},
+{
+  "model": "homepage.service",
+  "pk": 37,
+  "fields": {
+    "slug": "system-integration-services",
+    "image": "images/service/system-integration-services_fxY81jT.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.629Z",
+    "modified": "2026-03-21T19:34:38.680Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.service",
+  "pk": 38,
+  "fields": {
+    "slug": "business-intelligence-tool",
+    "image": "images/service/business-intelligence-tool_HlLyAcb.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.690Z",
+    "modified": "2026-03-21T19:34:38.738Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.service",
+  "pk": 39,
+  "fields": {
+    "slug": "advanced-automation-solutions",
+    "image": "images/service/advanced-automation-solutions_TJX7ktK.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.738Z",
+    "modified": "2026-03-21T19:34:38.800Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.service",
+  "pk": 40,
+  "fields": {
+    "slug": "performance-monitoring-systems",
+    "image": "images/service/performance-monitoring-systems_5AggTrt.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.806Z",
+    "modified": "2026-03-21T19:34:38.855Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.service",
+  "pk": 41,
+  "fields": {
+    "slug": "tracking-solutions-systems",
+    "image": "images/service/tracking-solutions-systems_x7Ndql9.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.864Z",
+    "modified": "2026-03-21T19:34:38.913Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.service",
+  "pk": 42,
+  "fields": {
+    "slug": "data-portability-solutions",
+    "image": "images/service/data-portability-solutions_dDA2Ymd.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.922Z",
+    "modified": "2026-03-21T19:34:38.969Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.service",
+  "pk": 43,
+  "fields": {
+    "slug": "real-time-database-systems",
+    "image": "images/service/real-time-database-systems_UVdLz0H.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.973Z",
+    "modified": "2026-03-21T19:34:39.025Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.service",
+  "pk": 44,
+  "fields": {
+    "slug": "digital-transformation-system",
+    "image": "images/service/digital-transformation-system_WF0wv58.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:39.025Z",
+    "modified": "2026-03-21T19:34:39.074Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.service",
+  "pk": 45,
+  "fields": {
+    "slug": "transaction-processing-system",
+    "image": "images/service/transaction-processing-system_YApHm0n.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:39.082Z",
+    "modified": "2026-03-21T19:34:39.132Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.service",
+  "pk": 46,
+  "fields": {
+    "slug": "management-information-system",
+    "image": "images/service/management-information-system_jkcFer0.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:39.138Z",
+    "modified": "2026-03-21T19:34:39.189Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.service",
+  "pk": 47,
+  "fields": {
+    "slug": "decision-support-system",
+    "image": "images/service/decision-support-system_fgK3bvq.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:39.189Z",
+    "modified": "2026-03-21T19:34:39.241Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.service",
+  "pk": 48,
+  "fields": {
+    "slug": "executive-support-system",
+    "image": "images/service/executive-support-system_k9Uk0U9.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:39.250Z",
+    "modified": "2026-03-21T19:34:39.297Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 123,
+  "fields": {
+    "language_code": "en",
+    "name": "Customer Segmentation",
+    "description": "We use advanced analytics to segment your customer base based on demographics, behavior, and other factors. This helps you understand the unique needs and preferences of different customer groups, allowing you to tailor your marketing and sales efforts for maximum impact.",
+    "master": 62
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 124,
+  "fields": {
+    "language_code": "ar",
+    "name": "تقسيم العملاء",
+    "description": "نحن نستخدم التحليلات المتقدمة لتقسيم قاعدة عملائك استنادًا إلى السمات الديموغرافية والسلوكية وعوامل أخرى. يساعد هذا في فهم الاحتياجات والتفضيلات الفريدة لمجموعات العملاء المختلفة، مما يتيح لك تخصيص جهود التسويق والمبيعات الخاصة بك لتحقيق أقصى تأثير.",
+    "master": 62
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 125,
+  "fields": {
+    "language_code": "en",
+    "name": "Predictive Analytics",
+    "description": "We use predictive modeling to forecast future revenue trends and identify potential areas of risk. By leveraging your historical data, we can develop accurate revenue forecasts and help you mitigate potential risks.",
+    "master": 63
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 126,
+  "fields": {
+    "language_code": "ar",
+    "name": "التحليل التنبؤي",
+    "description": "نحن نستخدم النمذجة التنبؤية لتوقع اتجاهات الإيرادات المستقبلية وتحديد المجالات المحتملة للمخاطر. من خلال استغلال بياناتك التاريخية، يمكننا تطوير توقعات دقيقة للإيرادات ومساعدتك في التخفيف من المخاطر المحتملة.",
+    "master": 63
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 127,
+  "fields": {
+    "language_code": "en",
+    "name": "Sales And Marketing Optimization",
+    "description": "We analyze your sales and marketing data to identify areas of opportunity for improvement. By understanding the effectiveness of your campaigns and channels, we can help you optimize your marketing spend and increase your ROI.",
+    "master": 64
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 128,
+  "fields": {
+    "language_code": "ar",
+    "name": "تحسين المبيعات والتسويق",
+    "description": "نحن نحلل بيانات مبيعاتك وتسويقك لتحديد مجالات الفرص للتحسين. من خلال فهم فعالية حملاتك وقنواتك، يمكننا مساعدتك في تحسين إنفاق التسويق الخاص بك وزيادة عائد الاستثمار.",
+    "master": 64
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 129,
+  "fields": {
+    "language_code": "en",
+    "name": "Demand Forecasting",
+    "description": "Use historical data and predictive analytics to forecast demand and optimize pricing and inventory management strategies.",
+    "master": 65
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 130,
+  "fields": {
+    "language_code": "ar",
+    "name": "توقع الطلب",
+    "description": "استخدم البيانات التاريخية والتحليلات التنبؤية لتوقع الطلب وتحسين استراتيجيات التسعير وإدارة المخزون.",
+    "master": 65
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 131,
+  "fields": {
+    "language_code": "en",
+    "name": "Pricing Optimization",
+    "description": "Use data analysis and modeling to determine optimal pricing strategies that maximize revenue while remaining competitive in the market.",
+    "master": 66
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 132,
+  "fields": {
+    "language_code": "ar",
+    "name": "تحسين التسعير",
+    "description": "استخدم تحليل البيانات والنمذجة لتحديد استراتيجيات التسعير الأمثل التي تعزز الإيرادات مع البقاء تنافسية في السوق.",
+    "master": 66
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 133,
+  "fields": {
+    "language_code": "en",
+    "name": "Inventory Management",
+    "description": "Use data analytics to optimize inventory levels, minimize stockouts, and reduce inventory carrying costs.",
+    "master": 67
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 134,
+  "fields": {
+    "language_code": "ar",
+    "name": "إدارة المخزون",
+    "description": "استخدم تحليل البيانات لتحسين مستويات المخزون، وتقليل نقص المخزون، وتقليل تكاليف حمل المخزون.",
+    "master": 67
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 135,
+  "fields": {
+    "language_code": "en",
+    "name": "Revenue Analysis",
+    "description": "Analyze historical revenue data to identify trends, patterns, and opportunities for growth.",
+    "master": 68
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 136,
+  "fields": {
+    "language_code": "ar",
+    "name": "تحليل الإيرادات",
+    "description": "قم بتحليل البيانات التاريخية للإيرادات لتحديد الاتجاهات والأنماط وفرص النمو.",
+    "master": 68
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 137,
+  "fields": {
+    "language_code": "en",
+    "name": "Competitive Analysis",
+    "description": "Use data analysis to understand your competitors' pricing, product offerings, and other factors that impact revenue generation.",
+    "master": 69
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 138,
+  "fields": {
+    "language_code": "ar",
+    "name": "تحليل المنافسة",
+    "description": "استخدم تحليل البيانات لفهم تسعير منافسيك وعروض منتجاتهم وعوامل أخرى تؤثر على توليد الإيرادات.",
+    "master": 69
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 139,
+  "fields": {
+    "language_code": "en",
+    "name": "Channel Management",
+    "description": "Analyze sales data across different channels, such as online marketplaces, retail stores, and distribution networks, to identify opportunities for revenue growth.",
+    "master": 70
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 140,
+  "fields": {
+    "language_code": "ar",
+    "name": "إدارة القنوات",
+    "description": "قم بتحليل بيانات المبيعات عبر قنوات مختلفة، مثل الأسواق عبر الإنترنت ومتاجر التجزئة وشبكات التوزيع، لتحديد فرص النمو في الإيرادات.",
+    "master": 70
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 141,
+  "fields": {
+    "language_code": "en",
+    "name": "Marketing Analytics",
+    "description": "Use data analysis to measure the effectiveness of marketing campaigns and optimize marketing spend for maximum ROI.",
+    "master": 71
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 142,
+  "fields": {
+    "language_code": "ar",
+    "name": "تحليل التسويق",
+    "description": "استخدم تحليل البيانات لقياس فعالية حملات التسويق وتحسين إنفاق التسويق لتحقيق أقصى عائد استثماري.",
+    "master": 71
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 143,
+  "fields": {
+    "language_code": "en",
+    "name": "Customer Analytics",
+    "description": "Use data analysis to understand customer behavior, preferences, and demographics, and use this information to develop targeted marketing campaigns and personalized offers that drive revenue growth.",
+    "master": 72
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 144,
+  "fields": {
+    "language_code": "ar",
+    "name": "تحليل العملاء",
+    "description": "استخدم تحليل البيانات لفهم سلوك وتفضيلات العملاء والديموغرافيات، واستخدم هذه المعلومات لتطوير حملات التسويق المستهدفة والعروض الشخصية التي تعزز نمو الإيرادات.",
+    "master": 72
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 145,
+  "fields": {
+    "language_code": "en",
+    "name": "Forecast Accuracy Monitoring",
+    "description": "Monitor forecast accuracy and adjust strategies as needed to ensure revenue targets are met.",
+    "master": 73
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 146,
+  "fields": {
+    "language_code": "ar",
+    "name": "مراقبة دقة التوقعات",
+    "description": "مراقبة دقة التوقعات وضبط الاستراتيجيات حسب الحاجة لضمان تحقيق أهداف الإيرادات.",
+    "master": 73
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 147,
+  "fields": {
+    "language_code": "en",
+    "name": "Roi Analysis",
+    "description": "Explain how you can help businesses calculate their ROI for various investments or projects, and how you use data analytics to measure and optimize ROI.",
+    "master": 74
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 148,
+  "fields": {
+    "language_code": "ar",
+    "name": "تحليل عائد الاستثمار",
+    "description": "شرح كيف يمكنك مساعدة الشركات في حساب عائد الاستثمار الخاص بها لمختلف الاستثمارات أو المشاريع، وكيفية استخدام تحليل البيانات لقياس وتحسين عائد الاستثمار.",
+    "master": 74
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 149,
+  "fields": {
+    "language_code": "en",
+    "name": "Financial Modeling",
+    "description": "Describe how you use financial models to help businesses make informed decisions about investments, budgets, and other financial matters.",
+    "master": 75
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 150,
+  "fields": {
+    "language_code": "ar",
+    "name": "النمذجة المالية",
+    "description": "وصف كيفية استخدام النماذج المالية لمساعدة الشركات في اتخاذ قرارات مستنيرة حول الاستثمارات والميزانيات والأمور المالية الأخرى.",
+    "master": 75
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 151,
+  "fields": {
+    "language_code": "en",
+    "name": "Cost Optimization",
+    "description": "Highlight how you use data analytics to identify cost-saving opportunities and optimize spending to improve ROI.",
+    "master": 76
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 152,
+  "fields": {
+    "language_code": "ar",
+    "name": "تحسين التكاليف",
+    "description": "أبرز كيفية استخدام تحليل البيانات لتحديد فرص توفير التكاليف وتحسين الإنفاق لتحسين عائد الاستثمار.",
+    "master": 76
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 153,
+  "fields": {
+    "language_code": "en",
+    "name": "Risk Management",
+    "description": "Discuss how you help businesses manage risk and uncertainty through data analysis and modeling, and how this can improve ROI by minimizing potential losses.",
+    "master": 77
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 154,
+  "fields": {
+    "language_code": "ar",
+    "name": "إدارة المخاطر",
+    "description": "ناقش كيف تساعد الشركات في إدارة المخاطر وعدم اليقين من خلال تحليل البيانات والنمذجة، وكيف يمكن أن يحسن هذا عائد الاستثمار عن طريق تقليل الخسائر المحتملة.",
+    "master": 77
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 155,
+  "fields": {
+    "language_code": "en",
+    "name": "Performance Analysis",
+    "description": "Explain how you help businesses analyze financial performance metrics such as profit margin, revenue growth, and return on investment, and how you use these insights to optimize ROI.",
+    "master": 78
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 156,
+  "fields": {
+    "language_code": "ar",
+    "name": "تحليل الأداء",
+    "description": "شرح كيف تساعد الشركات في تحليل مقاييس أدائها المالي مثل هامش الربح ونمو الإيرادات وعائد الاستثمار، وكيف تستخدم هذه النظرات لتحسين عائد الاستثمار.",
+    "master": 78
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 157,
+  "fields": {
+    "language_code": "en",
+    "name": "Investment Analysis",
+    "description": "Describe how you can help businesses evaluate potential investment opportunities and make informed decisions based on data analysis and financial modeling.",
+    "master": 79
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 158,
+  "fields": {
+    "language_code": "ar",
+    "name": "تحليل الاستثمار",
+    "description": "وصف كيفية مساعدة الشركات في تقييم فرص الاستثمار المحتملة واتخاذ قرارات مستنيرة استنادًا إلى تحليل البيانات والنمذجة المالية.",
+    "master": 79
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 159,
+  "fields": {
+    "language_code": "en",
+    "name": "Portfolio Optimization",
+    "description": "Discuss how you help businesses optimize their investment portfolios based on risk, return, and other factors, and how this can improve overall ROI.",
+    "master": 80
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 160,
+  "fields": {
+    "language_code": "ar",
+    "name": "تحسين محفظة الاستثمار",
+    "description": "ناقش كيفية مساعدة الشركات في تحسين محافظ الاستثمار الخاصة بها استنادًا إلى المخاطر والعائدات وعوامل أخرى، وكيف يمكن أن يحسن هذا عائد الاستثمار الشامل.",
+    "master": 80
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 161,
+  "fields": {
+    "language_code": "en",
+    "name": "Benchmarking",
+    "description": "Explain how you help businesses benchmark their financial performance against industry peers and competitors, and how this can provide valuable insights for improving ROI.",
+    "master": 81
+  }
+},
+{
+  "model": "homepage.featuretranslation",
+  "pk": 162,
+  "fields": {
+    "language_code": "ar",
+    "name": "المقارنة",
+    "description": "شرح كيف تساعد الشركات في مقارنة أدائها المالي مقابل أقران الصناعة والمنافسين، وكيف يمكن أن توفر هذه المعلومات القيمة لتحسين عائد الاستثمار.",
+    "master": 81
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 62,
+  "fields": {
+    "slug": "customer-segmentation",
+    "image": "images/feature/customer-segmentation_JLDUT9a.jfif",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:36.130Z",
+    "modified": "2026-03-21T19:34:36.224Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 63,
+  "fields": {
+    "slug": "predictive-analytics",
+    "image": "images/feature/predictive-analytics_mYsrxnA.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:36.228Z",
+    "modified": "2026-03-21T19:34:36.319Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 64,
+  "fields": {
+    "slug": "sales-and-marketing-optimization",
+    "image": "images/feature/sales-and-marketing-optimization_hxbw2j0.jfif",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:36.327Z",
+    "modified": "2026-03-21T19:34:36.412Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 65,
+  "fields": {
+    "slug": "demand-forecasting",
+    "image": "images/feature/demand-forecasting_NCxwKeo.jfif",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:36.421Z",
+    "modified": "2026-03-21T19:34:36.504Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 66,
+  "fields": {
+    "slug": "pricing-optimization",
+    "image": "images/feature/pricing-optimization_dQ1oocQ.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:36.511Z",
+    "modified": "2026-03-21T19:34:36.598Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 67,
+  "fields": {
+    "slug": "inventory-management",
+    "image": "images/feature/inventory-management_QBOls7x.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:36.607Z",
+    "modified": "2026-03-21T19:34:36.708Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 68,
+  "fields": {
+    "slug": "revenue-analysis",
+    "image": "images/feature/revenue-analysis_WCnbQ5y.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:36.711Z",
+    "modified": "2026-03-21T19:34:36.795Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 69,
+  "fields": {
+    "slug": "competitive-analysis",
+    "image": "images/feature/competitive-analysis_QnS9dRt.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:36.804Z",
+    "modified": "2026-03-21T19:34:36.904Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 70,
+  "fields": {
+    "slug": "channel-management",
+    "image": "images/feature/channel-management_Qf67ybq.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:36.908Z",
+    "modified": "2026-03-21T19:34:37.019Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 71,
+  "fields": {
+    "slug": "marketing-analytics",
+    "image": "images/feature/marketing-analytics_0fDeOIw.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:37.021Z",
+    "modified": "2026-03-21T19:34:37.121Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 72,
+  "fields": {
+    "slug": "customer-analytics",
+    "image": "images/feature/customer-analytics_yW5eOnk.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:37.126Z",
+    "modified": "2026-03-21T19:34:37.231Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 73,
+  "fields": {
+    "slug": "forecast-accuracy-monitoring",
+    "image": "images/feature/forecast-accuracy-monitoring_3p7bgdM.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:37.248Z",
+    "modified": "2026-03-21T19:34:37.355Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 74,
+  "fields": {
+    "slug": "roi-analysis",
+    "image": "images/feature/roi-analysis_zBHxQF7.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:37.371Z",
+    "modified": "2026-03-21T19:34:37.471Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 75,
+  "fields": {
+    "slug": "financial-modeling",
+    "image": "images/feature/financial-modeling_BYECyPO.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:37.478Z",
+    "modified": "2026-03-21T19:34:37.581Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 76,
+  "fields": {
+    "slug": "cost-optimization",
+    "image": "images/feature/cost-optimization_3WJkSIh.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:37.583Z",
+    "modified": "2026-03-21T19:34:37.688Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 77,
+  "fields": {
+    "slug": "risk-management",
+    "image": "images/feature/risk-management_NUUykZM.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:37.697Z",
+    "modified": "2026-03-21T19:34:37.804Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 78,
+  "fields": {
+    "slug": "performance-analysis",
+    "image": "images/feature/performance-analysis_CjDfuDA.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:37.813Z",
+    "modified": "2026-03-21T19:34:37.909Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 79,
+  "fields": {
+    "slug": "investment-analysis",
+    "image": "images/feature/investment-analysis_jAtaoDr.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:37.909Z",
+    "modified": "2026-03-21T19:34:38.005Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 80,
+  "fields": {
+    "slug": "portfolio-optimization",
+    "image": "images/feature/portfolio-optimization_hjZj1QO.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.018Z",
+    "modified": "2026-03-21T19:34:38.117Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.feature",
+  "pk": 81,
+  "fields": {
+    "slug": "benchmarking",
+    "image": "images/feature/benchmarking_RqClTIZ.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.125Z",
+    "modified": "2026-03-21T19:34:38.227Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.frameworktranslation",
+  "pk": 37,
+  "fields": {
+    "language_code": "en",
+    "name": "Python",
+    "description": "High-level interpreted language.",
+    "master": 19
+  }
+},
+{
+  "model": "homepage.frameworktranslation",
+  "pk": 38,
+  "fields": {
+    "language_code": "ar",
+    "name": "",
+    "description": "",
+    "master": 19
+  }
+},
+{
+  "model": "homepage.frameworktranslation",
+  "pk": 39,
+  "fields": {
+    "language_code": "en",
+    "name": "Database",
+    "description": "Organized electronic data storage.",
+    "master": 20
+  }
+},
+{
+  "model": "homepage.frameworktranslation",
+  "pk": 40,
+  "fields": {
+    "language_code": "ar",
+    "name": "",
+    "description": "",
+    "master": 20
+  }
+},
+{
+  "model": "homepage.frameworktranslation",
+  "pk": 41,
+  "fields": {
+    "language_code": "en",
+    "name": "R",
+    "description": "Statistical computing and graphics.",
+    "master": 21
+  }
+},
+{
+  "model": "homepage.frameworktranslation",
+  "pk": 42,
+  "fields": {
+    "language_code": "ar",
+    "name": "",
+    "description": "",
+    "master": 21
+  }
+},
+{
+  "model": "homepage.frameworktranslation",
+  "pk": 43,
+  "fields": {
+    "language_code": "en",
+    "name": "Tableau",
+    "description": "Data visualization and analytics platform.",
+    "master": 22
+  }
+},
+{
+  "model": "homepage.frameworktranslation",
+  "pk": 44,
+  "fields": {
+    "language_code": "ar",
+    "name": "",
+    "description": "",
+    "master": 22
+  }
+},
+{
+  "model": "homepage.frameworktranslation",
+  "pk": 45,
+  "fields": {
+    "language_code": "en",
+    "name": "Powerbi",
+    "description": "Business analytics service by Microsoft.",
+    "master": 23
+  }
+},
+{
+  "model": "homepage.frameworktranslation",
+  "pk": 46,
+  "fields": {
+    "language_code": "ar",
+    "name": "",
+    "description": "",
+    "master": 23
+  }
+},
+{
+  "model": "homepage.frameworktranslation",
+  "pk": 47,
+  "fields": {
+    "language_code": "en",
+    "name": "Excel",
+    "description": "Spreadsheet software by Microsoft.",
+    "master": 24
+  }
+},
+{
+  "model": "homepage.frameworktranslation",
+  "pk": 48,
+  "fields": {
+    "language_code": "ar",
+    "name": "None",
+    "description": "",
+    "master": 24
+  }
+},
+{
+  "model": "homepage.framework",
+  "pk": 19,
+  "fields": {
+    "slug": "python",
+    "image": "images/framework/python_VkZ37qI.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.238Z",
+    "modified": "2026-03-21T19:34:38.294Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.framework",
+  "pk": 20,
+  "fields": {
+    "slug": "database",
+    "image": "images/framework/database_j2bvpyl.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.304Z",
+    "modified": "2026-03-21T19:34:38.359Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.framework",
+  "pk": 21,
+  "fields": {
+    "slug": "r",
+    "image": "images/framework/r_X6lSaVO.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.359Z",
+    "modified": "2026-03-21T19:34:38.428Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.framework",
+  "pk": 22,
+  "fields": {
+    "slug": "tableau",
+    "image": "images/framework/tableau_JeBvPZj.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.440Z",
+    "modified": "2026-03-21T19:34:38.483Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.framework",
+  "pk": 23,
+  "fields": {
+    "slug": "powerbi",
+    "image": "images/framework/powerbi_R9HvZgX.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.490Z",
+    "modified": "2026-03-21T19:34:38.557Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.framework",
+  "pk": 24,
+  "fields": {
+    "slug": "excel",
+    "image": "images/framework/none.png",
+    "icon": null,
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:38.557Z",
+    "modified": "2026-03-21T19:36:45.014Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 97,
+  "fields": {
+    "language_code": "en",
+    "name": "Technology Solutions",
+    "description": "",
+    "master": 49
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 98,
+  "fields": {
+    "language_code": "ar",
+    "name": "حلول تكنولوجيا",
+    "description": "",
+    "master": 49
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 99,
+  "fields": {
+    "language_code": "en",
+    "name": "Health & Wellness",
+    "description": "",
+    "master": 50
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 100,
+  "fields": {
+    "language_code": "ar",
+    "name": "الصحة والعافية",
+    "description": "",
+    "master": 50
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 101,
+  "fields": {
+    "language_code": "en",
+    "name": "Home Improvement",
+    "description": "",
+    "master": 51
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 102,
+  "fields": {
+    "language_code": "ar",
+    "name": "تحسين المنزل",
+    "description": "",
+    "master": 51
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 103,
+  "fields": {
+    "language_code": "en",
+    "name": "Financial Services",
+    "description": "",
+    "master": 52
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 104,
+  "fields": {
+    "language_code": "ar",
+    "name": "الخدمات المالية",
+    "description": "",
+    "master": 52
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 105,
+  "fields": {
+    "language_code": "en",
+    "name": "Travel & Leisure",
+    "description": "",
+    "master": 53
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 106,
+  "fields": {
+    "language_code": "ar",
+    "name": "السفر والترفيه",
+    "description": "",
+    "master": 53
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 107,
+  "fields": {
+    "language_code": "en",
+    "name": "Food & Beverage",
+    "description": "",
+    "master": 54
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 108,
+  "fields": {
+    "language_code": "ar",
+    "name": "الطعام والمشروبات",
+    "description": "",
+    "master": 54
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 109,
+  "fields": {
+    "language_code": "en",
+    "name": "Fashion & Beauty",
+    "description": "",
+    "master": 55
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 110,
+  "fields": {
+    "language_code": "ar",
+    "name": "الموضة والجمال",
+    "description": "",
+    "master": 55
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 111,
+  "fields": {
+    "language_code": "en",
+    "name": "Education & Learning",
+    "description": "",
+    "master": 56
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 112,
+  "fields": {
+    "language_code": "ar",
+    "name": "التعليم والتعلم",
+    "description": "",
+    "master": 56
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 113,
+  "fields": {
+    "language_code": "en",
+    "name": "Automotive Industry",
+    "description": "",
+    "master": 57
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 114,
+  "fields": {
+    "language_code": "ar",
+    "name": "صناعة السيارات",
+    "description": "",
+    "master": 57
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 115,
+  "fields": {
+    "language_code": "en",
+    "name": "Entertainment & Media",
+    "description": "",
+    "master": 58
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 116,
+  "fields": {
+    "language_code": "ar",
+    "name": "الترفيه ووسائل الإعلام",
+    "description": "",
+    "master": 58
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 117,
+  "fields": {
+    "language_code": "en",
+    "name": "Sports & Fitness",
+    "description": "",
+    "master": 59
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 118,
+  "fields": {
+    "language_code": "ar",
+    "name": "الرياضة واللياقة البدنية",
+    "description": "",
+    "master": 59
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 119,
+  "fields": {
+    "language_code": "en",
+    "name": "Environmental Sustainability",
+    "description": "",
+    "master": 60
+  }
+},
+{
+  "model": "homepage.businesscategorytranslation",
+  "pk": 120,
+  "fields": {
+    "language_code": "ar",
+    "name": "الاستدامة البيئية",
+    "description": "",
+    "master": 60
+  }
+},
+{
+  "model": "homepage.businesscategory",
+  "pk": 49,
+  "fields": {
+    "slug": "technology-solutions",
+    "image": "images/businesscategory/technology-solutions_z5GdlbD.jfif",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:34.559Z",
+    "modified": "2026-03-21T19:34:34.768Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.businesscategory",
+  "pk": 50,
+  "fields": {
+    "slug": "health-wellness",
+    "image": "images/businesscategory/health-wellness_KvQWxsd.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:34.823Z",
+    "modified": "2026-03-21T19:34:34.985Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.businesscategory",
+  "pk": 51,
+  "fields": {
+    "slug": "home-improvement",
+    "image": "images/businesscategory/home-improvement_pqNYVJn.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:35.008Z",
+    "modified": "2026-03-21T19:34:35.140Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.businesscategory",
+  "pk": 52,
+  "fields": {
+    "slug": "financial-services",
+    "image": "images/businesscategory/financial-services_H3t94p1.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:35.155Z",
+    "modified": "2026-03-21T19:34:35.287Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.businesscategory",
+  "pk": 53,
+  "fields": {
+    "slug": "travel-leisure",
+    "image": "images/businesscategory/travel-leisure_bmGZWXP.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:35.294Z",
+    "modified": "2026-03-21T19:34:35.406Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.businesscategory",
+  "pk": 54,
+  "fields": {
+    "slug": "food-beverage",
+    "image": "images/businesscategory/food-beverage_7AoG9Aa.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:35.422Z",
+    "modified": "2026-03-21T19:34:35.521Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.businesscategory",
+  "pk": 55,
+  "fields": {
+    "slug": "fashion-beauty",
+    "image": "images/businesscategory/fashion-beauty_ySa8dJ2.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:35.528Z",
+    "modified": "2026-03-21T19:34:35.624Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.businesscategory",
+  "pk": 56,
+  "fields": {
+    "slug": "education-learning",
+    "image": "images/businesscategory/education-learning_V3nCIqg.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:35.624Z",
+    "modified": "2026-03-21T19:34:35.723Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.businesscategory",
+  "pk": 57,
+  "fields": {
+    "slug": "automotive-industry",
+    "image": "images/businesscategory/automotive-industry_5OMpWU1.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:35.737Z",
+    "modified": "2026-03-21T19:34:35.820Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.businesscategory",
+  "pk": 58,
+  "fields": {
+    "slug": "entertainment-media",
+    "image": "images/businesscategory/entertainment-media_dqkwr0x.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:35.830Z",
+    "modified": "2026-03-21T19:34:35.926Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.businesscategory",
+  "pk": 59,
+  "fields": {
+    "slug": "sports-fitness",
+    "image": "images/businesscategory/sports-fitness_I5Kb6Xd.jfif",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:35.933Z",
+    "modified": "2026-03-21T19:34:36.023Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.businesscategory",
+  "pk": 60,
+  "fields": {
+    "slug": "environmental-sustainability",
+    "image": "images/businesscategory/environmental-sustainability_AvLbGKO.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:36.026Z",
+    "modified": "2026-03-21T19:34:36.121Z",
+    "site": 2
+  }
+},
+{
+  "model": "homepage.offeringtranslation",
+  "pk": 1,
+  "fields": {
+    "language_code": "en",
+    "name": "Roinsight.Com",
+    "description": "Our company is designed to provide you with a comprehensive overview of the most popular data science and business intelligence tools available on the market today. From data visualization and dashboarding tools to advanced analytics and machine learning platforms, we cover everything you need to know to make informed decisions about which tools are right for your business.",
+    "master": 1
+  }
+},
+{
+  "model": "homepage.offeringtranslation",
+  "pk": 2,
+  "fields": {
+    "language_code": "ar",
+    "name": "Roinsight.Com",
+    "description": "شركتنا مصممة لتزويدك بنظرة شاملة عن أشهر أدوات علم البيانات والذكاء التجاري المتاحة في السوق اليوم. من أدوات تصور البيانات واللوحات الإرشادية إلى التحليلات المتقدمة ومنصات التعلم الآلي، نغطي كل ما تحتاج إلى معرفته لاتخاذ قرارات مستنيرة حول الأدوات المناسبة لعملك.",
+    "master": 1
+  }
+},
+{
+  "model": "homepage.offeringtranslation",
+  "pk": 3,
+  "fields": {
+    "language_code": "en",
+    "name": "Business Intelligence Tool",
+    "description": "Our advanced tool empowers you to make informed decisions using real-time data and analytics. Gain insights into market trends, competitor activity, and customer behavior, optimizing pricing strategies and identifying revenue streams effortlessly.",
+    "master": 2
+  }
+},
+{
+  "model": "homepage.offeringtranslation",
+  "pk": 4,
+  "fields": {
+    "language_code": "ar",
+    "name": "أداة الذكاء التجاري",
+    "description": "تقاريرنا المتقدمة تمكنك من اتخاذ قرارات مستنيرة باستخدام البيانات والتحليلات في الوقت الفعلي. احصل على رؤى حول اتجاهات السوق ونشاط المنافسين وسلوك العملاء، مما يساعد في تحسين استراتيجيات التسعير وتحديد مصادر الإيرادات بسهولة.",
+    "master": 2
+  }
+},
+{
+  "model": "homepage.offeringtranslation",
+  "pk": 5,
+  "fields": {
+    "language_code": "en",
+    "name": "Revenue Management Consultation",
+    "description": "Maximize your hotel's revenue with our expert services. We optimize pricing and distribution channels, increasing occupancy rates and profitability. Our tailored strategies ensure measurable revenue growth, helping you stay ahead of the competition.",
+    "master": 3
+  }
+},
+{
+  "model": "homepage.offeringtranslation",
+  "pk": 6,
+  "fields": {
+    "language_code": "ar",
+    "name": "استشارات إدارة الإيرادات",
+    "description": "قم بتحقيق أقصى قدر من إيرادات فندقك مع خدماتنا المستنيرة. نحن نحسن التسعير وقنوات التوزيع، مما يزيد من معدلات الإشغال والربحية. استراتيجياتنا المخصصة تضمن نمواً قابلاً للقياس في الإيرادات، مما يساعدك على البقاء في المقدمة.",
+    "master": 3
+  }
+},
+{
+  "model": "homepage.offeringtranslation",
+  "pk": 7,
+  "fields": {
+    "language_code": "en",
+    "name": "Revenue Optimization Solutions",
+    "description": "Our versatile business intelligence tool is suitable for any industry, helping you achieve your goals and elevate your business. Try it today for impactful results!",
+    "master": 4
+  }
+},
+{
+  "model": "homepage.offeringtranslation",
+  "pk": 8,
+  "fields": {
+    "language_code": "ar",
+    "name": "حلول تحسين الإيرادات",
+    "description": "أداة الذكاء التجاري متعددة الاستخدامات لدينا مناسبة لأي صناعة، مما يساعدك في تحقيق أهدافك وتطوير عملك. جربها اليوم لنتائج فعّالة!",
+    "master": 4
+  }
+},
+{
+  "model": "homepage.offering",
+  "pk": 1,
+  "fields": {
+    "slug": "roinsightcom",
+    "image": "",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:40.104Z",
+    "modified": "2026-03-21T19:34:40.143Z",
+    "site": 2,
+    "category": 49
+  }
+},
+{
+  "model": "homepage.offering",
+  "pk": 2,
+  "fields": {
+    "slug": "business-intelligence-tool",
+    "image": "images/offering/business-intelligence-tool.png",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:40.149Z",
+    "modified": "2026-03-21T19:34:40.242Z",
+    "site": 2,
+    "category": 49
+  }
+},
+{
+  "model": "homepage.offering",
+  "pk": 3,
+  "fields": {
+    "slug": "revenue-management-consultation",
+    "image": "images/offering/revenue-management-consultation.jfif",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:40.254Z",
+    "modified": "2026-03-21T19:34:40.355Z",
+    "site": 2,
+    "category": 49
+  }
+},
+{
+  "model": "homepage.offering",
+  "pk": 4,
+  "fields": {
+    "slug": "revenue-optimization-solutions",
+    "image": "images/offering/revenue-optimization-solutions.jpeg",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:40.363Z",
+    "modified": "2026-03-21T19:34:40.465Z",
+    "site": 2,
+    "category": 49
+  }
+},
+{
+  "model": "homepage.menuitemtranslation",
+  "pk": 1,
+  "fields": {
+    "language_code": "en",
+    "name": "Home",
+    "description": "Home",
+    "master": 1
+  }
+},
+{
+  "model": "homepage.menuitemtranslation",
+  "pk": 2,
+  "fields": {
+    "language_code": "ar",
+    "name": "الرئيسية",
+    "description": "",
+    "master": 1
+  }
+},
+{
+  "model": "homepage.menuitemtranslation",
+  "pk": 3,
+  "fields": {
+    "language_code": "en",
+    "name": "Service",
+    "description": "",
+    "master": 2
+  }
+},
+{
+  "model": "homepage.menuitemtranslation",
+  "pk": 4,
+  "fields": {
+    "language_code": "en",
+    "name": "Products",
+    "description": "",
+    "master": 3
+  }
+},
+{
+  "model": "homepage.menuitemtranslation",
+  "pk": 5,
+  "fields": {
+    "language_code": "en",
+    "name": "Offering",
+    "description": "",
+    "master": 4
+  }
+},
+{
+  "model": "homepage.menuitemtranslation",
+  "pk": 6,
+  "fields": {
+    "language_code": "en",
+    "name": "BI Tools",
+    "description": "",
+    "master": 5
+  }
+},
+{
+  "model": "homepage.menuitem",
+  "pk": 1,
+  "fields": {
+    "slug": "Home",
+    "image": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T23:41:57.140Z",
+    "modified": "2026-03-21T23:42:18.870Z",
+    "site": 2,
+    "parent": null,
+    "url": "Home",
+    "route_name": "Home",
+    "icon": "fa-home",
+    "anchor": null,
+    "open_in_new_tab": false,
+    "is_dropdown": false,
+    "order": 0
+  }
+},
+{
+  "model": "homepage.menuitem",
+  "pk": 2,
+  "fields": {
+    "slug": "Services",
+    "image": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T23:54:34.979Z",
+    "modified": "2026-03-21T23:54:43.145Z",
+    "site": 2,
+    "parent": null,
+    "url": "#Service",
+    "route_name": "Service",
+    "icon": "fa-serivce",
+    "anchor": "services",
+    "open_in_new_tab": false,
+    "is_dropdown": false,
+    "order": 1
+  }
+},
+{
+  "model": "homepage.menuitem",
+  "pk": 3,
+  "fields": {
+    "slug": "Products",
+    "image": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T23:55:32.038Z",
+    "modified": "2026-03-21T23:58:30.068Z",
+    "site": 2,
+    "parent": null,
+    "url": "#Products",
+    "route_name": "Products",
+    "icon": "fa-product",
+    "anchor": "Products",
+    "open_in_new_tab": false,
+    "is_dropdown": true,
+    "order": 3
+  }
+},
+{
+  "model": "homepage.menuitem",
+  "pk": 4,
+  "fields": {
+    "slug": "Offering",
+    "image": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T23:56:16.218Z",
+    "modified": "2026-03-21T23:56:16.218Z",
+    "site": 2,
+    "parent": null,
+    "url": "Offering",
+    "route_name": "Offering",
+    "icon": "Offering",
+    "anchor": "Offering",
+    "open_in_new_tab": false,
+    "is_dropdown": false,
+    "order": 4
+  }
+},
+{
+  "model": "homepage.menuitem",
+  "pk": 5,
+  "fields": {
+    "slug": "bi_tools",
+    "image": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T23:57:10.896Z",
+    "modified": "2026-03-21T23:57:54.257Z",
+    "site": 2,
+    "parent": 3,
+    "url": null,
+    "route_name": null,
+    "icon": null,
+    "anchor": null,
+    "open_in_new_tab": false,
+    "is_dropdown": false,
+    "order": 0
+  }
+},
+{
+  "model": "homepage.teammembertranslation",
+  "pk": 7,
+  "fields": {
+    "language_code": "en",
+    "name": "",
+    "description": "",
+    "job_title": "",
+    "bio": "",
+    "master": 4
+  }
+},
+{
+  "model": "homepage.teammembertranslation",
+  "pk": 8,
+  "fields": {
+    "language_code": "ar",
+    "name": "",
+    "description": "",
+    "job_title": null,
+    "bio": null,
+    "master": 4
+  }
+},
+{
+  "model": "homepage.teammember",
+  "pk": 4,
+  "fields": {
+    "slug": null,
+    "image": "",
+    "icon": "",
+    "is_featured": false,
+    "is_published": true,
+    "created": "2026-03-21T19:34:40.071Z",
+    "modified": "2026-03-21T19:34:40.104Z",
+    "site": 2,
+    "email": "",
+    "phone_number": "",
+    "location": "",
+    "whatsapp": "",
+    "linkedin": "",
+    "twitter": "",
+    "facebook": "",
+    "instagram": "",
+    "github": "",
+    "medium": ""
+  }
+}
+]
