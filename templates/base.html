@@ -152,18 +152,17 @@
             class="fixed inset-0 z-30 bg-slate-950/60 backdrop-blur-sm lg:hidden"
         ></div>
 
-        {% if homepage %}
-            {% block contenthomepage %}{% endblock %}
-        {% else %}
 
-        <div
-            class="flex h-screen w-full"
-            hx-boost="true"
+            <!-- hx-boost="true"
             hx-target="#main-content"
             hx-select="#main-content"
             hx-swap="innerHTML"
             hx-push-url="true"
-            id="main-content"
+            id="main-content" -->
+
+        <div
+            class="flex h-screen w-full"
+
         >
             {% block sidebar %}
                 {% include 'dashboard/partials/sidebar.html' %}
@@ -181,7 +180,7 @@
                 </main>
             </div>
         </div>
-        {% endif %}
+
     </div>
 
 

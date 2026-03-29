@@ -5,7 +5,7 @@ from . import views
 
 app_name = "homepage"
 urlpatterns = [
-    path('', views.home, name='index'),
+    path('', views.home, name='home'),
 
     path('services/<slug:slug>/', views.service_detail, name='service-detail'),
     path("offerings/<slug:slug>/", views.offering_detail, name="offering-detail"),
@@ -17,7 +17,8 @@ urlpatterns = [
     path('team/<slug:slug>/', views.teammember_detail, name='teammember-detail'),
     path('testimonials/<slug:slug>/', views.testimonial_detail, name='testimonial-detail'),
 
-
+    # TODO fix this please show contact
+    path('contact/', views.about_us_view, name='contact'),
     path('about-us/', views.about_us_view, name='about_us'),
     path('privacy-policy/', views.privacy_policy_view, name='privacy_policy'),
     path('terms-of-service/', views.terms_of_service_view, name='terms_of_service'),
@@ -31,6 +32,10 @@ urlpatterns = [
     # path('categories/', CategoryListView.as_view(), name='category-list'),
     # path('category/<slug:slug>/', CategoryDetailView.as_view(), name='category-detail'),
 
+    path('pricing/', views.pricing_section_list, name='pricing-list'),
+    path('pricing/plan/<slug:slug>/', views.pricing_plan_detail, name='pricing-plan-detail'),
+    path('pricing/<slug:slug>/comparison/', views.pricing_comparison, name='pricing-comparison'),
+    path('pricing/<slug:slug>/', views.pricing_section_detail, name='pricing-detail'),
 
 ]
 

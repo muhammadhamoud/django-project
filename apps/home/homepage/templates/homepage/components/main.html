@@ -1,25 +1,18 @@
 
-{% extends 'base.html' %}
-{% load static %}
-
+{% extends 'homepage/base.html' %}
+{% load static i18n%}
 {% block title %}Home{% endblock %}
-{% block contenthomepage %}
-
-{% load i18n %}
-
-{% include "homepage/partials/navbar.html" %}
+{% block content %}
 
 <main class="flex-1 overflow-y-auto px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
     {% include "homepage/offerings.html" %}
     {% include "homepage/services.html" %}
+    {% include "homepage/pricing.html" %}
     {% include "homepage/features.html" %}
     {% include "homepage/projects.html" %}
     {% include "homepage/teammember.html" %}
     {% include "homepage/testimonial.html" %}
 </main>
-
-
-
 {% endblock %}
 
 {% comment %}
@@ -48,3 +41,5 @@
 
 {% endblock %}
 {% endcomment %}
+
+

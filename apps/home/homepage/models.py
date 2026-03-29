@@ -15,6 +15,7 @@ from core.models import BaseContent, DRY_TRANSLATION
 class SiteInformation(Extensions, TranslatableModel):
 	# Site Information Fields
 	translations = DRY_TRANSLATION
+	slogan = models.CharField(max_length=100, blank=True, null=True)
 	company_name = models.CharField(max_length=100, blank=True, null=True)
 	keywords = models.CharField(max_length=200, blank=True, null=True)
 	license_number = models.CharField(max_length=200, blank=True, null=True)
@@ -95,7 +96,6 @@ class SiteInformationAdditional(Extensions, TranslatableModel):
 	def get_terms_url(self):
 		return reverse('homepage:terms_of_service')
 
-
 class Marketing(TranslatableModel, BaseContent):
 	site = models.ForeignKey(SiteInformation, on_delete=models.CASCADE ,related_name='marketings')
 	translations = DRY_TRANSLATION
@@ -173,7 +173,6 @@ class Framework(BaseContent, TranslatableModel):
 
 		super(Framework, self).save(*args, **kwargs)
 
-
 class BusinessCategory(BaseContent, TranslatableModel):
 	site = models.ForeignKey(SiteInformation, on_delete=models.CASCADE ,related_name='product_categories')
 	translations = DRY_TRANSLATION
@@ -248,8 +247,6 @@ class Project(BaseContent, TranslatableModel):
 		if not self.id:
 			self.slug = slugify(self.name)
 		super(Project, self).save(*args, **kwargs)
-
-
 
 class MenuItem(BaseContent, TranslatableModel):
 	site = models.ForeignKey(
@@ -330,7 +327,6 @@ class MenuItem(BaseContent, TranslatableModel):
 				return f"#{self.anchor}"
 
 		return "#"
-
 
 class TeamMember(BaseContent, TranslatableModel):
 	# Personal Information
@@ -418,6 +414,290 @@ class Testimonial(BaseContent, TranslatableModel):
 		if not self.id:
 			self.slug = slugify(self.name)
 		super(Testimonial, self).save(*args, **kwargs)
+
+
+# ================================================
+# Pricings
+# ================================================
+class PricingSection(TranslatableModel, BaseContent):
+	"""
+	Main pricing section for a site.
+	Example: 'Pricing', 'Plans', 'Choose Your Plan'
+	"""
+	site = models.ForeignKey(
+		'SiteInformation',
+		on_delete=models.CASCADE,
+		related_name='pricing_sections'
+	)
+	translations = DRY_TRANSLATION
+
+	class Meta:
+		verbose_name = "Pricing Section"
+		verbose_name_plural = "Pricing Sections"
+		ordering = ['-created']
+
+	def __str__(self):
+		return f"{str(self.name)}"
+
+	def get_absolute_url(self):
+		return reverse('homepage:pricing-detail', args=[str(self.slug)])
+	
+	def save(self, *args, **kwargs):
+		if self.image and self.image.name:
+			self.image = compress_image(self.image)
+		
+		# name = self.safe_translation_getter('name', any_language=True)
+		# if name:
+		# 	self.name = str(name).title()
+
+		self.name = str(self.name).title()
+		if not self.id:
+			self.slug = slugify(self.name)
+		super(PricingSection, self).save(*args, **kwargs)
+
+
+class PricingPlan(TranslatableModel, BaseContent):
+	"""
+	Actual plan card like:
+	Free / Starter / Pro / Enterprise
+	"""
+	BILLING_INTERVAL_CHOICES = (
+		('free', 'Free'),
+		('monthly', 'Monthly'),
+		('quarterly', 'Quarterly'),
+		('yearly', 'Yearly'),
+		('one_time', 'One Time'),
+		('custom', 'Custom'),
+	)
+
+	CURRENCY_CHOICES = (
+		('USD', 'USD'),
+		('EUR', 'EUR'),
+		('GBP', 'GBP'),
+		('AED', 'AED'),
+		('SAR', 'SAR'),
+	)
+
+	section = models.ForeignKey(
+		PricingSection,
+		on_delete=models.CASCADE,
+		related_name='plans'
+	)
+
+	translations = TranslatedFields(
+		name=models.CharField(max_length=255),
+		short_description=models.CharField(max_length=300, blank=True, null=True),
+		description=models.TextField(blank=True, null=True),
+		badge_text=models.CharField(max_length=100, blank=True, null=True),
+		price_label=models.CharField(
+			max_length=100,
+			blank=True,
+			null=True,
+			help_text="Examples: Per Month, Per User / Month, Contact Us"
+		),
+		button_text=models.CharField(max_length=100, default="Get Started"),
+		button_url=models.CharField(max_length=500, blank=True, null=True),
+	)
+
+	billing_interval = models.CharField(
+		max_length=20,
+		choices=BILLING_INTERVAL_CHOICES,
+		default='monthly'
+	)
+
+	currency = models.CharField(
+		max_length=10,
+		choices=CURRENCY_CHOICES,
+		default='USD'
+	)
+
+	price = models.DecimalField(
+		max_digits=10,
+		decimal_places=2,
+		blank=True,
+		null=True,
+		help_text="Leave empty for Contact Us / Custom pricing"
+	)
+
+	compare_at_price = models.DecimalField(
+		max_digits=10,
+		decimal_places=2,
+		blank=True,
+		null=True,
+		help_text="Optional old price for discounts"
+	)
+
+	trial_days = models.PositiveIntegerField(default=0)
+	setup_fee = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+	is_popular = models.BooleanField(default=False)
+	is_free = models.BooleanField(default=False)
+	is_custom_price = models.BooleanField(
+		default=False,
+		help_text="Enable for enterprise or contact-sales plans"
+	)
+
+	allow_subscribe = models.BooleanField(default=True)
+	allow_contact_sales = models.BooleanField(default=False)
+	sort_order = models.PositiveIntegerField(default=0)
+
+	class Meta:
+		verbose_name = "Pricing Plan"
+		verbose_name_plural = "Pricing Plans"
+		ordering = ['sort_order', 'id']
+
+	def __str__(self):
+		return f"{str(self.name)}"
+
+	def get_absolute_url(self):
+		return reverse('homepage:pricing-plan-detail', args=[str(self.slug)])
+
+	@property
+	def final_price_display(self):
+		if self.is_free:
+			return "Free"
+		if self.is_custom_price or self.billing_interval == 'custom' or self.price is None:
+			return "Contact Us"
+		return f"{self.price}"
+
+	def save(self, *args, **kwargs):
+		if self.image and self.image.name:
+			self.image = compress_image(self.image)
+
+		if self.is_free:
+			self.price = 0
+			self.billing_interval = 'free'
+
+		if self.is_custom_price:
+			self.price = None
+			
+		self.name = str(self.name).title()
+		if not self.id:
+			self.slug = slugify(self.name)
+		super(PricingPlan, self).save(*args, **kwargs)
+
+
+class PricingFeature(TranslatableModel, BaseContent):
+	"""
+	Feature rows under each plan.
+	Example:
+	- Unlimited Reports
+	- Email Support
+	- Advanced Analytics
+	"""
+	VALUE_TYPE_CHOICES = (
+		('text', 'Text'),
+		('boolean', 'Boolean'),
+		('number', 'Number'),
+	)
+
+	plan = models.ForeignKey(
+		PricingPlan,
+		on_delete=models.CASCADE,
+		related_name='features'
+	)
+
+	translations = TranslatedFields(
+		name=models.CharField(max_length=255),
+		description=models.CharField(max_length=300, blank=True, null=True),
+		value_text=models.CharField(max_length=255, blank=True, null=True),
+	)
+
+	value_type = models.CharField(max_length=20, choices=VALUE_TYPE_CHOICES, default='boolean')
+	value_boolean = models.BooleanField(default=True)
+	value_number = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+
+	sort_order = models.PositiveIntegerField(default=0)
+
+	class Meta:
+		verbose_name = "Pricing Feature"
+		verbose_name_plural = "Pricing Features"
+		ordering = ['sort_order', 'id']
+
+	def __str__(self):
+		return f"{str(self.name)}"
+
+	@property
+	def display_value(self):
+		if self.value_type == 'boolean':
+			return self.value_boolean
+		if self.value_type == 'number':
+			return self.value_number
+		return self.safe_translation_getter('value_text', any_language=True)
+
+	def get_absolute_url(self):
+		return reverse('homepage:pricing-features', args=[str(self.slug)])
+	
+	def save(self, *args, **kwargs):
+		if self.image and self.image.name:
+			self.image = compress_image(self.image)
+
+		self.name = str(self.name).title()
+		if not self.id:
+			self.slug = slugify(self.name)
+		super(PricingFeature, self).save(*args, **kwargs)
+
+
+class PricingPlanLimit(TranslatableModel, BaseContent):
+	"""
+	Numeric usage limits per plan.
+	Example:
+	- Users: 10
+	- Properties: 5
+	- Reports / month: 100
+	"""
+	LIMIT_TYPE_CHOICES = (
+		('integer', 'Integer'),
+		('decimal', 'Decimal'),
+		('unlimited', 'Unlimited'),
+		('custom', 'Custom'),
+	)
+
+	plan = models.ForeignKey(
+		PricingPlan,
+		on_delete=models.CASCADE,
+		related_name='limits'
+	)
+
+	translations = TranslatedFields(
+		name=models.CharField(max_length=255),
+		unit=models.CharField(max_length=100, blank=True, null=True),
+		custom_value=models.CharField(max_length=255, blank=True, null=True),
+	)
+
+	limit_type = models.CharField(max_length=20, choices=LIMIT_TYPE_CHOICES, default='integer')
+	value_integer = models.PositiveIntegerField(blank=True, null=True)
+	value_decimal = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+
+	sort_order = models.PositiveIntegerField(default=0)
+
+	class Meta:
+		verbose_name = "Pricing Plan Limit"
+		verbose_name_plural = "Pricing Plan Limits"
+		ordering = ['sort_order', 'id']
+
+	def __str__(self):
+		return str(self.safe_translation_getter('name', any_language=True) or "Plan Limit")
+
+	@property
+	def display_limit(self):
+		if self.limit_type == 'unlimited':
+			return "Unlimited"
+		if self.limit_type == 'decimal':
+			return self.value_decimal
+		if self.limit_type == 'custom':
+			return self.safe_translation_getter('custom_value', any_language=True)
+		return self.value_integer
+ 
+	def save(self, *args, **kwargs):
+		if self.image and self.image.name:
+			self.image = compress_image(self.image)
+
+		self.name = str(self.name).title()
+		if not self.id:
+			self.slug = slugify(self.name)
+		super(PricingPlanLimit, self).save(*args, **kwargs)
+
+
 
 
 """

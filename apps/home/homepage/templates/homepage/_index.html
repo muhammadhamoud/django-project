@@ -1,0 +1,636 @@
+{% load static tailwind_tags i18n %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ page_title|default:'Your Company' }}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Modern Django website with a premium user experience.{% endblock %}">
+{% tailwind_css %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- HTMX -->
+    <!-- <script src="https://unpkg.com/htmx.org@1.9.12"></script> -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        [x-cloak] { display: none !important; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #f8fbff 0%, #ffffff 40%, #f8fafc 100%);
+        }
+        .glass {
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+        .section-shell {
+            @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+        }
+    </style>
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900"
+      x-data="siteLayout()"
+>
+
+    <div class="relative min-h-screen overflow-x-hidden">
+        <div class="pointer-events-none absolute inset-0 -z-10 bg-hero-grid"></div>
+        <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[36rem] bg-gradient-to-b from-brand-50/80 via-white/40 to-transparent"></div>
+        <header class="sticky top-0 z-50 border-b border-white/60 bg-white/70 glass shadow-sm">
+            <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+                <a href="{% url 'homepage:home' %}" class="flex items-center gap-3">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-600 to-accent text-sm font-black tracking-wide text-white shadow-glow">
+                        {% if site_metadata.logo %}
+                            <img
+                                src="{{ site_metadata.logo.url }}"
+                                alt="{{ site_information.name|default:'Logo' }}"
+                                class="h-10 w-10 object-cover"
+                            >
+                            
+                        {% else %}
+                            <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-brand-500 to-violet-600 text-sm font-bold text-white">
+                                {{ site_information.name|default:site_information.name|slice:":1"|upper }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <p class="text-base font-extrabold tracking-tight text-slate-900">
+                            {{ site_information.name|default:"ROInsight" }}
+                        </p>
+                        {% if site_information.description%}
+                            <p class="text-xs font-medium text-slate-500">{{ site_information.description }}</p>
+                        {% endif %}
+                    </div>
+                </a>
+                
+                {% include 'homepage/partials/theme.html' %}
+
+
+                <nav class="hidden items-center gap-7 lg:flex">
+                    <!-- <a href="#features" class="text-sm font-semibold text-slate-600 transition hover:text-brand-600">Features</a>
+                    <a href="#services" class="text-sm font-semibold text-slate-600 transition hover:text-brand-600">Services</a>
+                    <a href="#offerings" class="text-sm font-semibold text-slate-600 transition hover:text-brand-600">Offerings</a>
+                    <a href="#pricing" class="text-sm font-semibold text-slate-600 transition hover:text-brand-600">Pricing</a>
+                    <a href="#projects" class="text-sm font-semibold text-slate-600 transition hover:text-brand-600">Projects</a>
+                    <a href="#team" class="text-sm font-semibold text-slate-600 transition hover:text-brand-600">Team</a>
+                    <a href="#testimonials" class="text-sm font-semibold text-slate-600 transition hover:text-brand-600">Testimonials</a> -->
+                </nav>
+
+                <div class="hidden items-center gap-3 lg:flex">
+                
+                    <div
+                        x-data="{ open: false, closeTimer: null }"
+                        @mouseenter="clearTimeout(closeTimer); open = true"
+                        @mouseleave="closeTimer = setTimeout(() => { open = false }, 120)"
+                        class="relative"
+                    >
+                        <button
+                            type="button"
+                            class="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white"
+                        >
+                            <i class="fas fa-database"></i>
+                            <span class="inline-block w-8 text-left">Data</span>
+                                <i class="fas fa-chevron-down text-xs transition duration-200"
+                                :class="open ? 'rotate-180' : ''"></i>
+                        </button>
+
+                        <div
+                            x-show="open"
+                            x-transition
+                            x-cloak
+                            class="absolute left-0 z-50 mt-3 w-96 rounded-2xl border border-slate-200 bg-white p-2 shadow-panel dark:border-slate-700 dark:bg-slate-900"
+                        >
+                            <a
+                                href="{% url 'data:incoming_file_list' %}"
+                                class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                            >
+                                <i class="fas fa-file-import w-4 text-center text-sky-500 dark:text-sky-400"></i>
+                                <div class="min-w-0">
+                                    <p class="font-medium">Incoming Files</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">
+                                        Review discovered, loaded, failed, and missing incoming files
+                                    </p>
+                                </div>
+                            </a>
+
+                            <a
+                                href="{% url 'data:expected_file_list' %}"
+                                class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+                            >
+                                <i class="fas fa-calendar-check w-4 text-center text-amber-500 dark:text-amber-400"></i>
+                                <div class="min-w-0">
+                                    <p class="font-medium">Expected Files</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">
+                                        Review pending, late, found, and missing expected files
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <a href="#pricing" class="rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-200 hover:text-brand-700">View Pricing</a>
+                    <a href="#contact" class="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-brand-600">Get Started</a>
+                </div>
+
+                <button @click="toggleMobileMenu()"
+                        :aria-expanded="mobileMenuOpen.toString()"
+                        aria-controls="mobile-menu"
+                        class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-100 lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+
+            <div id="mobile-menu"
+                 x-show="mobileMenuOpen"
+                 x-cloak
+                 x-transition
+                 @click.outside="closeMobileMenu()"
+                 class="border-t border-slate-200 bg-white lg:hidden">
+                <div class="space-y-2 px-4 py-4 sm:px-6">
+                    <a href="#features" class="block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">Features</a>
+                    <a href="#services" class="block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">Services</a>
+                    <a href="#offerings" class="block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">Offerings</a>
+                    <a href="#pricing" class="block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">Pricing</a>
+                    <a href="#projects" class="block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">Projects</a>
+                    <a href="#team" class="block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">Team</a>
+                    <a href="#testimonials" class="block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">Testimonials</a>
+                    <a href="#contact" class="block rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white">Contact Us</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="mx-auto flex max-w-7xl gap-8 px-4 py-8 sm:px-6 lg:px-8">
+            <!-- <aside id="side-navigation" class="sticky top-28 hidden h-[calc(100vh-8rem)] w-72 shrink-0 overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/80 p-5 shadow-soft glass xl:block">
+                <div class="mb-6 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-brand-600">Navigation</p>
+                        <h3 class="mt-2 text-lg font-bold text-slate-900">Website Sections</h3>
+                    </div>
+                    <button @click="toggleSidebar()"
+                            :aria-expanded="sidebarOpen.toString()"
+                            aria-controls="side-navigation"
+                            class="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 text-slate-600 hover:bg-slate-50 xl:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 6h16.5m-16.5 6h16.5" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="space-y-2">
+                    <a href="#hero" class="flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-brand-50 hover:text-brand-700">
+                        <span>Hero</span><span class="text-slate-400">01</span>
+                    </a>
+                    <a href="#features" class="flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-brand-50 hover:text-brand-700">
+                        <span>Features</span><span class="text-slate-400">02</span>
+                    </a>
+                    <a href="#services" class="flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-brand-50 hover:text-brand-700">
+                        <span>Services</span><span class="text-slate-400">03</span>
+                    </a>
+                    <a href="#offerings" class="flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-brand-50 hover:text-brand-700">
+                        <span>Offerings</span><span class="text-slate-400">04</span>
+                    </a>
+                    <a href="#pricing" class="flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-brand-50 hover:text-brand-700">
+                        <span>Pricing</span><span class="text-slate-400">05</span>
+                    </a>
+                    <a href="#projects" class="flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-brand-50 hover:text-brand-700">
+                        <span>Projects</span><span class="text-slate-400">06</span>
+                    </a>
+                    <a href="#team" class="flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-brand-50 hover:text-brand-700">
+                        <span>Team Members</span><span class="text-slate-400">07</span>
+                    </a>
+                    <a href="#testimonials" class="flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-brand-50 hover:text-brand-700">
+                        <span>Testimonials</span><span class="text-slate-400">08</span>
+                    </a>
+                    <a href="#reviews" class="flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-brand-50 hover:text-brand-700">
+                        <span>Ratings & Reviews</span><span class="text-slate-400">09</span>
+                    </a>
+                    <a href="#contact" class="flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-brand-50 hover:text-brand-700">
+                        <span>Contact Us</span><span class="text-slate-400">10</span>
+                    </a>
+                </div>
+
+                <div class="mt-6 rounded-[1.75rem] bg-gradient-to-br from-slate-900 to-brand-700 p-5 text-white shadow-glow">
+                    <p class="text-sm font-semibold text-white/80">Ready to launch?</p>
+                    <h4 class="mt-2 text-xl font-bold leading-tight">Build a premium digital presence with Django.</h4>
+                    <a href="#contact" class="mt-4 inline-flex rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-900 transition hover:-translate-y-0.5">Talk to us</a>
+                </div>
+            </aside> -->
+
+            <main class="min-w-0 flex-1 space-y-8">
+                <section id="hero" class="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 p-8 shadow-soft glass sm:p-10 lg:p-14">
+                    <div class="absolute right-0 top-0 h-56 w-56 rounded-full bg-brand-200/30 blur-3xl"></div>
+                    <div class="absolute bottom-0 left-0 h-56 w-56 rounded-full bg-accent/10 blur-3xl"></div>
+                    <div class="relative grid items-center gap-10 lg:grid-cols-2">
+                        <div>
+                            <span class="inline-flex rounded-full border border-brand-200 bg-brand-50 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.25em] text-brand-700">
+                                State-of-the-art website
+                            </span>
+                            <h1 class="mt-6 max-w-2xl text-4xl font-black leading-tight tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+                                Build trust, showcase value, and convert visitors into clients.
+                            </h1>
+                            <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+                                A modern Django-powered website experience designed for credibility, speed, storytelling, and measurable business growth.
+                            </p>
+                            <div class="mt-8 flex flex-wrap gap-4">
+                                <a href="#contact" class="rounded-full bg-slate-900 px-6 py-3.5 text-sm font-bold text-white shadow-soft transition hover:-translate-y-1 hover:bg-brand-600">Start Your Project</a>
+                                <a href="#projects" class="rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-bold text-slate-700 transition hover:-translate-y-1 hover:border-brand-200 hover:text-brand-700">See Our Work</a>
+                            </div>
+                            <div class="mt-10 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4">
+                                <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                                    <p class="text-2xl font-black text-slate-900">98%</p>
+                                    <p class="mt-1 text-sm text-slate-500">Client Satisfaction</p>
+                                </div>
+                                <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                                    <p class="text-2xl font-black text-slate-900">120+</p>
+                                    <p class="mt-1 text-sm text-slate-500">Projects Delivered</p>
+                                </div>
+                                <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                                    <p class="text-2xl font-black text-slate-900">24/7</p>
+                                    <p class="mt-1 text-sm text-slate-500">Business Support</p>
+                                </div>
+                                <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                                    <p class="text-2xl font-black text-slate-900">4.9★</p>
+                                    <p class="mt-1 text-sm text-slate-500">Average Rating</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            <div class="rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-slate-900 to-slate-800 p-6 text-white shadow-glow sm:col-span-2">
+                                <p class="text-sm font-semibold text-white/70">Flagship Value</p>
+                                <h3 class="mt-2 text-2xl font-bold">Everything your audience needs in one compelling experience.</h3>
+                                <p class="mt-3 text-sm leading-7 text-white/80">Strategy-led UX, elegant visuals, strong copy hierarchy, premium interactions, and conversion-focused components.</p>
+                            </div>
+                            <div class="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm">
+                                <p class="text-sm font-semibold text-brand-600">Fast</p>
+                                <h4 class="mt-2 text-lg font-bold text-slate-900">Optimized Layout</h4>
+                                <p class="mt-2 text-sm leading-7 text-slate-500">Built to feel clean, high-end, and responsive across devices.</p>
+                            </div>
+                            <div class="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm">
+                                <p class="text-sm font-semibold text-brand-600">Scalable</p>
+                                <h4 class="mt-2 text-lg font-bold text-slate-900">Reusable Blocks</h4>
+                                <p class="mt-2 text-sm leading-7 text-slate-500">Django template blocks let every page extend this foundation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+{% comment %}
+                <section id="features" class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft sm:p-10">
+                    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                        <div>
+                            <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-600">Features</p>
+                            <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">Premium foundations for a standout brand.</h2>
+                        </div>
+                        <p class="max-w-2xl text-sm leading-7 text-slate-500">Designed to make your website feel credible, high-performing, and visually refined from the first scroll.</p>
+                    </div>
+                    <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+                        {% for item in features|default:list %}
+                        <div class="rounded-[1.5rem] border border-slate-200 p-6 transition hover:-translate-y-1 hover:shadow-soft">
+                            <div class="mb-4 h-12 w-12 rounded-2xl bg-brand-50"></div>
+                            <h3 class="text-lg font-bold text-slate-900">{{ item.title }}</h3>
+                            <p class="mt-3 text-sm leading-7 text-slate-500">{{ item.description }}</p>
+                        </div>
+                        {% empty %}
+                        <div class="rounded-[1.5rem] border border-slate-200 p-6"><h3 class="text-lg font-bold">Responsive Design</h3><p class="mt-3 text-sm text-slate-500">Beautiful on desktop, tablet, and mobile.</p></div>
+                        <div class="rounded-[1.5rem] border border-slate-200 p-6"><h3 class="text-lg font-bold">Fast Performance</h3><p class="mt-3 text-sm text-slate-500">Lightweight layout and conversion-driven structure.</p></div>
+                        <div class="rounded-[1.5rem] border border-slate-200 p-6"><h3 class="text-lg font-bold">Elegant UI</h3><p class="mt-3 text-sm text-slate-500">Rounded cards, spacing rhythm, and strong typography.</p></div>
+                        <div class="rounded-[1.5rem] border border-slate-200 p-6"><h3 class="text-lg font-bold">Flexible CMS</h3><p class="mt-3 text-sm text-slate-500">Easy to extend using Django templates and views.</p></div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <section id="services" class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft sm:p-10">
+                    <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-600">Services</p>
+                    <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">Services built around business outcomes.</h2>
+                    <div class="mt-8 grid gap-6 lg:grid-cols-3">
+                        {% block services %}
+                        <div class="rounded-[1.5rem] bg-slate-50 p-6">
+                            <h3 class="text-xl font-bold text-slate-900">Web Design</h3>
+                            <p class="mt-3 text-sm leading-7 text-slate-500">Conversion-focused interfaces with premium visual identity.</p>
+                        </div>
+                        <div class="rounded-[1.5rem] bg-slate-50 p-6">
+                            <h3 class="text-xl font-bold text-slate-900">Django Development</h3>
+                            <p class="mt-3 text-sm leading-7 text-slate-500">Scalable back-end architecture with clean reusable templates.</p>
+                        </div>
+                        <div class="rounded-[1.5rem] bg-slate-50 p-6">
+                            <h3 class="text-xl font-bold text-slate-900">Analytics & Growth</h3>
+                            <p class="mt-3 text-sm leading-7 text-slate-500">Tracking, optimization, reporting, and business insights.</p>
+                        </div>
+                        {% endblock %}
+                    </div>
+                </section>
+
+                <section id="offerings" class="rounded-[2rem] border border-slate-200 bg-gradient-to-br from-slate-950 to-slate-900 p-8 text-white shadow-soft sm:p-10">
+                    <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-300">Offerings</p>
+                    <h2 class="mt-3 text-3xl font-black tracking-tight">Solutions tailored to your market and audience.</h2>
+                    <div class="mt-8 grid gap-6 md:grid-cols-2">
+                        {% block offerings %}
+                        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
+                            <h3 class="text-xl font-bold">Starter Growth Package</h3>
+                            <p class="mt-3 text-sm leading-7 text-white/75">Ideal for launching a sharp online presence quickly and professionally.</p>
+                        </div>
+                        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
+                            <h3 class="text-xl font-bold">Enterprise Digital Presence</h3>
+                            <p class="mt-3 text-sm leading-7 text-white/75">For established brands that need stronger messaging, structure, and trust.</p>
+                        </div>
+                        {% endblock %}
+                    </div>
+                </section>
+
+                <section id="pricing" class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft sm:p-10">
+                    <div class="text-center">
+                        <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-600">Pricing</p>
+                        <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">Flexible pricing for growing businesses.</h2>
+                        <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-500">Choose a package that matches your ambition, timeline, and business goals.</p>
+                    </div>
+                    <div class="mt-10 grid gap-6 xl:grid-cols-3">
+                        {% block pricing %}
+                        <div class="rounded-[1.75rem] border border-slate-200 p-8">
+                            <h3 class="text-xl font-bold text-slate-900">Basic</h3>
+                            <p class="mt-3 text-4xl font-black text-slate-950">$49<span class="text-base font-semibold text-slate-500">/mo</span></p>
+                            <ul class="mt-6 space-y-3 text-sm text-slate-600">
+                                <li>Single landing page</li>
+                                <li>Core content sections</li>
+                                <li>Email support</li>
+                            </ul>
+                        </div>
+                        <div class="rounded-[1.75rem] border-2 border-brand-500 bg-gradient-to-b from-brand-50 to-white p-8 shadow-glow">
+                            <span class="rounded-full bg-slate-900 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-white">Most Popular</span>
+                            <h3 class="mt-4 text-xl font-bold text-slate-900">Professional</h3>
+                            <p class="mt-3 text-4xl font-black text-slate-950">$99<span class="text-base font-semibold text-slate-500">/mo</span></p>
+                            <ul class="mt-6 space-y-3 text-sm text-slate-600">
+                                <li>Multi-section company site</li>
+                                <li>Pricing and testimonials</li>
+                                <li>Priority support</li>
+                            </ul>
+                        </div>
+                        <div class="rounded-[1.75rem] border border-slate-200 p-8">
+                            <h3 class="text-xl font-bold text-slate-900">Enterprise</h3>
+                            <p class="mt-3 text-4xl font-black text-slate-950">Custom</p>
+                            <ul class="mt-6 space-y-3 text-sm text-slate-600">
+                                <li>Custom architecture</li>
+                                <li>Advanced integrations</li>
+                                <li>Dedicated consultation</li>
+                            </ul>
+                        </div>
+                        {% endblock %}
+                    </div>
+                </section>
+
+                <section id="projects" class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft sm:p-10">
+                    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                        <div>
+                            <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-600">Projects</p>
+                            <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">Work that proves capability and trust.</h2>
+                        </div>
+                        <a href="#contact" class="text-sm font-bold text-brand-600 transition hover:text-brand-700">Request portfolio →</a>
+                    </div>
+                    <div class="mt-8 grid gap-6 lg:grid-cols-3">
+                        {% block projects %}
+                        <div class="overflow-hidden rounded-[1.5rem] border border-slate-200">
+                            <div class="h-52 bg-slate-100"></div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-slate-900">Corporate Website Redesign</h3>
+                                <p class="mt-3 text-sm text-slate-500">Modernized digital identity with improved conversion flow.</p>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden rounded-[1.5rem] border border-slate-200">
+                            <div class="h-52 bg-slate-100"></div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-slate-900">BI Product Landing Page</h3>
+                                <p class="mt-3 text-sm text-slate-500">Clear positioning for SaaS and business intelligence solutions.</p>
+                            </div>
+                        </div>
+                        <div class="overflow-hidden rounded-[1.5rem] border border-slate-200">
+                            <div class="h-52 bg-slate-100"></div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-slate-900">Service Marketplace Platform</h3>
+                                <p class="mt-3 text-sm text-slate-500">Built for scalability, clarity, and trust signals.</p>
+                            </div>
+                        </div>
+                        {% endblock %}
+                    </div>
+                </section>
+
+                <section id="team" class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft sm:p-10">
+                    <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-600">Team Members</p>
+                    <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">The people behind the excellence.</h2>
+                    <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+                        {% block team_members %}
+                        {% for member in team_members|default:list %}
+                        <div class="rounded-[1.5rem] border border-slate-200 p-6 text-center">
+                            <div class="mx-auto h-24 w-24 rounded-full bg-slate-100"></div>
+                            <h3 class="mt-4 text-lg font-bold text-slate-900">{{ member.name }}</h3>
+                            <p class="mt-1 text-sm text-brand-600">{{ member.role }}</p>
+                        </div>
+                        {% empty %}
+                        <div class="rounded-[1.5rem] border border-slate-200 p-6 text-center"><div class="mx-auto h-24 w-24 rounded-full bg-slate-100"></div><h3 class="mt-4 text-lg font-bold">Creative Lead</h3><p class="mt-1 text-sm text-brand-600">Design Strategy</p></div>
+                        <div class="rounded-[1.5rem] border border-slate-200 p-6 text-center"><div class="mx-auto h-24 w-24 rounded-full bg-slate-100"></div><h3 class="mt-4 text-lg font-bold">Tech Lead</h3><p class="mt-1 text-sm text-brand-600">Django Engineering</p></div>
+                        <div class="rounded-[1.5rem] border border-slate-200 p-6 text-center"><div class="mx-auto h-24 w-24 rounded-full bg-slate-100"></div><h3 class="mt-4 text-lg font-bold">Growth Analyst</h3><p class="mt-1 text-sm text-brand-600">Analytics</p></div>
+                        <div class="rounded-[1.5rem] border border-slate-200 p-6 text-center"><div class="mx-auto h-24 w-24 rounded-full bg-slate-100"></div><h3 class="mt-4 text-lg font-bold">Client Success</h3><p class="mt-1 text-sm text-brand-600">Support</p></div>
+                        {% endfor %}
+                        {% endblock %}
+                    </div>
+                </section>
+
+                <section id="testimonials" class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft sm:p-10">
+                    <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-600">Testimonials</p>
+                    <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">What clients say about working with us.</h2>
+                    <div class="mt-8 grid gap-6 lg:grid-cols-3">
+                        {% block testimonials %}
+                        <blockquote class="rounded-[1.5rem] bg-slate-50 p-6">
+                            <p class="text-base leading-8 text-slate-600">“The site feels premium, professional, and converts far better than before.”</p>
+                            <footer class="mt-4 text-sm font-bold text-slate-900">— Client A</footer>
+                        </blockquote>
+                        <blockquote class="rounded-[1.5rem] bg-slate-50 p-6">
+                            <p class="text-base leading-8 text-slate-600">“A strong mix of business understanding, design quality, and technical delivery.”</p>
+                            <footer class="mt-4 text-sm font-bold text-slate-900">— Client B</footer>
+                        </blockquote>
+                        <blockquote class="rounded-[1.5rem] bg-slate-50 p-6">
+                            <p class="text-base leading-8 text-slate-600">“They gave our brand clarity, confidence, and a modern digital presence.”</p>
+                            <footer class="mt-4 text-sm font-bold text-slate-900">— Client C</footer>
+                        </blockquote>
+                        {% endblock %}
+                    </div>
+                </section>
+                {% endcomment %}
+                <section id="reviews" class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft sm:p-10">
+                    <div class="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+                        <div>
+                            <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-600">Ratings & Reviews</p>
+                            <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">Trusted by clients across industries.</h2>
+                            <div class="mt-6 flex items-center gap-4">
+                                <div class="text-5xl font-black text-slate-950">4.9</div>
+                                <div>
+                                    <div class="text-xl text-amber-400">★★★★★</div>
+                                    <p class="text-sm text-slate-500">Based on 120+ verified reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="mb-2 flex justify-between text-sm font-semibold text-slate-600"><span>Quality</span><span>98%</span></div>
+                                <div class="h-3 rounded-full bg-slate-100"><div class="h-3 w-[98%] rounded-full bg-slate-900"></div></div>
+                            </div>
+                            <div>
+                                <div class="mb-2 flex justify-between text-sm font-semibold text-slate-600"><span>Communication</span><span>96%</span></div>
+                                <div class="h-3 rounded-full bg-slate-100"><div class="h-3 w-[96%] rounded-full bg-brand-500"></div></div>
+                            </div>
+                            <div>
+                                <div class="mb-2 flex justify-between text-sm font-semibold text-slate-600"><span>Delivery</span><span>97%</span></div>
+                                <div class="h-3 rounded-full bg-slate-100"><div class="h-3 w-[97%] rounded-full bg-accent"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="contact" class="rounded-[2rem] border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 shadow-soft sm:p-10">
+                    <div class="grid gap-8 lg:grid-cols-2">
+                        <div>
+                            <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-600">Contact Us</p>
+                            <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">Let’s build something exceptional together.</h2>
+                            <p class="mt-4 max-w-xl text-sm leading-7 text-slate-500">Share your idea, your timeline, and what success looks like. We’ll help translate your vision into a modern and effective digital experience.</p>
+                            <div class="mt-8 space-y-4 text-sm text-slate-600">
+                                <p><strong>Email:</strong> hello@yourcompany.com</p>
+                                <p><strong>Phone:</strong> +000 000 000 000</p>
+                                <p><strong>Address:</strong> Your business address here</p>
+                            </div>
+                        </div>
+
+                        <div class="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm">
+                            <form method="post" action="{% url 'homepage:contact' %}" class="space-y-5">
+                                {% csrf_token %}
+                                <div>
+                                    <label class="mb-2 block text-sm font-semibold text-slate-700">Full Name</label>
+                                    <input type="text" name="name" class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-brand-400 focus:ring-4 focus:ring-brand-100" placeholder="Enter your full name">
+                                </div>
+                                <div class="grid gap-5 sm:grid-cols-2">
+                                    <div>
+                                        <label class="mb-2 block text-sm font-semibold text-slate-700">Email</label>
+                                        <input type="email" name="email" class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-brand-400 focus:ring-4 focus:ring-brand-100" placeholder="you@example.com">
+                                    </div>
+                                    <div>
+                                        <label class="mb-2 block text-sm font-semibold text-slate-700">Phone</label>
+                                        <input type="text" name="phone" class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-brand-400 focus:ring-4 focus:ring-brand-100" placeholder="Your phone number">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="mb-2 block text-sm font-semibold text-slate-700">Subject</label>
+                                    <input type="text" name="subject" class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-brand-400 focus:ring-4 focus:ring-brand-100" placeholder="How can we help?">
+                                </div>
+                                <div>
+                                    <label class="mb-2 block text-sm font-semibold text-slate-700">Message</label>
+                                    <textarea name="message" rows="5" class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-brand-400 focus:ring-4 focus:ring-brand-100" placeholder="Tell us about your project"></textarea>
+                                </div>
+                                <button type="submit" class="inline-flex w-full items-center justify-center rounded-2xl bg-slate-900 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-brand-600">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                {% block extra_sections %}{% endblock %}
+            </main>
+        </div>
+
+        <footer class="border-t border-slate-200 bg-slate-950 text-white">
+            <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-4 lg:px-8">
+                <div class="lg:col-span-2">
+                    <div class="flex items-center gap-3">
+                        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-accent text-sm font-black text-white">YC</div>
+                        <div>
+                            <h3 class="text-lg font-black">Your Company</h3>
+                            <p class="text-sm text-white/60">Modern Django website foundation</p>
+                        </div>
+                    </div>
+                    <p class="mt-4 max-w-xl text-sm leading-7 text-white/70">A premium digital presence crafted for businesses that want credibility, clarity, and performance.</p>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-[0.25em] text-white/50">Quick Links</h4>
+                    <div class="mt-4 space-y-3 text-sm text-white/70">
+                        <a href="#features" class="block hover:text-white">Features</a>
+                        <a href="#services" class="block hover:text-white">Services</a>
+                        <a href="#pricing" class="block hover:text-white">Pricing</a>
+                        <a href="#contact" class="block hover:text-white">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-[0.25em] text-white/50">Contact</h4>
+                    <div class="mt-4 space-y-3 text-sm text-white/70">
+                        <p>hello@yourcompany.com</p>
+                        <p>+000 000 000 000</p>
+                        <p>Your Address Here</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10">
+                <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 text-sm text-white/50 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+                    <p>© {% now "Y" %} Your Company. All rights reserved.</p>
+                    <p>Built with Django, Tailwind CSS, and a premium UX system.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function siteLayout() {
+            return {
+                mobileMenuOpen: false,
+                sidebarOpen: false,
+                activeSection: 'hero',
+
+                init() {
+                    document.addEventListener('keydown', (event) => {
+                        if (event.key === 'Escape') {
+                            this.closeAllMenus();
+                        }
+                    });
+
+                    this.$watch('mobileMenuOpen', (value) => {
+                        document.body.classList.toggle('overflow-hidden', value);
+                    });
+                },
+
+                toggleMobileMenu() {
+                    this.mobileMenuOpen = !this.mobileMenuOpen;
+                },
+
+                closeMobileMenu() {
+                    this.mobileMenuOpen = false;
+                },
+
+                toggleSidebar() {
+                    this.sidebarOpen = !this.sidebarOpen;
+                },
+
+                closeSidebar() {
+                    this.sidebarOpen = false;
+                },
+
+                closeAllMenus() {
+                    this.mobileMenuOpen = false;
+                    this.sidebarOpen = false;
+                }
+            }
+        }
+    </script>
+
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'auto';
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const root = document.documentElement;
+
+            root.classList.remove('dark');
+            if (savedTheme === 'dark' || (savedTheme === 'auto' && prefersDark)) {
+                root.classList.add('dark');
+            }
+        })();
+    </script>
+
+{% block extra_js %}{% endblock %}
+</body>
+</html>

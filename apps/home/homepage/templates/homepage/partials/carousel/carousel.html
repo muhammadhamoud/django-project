@@ -1,0 +1,103 @@
+
+<section
+    class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft dark:border-slate-800 dark:bg-slate-900 sm:p-10"
+    x-data="dynamicCarousel({ total: {{ items|length }} })"
+>
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+            {% if eyebrow %}
+                <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-600 dark:text-brand-400">
+                    {{ eyebrow }}
+                </p>
+            {% endif %}
+
+            {% if title %}
+                <h2 class="mt-2 text-3xl font-black tracking-tight text-slate-950 dark:text-white">
+                    {{ title }}
+                </h2>
+            {% endif %}
+
+            {% if description %}
+                <p class="mt-3 max-w-2xl text-sm leading-7 text-slate-500 dark:text-slate-400">
+                    {{ description }}
+                </p>
+            {% endif %}
+        </div>
+
+        {% if items|length > 1 %}
+            <div class="flex items-center gap-3">
+                <button
+                    type="button"
+                    @click="prev()"
+                    class="rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+                >
+                    Prev
+                </button>
+                <button
+                    type="button"
+                    @click="next()"
+                    class="rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+                >
+                    Next
+                </button>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="relative mt-8 overflow-hidden">
+        <div
+            class="flex transition-transform duration-500 ease-out"
+            :style="`transform: translateX(-${active * 100}%);`"
+        >
+            {% for item in items %}
+                <div class="w-full shrink-0">
+                    {% include card_template with item=item only %}
+                </div>
+            {% empty %}
+                <div class="w-full shrink-0">
+                    <div class="rounded-[1.5rem] border border-dashed border-slate-300 p-10 text-center text-slate-500 dark:border-slate-700 dark:text-slate-400">
+                        No items available.
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if items|length > 1 %}
+        <div class="mt-6 flex items-center justify-center gap-2">
+            {% for item in items %}
+                <button
+                    type="button"
+                    @click="goTo({{ forloop.counter0 }})"
+                    :class="active === {{ forloop.counter0 }} ? 'bg-slate-900 dark:bg-white' : 'bg-slate-300 dark:bg-slate-700'"
+                    class="h-2.5 w-8 rounded-full transition"
+                ></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+</section>
+
+{% block extra_js %}
+<script>
+    function dynamicCarousel({ total = 0 } = {}) {
+        return {
+            active: 0,
+            total: total,
+
+            next() {
+                if (this.total <= 1) return;
+                this.active = (this.active + 1) % this.total;
+            },
+
+            prev() {
+                if (this.total <= 1) return;
+                this.active = (this.active - 1 + this.total) % this.total;
+            },
+
+            goTo(index) {
+                this.active = index;
+            }
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,37 @@
+<section id="projects" class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft dark:border-slate-800 dark:bg-slate-900 sm:p-10">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+            <p class="text-sm font-bold uppercase tracking-[0.25em] text-brand-600 dark:text-brand-400">Projects</p>
+            <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950 dark:text-white">Work that proves capability and trust.</h2>
+        </div>
+        <a href="#contact" class="text-sm font-bold text-brand-600 transition hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300">Request portfolio →</a>
+    </div>
+
+    <div class="mt-8 grid gap-6 lg:grid-cols-3">
+        {% block projects %}
+        <div class="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+            <div class="h-52 bg-slate-100 dark:bg-slate-800"></div>
+            <div class="p-6">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Corporate Website Redesign</h3>
+                <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Modernized digital identity with improved conversion flow.</p>
+            </div>
+        </div>
+
+        <div class="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+            <div class="h-52 bg-slate-100 dark:bg-slate-800"></div>
+            <div class="p-6">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">BI Product Landing Page</h3>
+                <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Clear positioning for SaaS and business intelligence solutions.</p>
+            </div>
+        </div>
+
+        <div class="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+            <div class="h-52 bg-slate-100 dark:bg-slate-800"></div>
+            <div class="p-6">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Service Marketplace Platform</h3>
+                <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Built for scalability, clarity, and trust signals.</p>
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+</section>

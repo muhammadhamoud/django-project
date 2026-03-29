@@ -110,3 +110,162 @@ admin_site = CustomAdminPage(name='custom_admin')
 
 from django.conf import settings
 admin.site.site_header = f"{settings.WEBISTE_NAME.upper()} administration"
+
+
+
+
+# from django.contrib import admin
+# from parler.admin import TranslatableAdmin, TranslatableStackedInline
+
+from .models import (
+	PricingSection,
+	PricingPlan,
+	PricingFeature,
+	PricingPlanLimit,
+)
+
+
+class PricingFeatureInline(TranslatableStackedInline):
+	model = PricingFeature
+	extra = 1
+	fields = (
+		'name',
+		'description',
+		'value_type',
+		'value_text',
+		'value_boolean',
+		'value_number',
+		'sort_order',
+		'is_published',
+	)
+	ordering = ('sort_order', 'id')
+
+
+class PricingPlanLimitInline(TranslatableStackedInline):
+	model = PricingPlanLimit
+	extra = 1
+	fields = (
+		'name',
+		'unit',
+		'limit_type',
+		'custom_value',
+		'value_integer',
+		'value_decimal',
+		'sort_order',
+		'is_published',
+	)
+	ordering = ('sort_order', 'id')
+
+
+class PricingPlanInline(TranslatableStackedInline):
+	model = PricingPlan
+	extra = 1
+	fields = (
+		'name',
+		'short_description',
+		'description',
+		'badge_text',
+		'price_label',
+		'button_text',
+		'button_url',
+		'billing_interval',
+		'currency',
+		'price',
+		'compare_at_price',
+		'setup_fee',
+		'trial_days',
+		'is_free',
+		'is_custom_price',
+		'allow_subscribe',
+		'allow_contact_sales',
+		'is_featured',
+		'is_published',
+		'sort_order',
+	)
+	ordering = ('sort_order', 'id')
+	show_change_link = True
+
+
+@admin.register(PricingSection)
+class PricingSectionAdmin(TranslatableAdmin):
+	list_display = ('__str__', 'site', 'is_featured', 'is_published', 'created')
+	list_filter = ('site', 'is_featured', 'is_published', 'created')
+	search_fields = ('translations__name', 'translations__description')
+	prepopulated_fields = {}
+	inlines = [PricingPlanInline]
+
+
+@admin.register(PricingPlan)
+class PricingPlanAdmin(TranslatableAdmin):
+	list_display = (
+		'__str__',
+		'section',
+		'billing_interval',
+		'currency',
+		'price',
+		'is_free',
+		'is_custom_price',
+		'is_featured',
+		'is_published',
+		'sort_order',
+	)
+	list_filter = (
+		'billing_interval',
+		'currency',
+		'is_free',
+		'is_custom_price',
+		'is_featured',
+		'is_published',
+	)
+	search_fields = (
+		'translations__name',
+		'translations__description',
+		'translations__short_description',
+	)
+	inlines = [PricingFeatureInline, PricingPlanLimitInline]
+
+
+@admin.register(PricingFeature)
+class PricingFeatureAdmin(TranslatableAdmin):
+	list_display = (
+		'__str__',
+		'plan',
+		'value_type',
+		'display_value',
+		'is_featured',
+		'is_published',
+		'sort_order',
+	)
+	list_filter = (
+		'value_type',
+		'is_featured',
+		'is_published',
+	)
+	search_fields = (
+		'translations__name',
+		'translations__description',
+		'translations__value_text',
+	)
+
+
+@admin.register(PricingPlanLimit)
+class PricingPlanLimitAdmin(TranslatableAdmin):
+	list_display = (
+		'__str__',
+		'plan',
+		'limit_type',
+		'display_limit',
+		'is_featured',
+		'is_published',
+		'sort_order',
+	)
+	list_filter = (
+		'limit_type',
+		'is_featured',
+		'is_published',
+	)
+	search_fields = (
+		'translations__name',
+		'translations__unit',
+		'translations__custom_value',
+	)

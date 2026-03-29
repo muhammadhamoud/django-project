@@ -9,7 +9,7 @@
         </div> -->
 
         <div class="min-w-0 flex flex-1 items-center gap-2">
-            <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border
+            <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border 
                 {% if metric.total >= metric.budget %}
                     border-emerald-200 bg-emerald-50 text-emerald-600 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-300
                 {% else %}
@@ -22,6 +22,7 @@
                     <path d="M12 16V5" />
                     <path d="M17 16v-3" />
                 </svg>
+
                 {% elif icon_svg == 'volume' %}
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" class="h-4.5 w-4.5">
                     <path d="M4 12h4l3-5 4 10 2-5h3" />

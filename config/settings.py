@@ -148,9 +148,10 @@ from django.utils.translation import gettext_lazy as _
 
 LANGUAGE_CODE = 'en'
 
+# TODO Change LANGUAGES
 LANGUAGES = [
-    ('ar', _('Arabic')),
     ('en', _('English')),
+    ('ar', _('Arabic')),
     # ('es', _('Spanish')),
 ]
 

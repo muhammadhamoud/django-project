@@ -1,0 +1,40 @@
+<div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <div class="rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-slate-950 to-slate-800 p-8 text-white shadow-glow dark:border-slate-700 xl:col-span-1">
+        <p class="text-sm font-semibold text-white/70">Offering</p>
+        <h3 class="mt-3 text-3xl font-black">{{ item.name }}</h3>
+        {% if item.description %}
+            <p class="mt-4 text-sm leading-8 text-white/80">
+                {{ item.description }}
+            </p>
+        {% endif %}
+    </div>
+
+    <div class="rounded-[1.75rem] border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900 xl:col-span-2">
+        <div class="grid gap-6 sm:grid-cols-2">
+            <div>
+                <p class="text-sm font-semibold text-brand-600 dark:text-brand-400">Slug</p>
+                <p class="mt-2 text-base font-medium text-slate-800 dark:text-slate-200">
+                    {{ item.slug|default:"—" }}
+                </p>
+            </div>
+
+            <div>
+                <p class="text-sm font-semibold text-brand-600 dark:text-brand-400">Status</p>
+                <p class="mt-2 text-base font-medium text-slate-800 dark:text-slate-200">
+                    {% if item.is_published %}Published{% else %}Draft{% endif %}
+                </p>
+            </div>
+        </div>
+
+        {% if item.get_absolute_url %}
+            <div class="mt-8">
+                <a
+                    href="{{ item.get_absolute_url }}"
+                    class="inline-flex rounded-full bg-slate-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-brand-600 dark:bg-brand-600 dark:hover:bg-brand-500"
+                >
+                    Explore Offering
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>

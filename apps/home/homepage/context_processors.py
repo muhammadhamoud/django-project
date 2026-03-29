@@ -22,7 +22,7 @@ def site_information(request):
         'site_information_additional': site_info_additional,
     }
 
-    # print(site_data)
+    print(site_data)
 
     return site_data
 

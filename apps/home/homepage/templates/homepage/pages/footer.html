@@ -1,0 +1,56 @@
+<footer class="border-t border-slate-200 bg-slate-950 text-white dark:border-slate-800">
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-4 lg:px-8">
+        <div class="lg:col-span-2">
+            <div class="flex items-center gap-3">
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-accent text-sm font-black text-white">
+                {% if site_metadata.logo %}
+                <img
+                    src="{{ site_metadata.logo.url }}"
+                    alt="{{ site_information.company_name|default:'Logo' }}"
+                    class="h-9 w-9 rounded-2xl object-cover shadow-sm ring-1 ring-slate-200 dark:ring-slate-800"
+                >
+                {% else %}
+                    {{ site_information.company_name|default:site_information.name|slice:":1"|upper }}
+                {% endif %}
+
+                </div>
+                <div>
+                    <h3 class="text-lg font-black">{{ site_information.company_name|default:"Company Name" }}</h3>
+                    {% if site_metadata.website %}
+                        <p class="text-sm text-white/60"><a href="{{ site_metadata.website }}" target="_blank" rel="noopener noreferrer">{{ site_metadata.website }}</a></p>
+                    {% endif %}
+                </div>
+            </div>
+            <p class="mt-4 max-w-xl text-sm leading-7 text-white/70">
+                {{ site_information.description|default:"A premium digital presence crafted for businesses that want credibility, clarity, and performance." }}
+                
+            </p>
+        </div>
+
+        <div>
+            <h4 class="text-sm font-bold uppercase tracking-[0.25em] text-white/50">Quick Links</h4>
+            <div class="mt-4 space-y-3 text-sm text-white/70">
+                <a href="#features" class="block hover:text-white">Features</a>
+                <a href="#services" class="block hover:text-white">Services</a>
+                <a href="#pricing" class="block hover:text-white">Pricing</a>
+                <a href="#contact" class="block hover:text-white">Contact</a>
+            </div>
+        </div>
+
+        <div>
+            <h4 class="text-sm font-bold uppercase tracking-[0.25em] text-white/50">Contact</h4>
+            <div class="mt-4 space-y-3 text-sm text-white/70">
+                <p>hello@yourcompany.com</p>
+                <p>+000 000 000 000</p>
+                <p>Your Address Here</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-t border-white/10">
+        <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 text-sm text-white/50 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+            <p>© {% now "Y" %} Your Company. All rights reserved.</p>
+            <p>Built with Django, Tailwind CSS, and a premium UX system.</p>
+        </div>
+    </div>
+</footer>

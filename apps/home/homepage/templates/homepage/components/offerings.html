@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n static %}
 
 <section id="offerings" class="relative overflow-hidden rounded-[2rem] border border-slate-200/70 bg-gradient-to-br from-white via-slate-50 to-brand-50/40 px-6 py-14 shadow-soft dark:border-slate-800 dark:from-slate-900 dark:via-slate-950 dark:to-brand-950/20 sm:px-8 lg:px-12">
     <div class="absolute inset-0 pointer-events-none">
@@ -7,8 +7,10 @@
     </div>
 
     <div class="relative">
+
         {% if offerings %}
             {% with hero_offering=offerings.0 side_offerings=offerings|slice:"1:4" %}
+            
                 <div class="grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
                     
                     <!-- Hero content from latest offering -->

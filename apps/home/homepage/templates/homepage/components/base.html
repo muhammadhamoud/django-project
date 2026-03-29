@@ -1,0 +1,132 @@
+{% load static tailwind_tags %}{% load i18n %}
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site_information.site_name|default:"ROInsight" }} | {% block title %}Home Page{% endblock %}</title>
+    {% tailwind_css %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>[x-cloak]{display:none!important;}</style>
+
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'auto';
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const root = document.documentElement;
+
+            root.classList.remove('dark');
+            if (savedTheme === 'dark' || (savedTheme === 'auto' && prefersDark)) {
+                root.classList.add('dark');
+            }
+        })();
+    </script>
+
+
+    <style>
+        @keyframes toast-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes toast-out {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+        }
+
+        @keyframes toast-progress {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+
+        .animate-toast-in {
+            animation: toast-in 0.3s ease-out;
+        }
+
+        .animate-toast-out {
+            animation: toast-out 0.25s ease-in forwards;
+        }
+
+        .toast-progress {
+            animation: toast-progress linear forwards;
+            animation-duration: 4s;
+        }
+
+        .custom-fab {
+            inset-inline-end: 1.5rem !important;
+            bottom: 1.5rem !important;
+        }
+        
+    </style>
+
+    {% block extra_head %}
+    {% endblock %}
+</head>
+
+<body class="h-full bg-white text-slate-900 antialiased transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
+    {% include "partials/toasts.html" %}
+    
+    <div
+        x-data="dashboardLayout()"
+        x-init="init()"
+        class="h-screen bg-[linear-gradient(to_bottom,_#f8fafc,_#e2e8f0)] dark:bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.15),_transparent_35%),linear-gradient(to_bottom,_#020617,_#0f172a)]"
+    >
+        <div
+            x-show="mobileSidebarOpen"
+            x-cloak
+            @click="mobileSidebarOpen = false"
+            class="fixed inset-0 z-30 bg-slate-950/60 backdrop-blur-sm lg:hidden"
+        ></div>
+
+        <div
+            class="flex h-screen w-full"
+            hx-boost="true"
+            hx-target="#main-content"
+            hx-select="#main-content"
+            hx-swap="innerHTML"
+            hx-push-url="true"
+            id="main-content"
+        >
+            {% block sidebar %}
+                {% include "homepage/partials/navbar.html" %}
+            {% endblock %}
+
+            <div id="page-wrapper" class="flex h-screen flex-1 flex-col">
+                    {% include 'homepage/partials/navbar.html' %}
+                <main
+                    class="flex-1 overflow-y-auto px-4 pt-24 pb-6 sm:px-6 lg:px-8 lg:pb-8 [scrollbar-gutter:stable_both-edges]"
+                >
+                    {% block content %}{% endblock %}
+                </main>
+            </div>
+        </div>
+    </div>
+
+    {% block extra_scripts %}{% endblock %}
+
+</body>
+
+
+</html>
