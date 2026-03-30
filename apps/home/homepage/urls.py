@@ -17,8 +17,7 @@ urlpatterns = [
     path('team/<slug:slug>/', views.teammember_detail, name='teammember-detail'),
     path('testimonials/<slug:slug>/', views.testimonial_detail, name='testimonial-detail'),
 
-    # TODO fix this please show contact
-    path('contact/', views.about_us_view, name='contact'),
+
     path('about-us/', views.about_us_view, name='about_us'),
     path('privacy-policy/', views.privacy_policy_view, name='privacy_policy'),
     path('terms-of-service/', views.terms_of_service_view, name='terms_of_service'),

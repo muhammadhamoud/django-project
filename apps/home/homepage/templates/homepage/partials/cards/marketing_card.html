@@ -1,0 +1,30 @@
+<div class="{% if use_carousel %}min-w-[320px] snap-start{% endif %} relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
+
+    {% if item.image %}
+        <!-- Background Image -->
+        <div class="absolute inset-0">
+            <img src="{{ item.image.url }}" alt="{{ item.name }}" class="h-full w-full object-cover">
+        </div>
+
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-slate-950/70"></div>
+    {% endif %}
+
+    <!-- Content -->
+    <div class="relative z-10">
+        <div class="flex items-center gap-3">
+            {% if not item.image %}
+                <div class="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center">
+                    <i class="fas {{ item.icon }} text-sm text-white"></i>
+                </div>
+            {% endif %}
+
+            <h3 class="text-xl font-bold">{{ item.name }}</h3>
+        </div>
+
+        <p class="mt-3 text-sm leading-7 text-white/75">
+            {{ item.description }}
+        </p>
+    </div>
+
+</div>

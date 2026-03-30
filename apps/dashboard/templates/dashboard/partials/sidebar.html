@@ -32,10 +32,30 @@
         
         {% include 'homepage/partials/logo.html' %}
 
-        <button @click="sidebarExpanded = !sidebarExpanded" class="hidden rounded-xl border border-white/10 bg-white/5 p-2 text-slate-300 transition hover:bg-white/10 lg:inline-flex">
+        <!-- <button @click="sidebarExpanded = !sidebarExpanded" class="hidden rounded-xl border border-white/10 bg-white/5 p-2 text-slate-300 transition hover:bg-white/10 lg:inline-flex">
             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
             </svg>
+        </button> -->
+
+        <button
+        @click="sidebarExpanded = !sidebarExpanded"
+        class="hidden inline-flex rounded-xl bg-transparent p-2 text-slate-300 transition lg:inline-flex"
+        >
+        <svg
+            class="h-5 w-5 transition-transform duration-300"
+            :class="sidebarExpanded ? '' : 'rotate-180'"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            stroke-width="1.8"
+        >
+            <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"
+            />
+        </svg>
         </button>
     </div>
 

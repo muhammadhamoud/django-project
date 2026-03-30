@@ -364,7 +364,7 @@ class TeamMember(BaseContent, TranslatableModel):
 	medium = models.URLField(blank=True, null=True)
 
 	def __str__(self):
-		return f"{str(self.name)} - {self.job_title}"
+		return f"{self.name or ''}"
 	
 	def get_absolute_url(self):
 		return reverse('homepage:teammember-detail', args=[str(self.slug)])
@@ -400,7 +400,7 @@ class Testimonial(BaseContent, TranslatableModel):
 	site = models.ForeignKey(SiteInformation, on_delete=models.CASCADE ,related_name='testimonials')
 	
 	def __str__(self):
-		return f"{str(self.name)} - {self.company}"
+		return f"{str(self.name)}"
 	
 	def get_absolute_url(self):
 		return reverse('homepage:testimonial-detail', args=[str(self.slug)])

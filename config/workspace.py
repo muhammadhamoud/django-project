@@ -31,6 +31,7 @@ APPLICATION_BATH = [
     os.path.join(BASE_DIR, 'apps', 'data'),
     os.path.join(BASE_DIR, 'apps', 'home'),
     os.path.join(BASE_DIR, 'apps', 'core'),
+    os.path.join(BASE_DIR, 'apps', 'communication'),
     # os.path.join(BASE_DIR, 'apps', 'ecommerce'),
     # os.path.join(BASE_DIR, 'apps', 'address'),
     # os.path.join(BASE_DIR, 'apps', 'shop'),
@@ -46,6 +47,7 @@ NEW_APPS = [
     'dashboard',
     'data',
     'settings',
+    'communication',
 
     # 'mappings',
     # 'segments',

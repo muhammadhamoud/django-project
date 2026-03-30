@@ -10,18 +10,22 @@ class Subscriber(models.Model):
         return self.email
 
 
+
 class Contact(models.Model):
-	name = models.CharField(max_length=250)
-	email = models.EmailField()
-	phone = models.CharField(max_length=30, blank=True, null=True)
-	subject = models.CharField(max_length=250)
-	message = models.TextField()
-      
-	action = models.BooleanField(default=False)
-	submission_date = models.DateTimeField(auto_now_add=True)
-	
-	def __str__(self):
-		return self.email
+    name = models.CharField(max_length=250)
+    email = models.EmailField()
+    phone = models.CharField(max_length=30, blank=True, null=True)
+    subject = models.CharField(max_length=250)
+    message = models.TextField()
+
+    action = models.BooleanField(default=False)
+    submission_date = models.DateTimeField(auto_now_add=True)
+
+    ip_address = models.GenericIPAddressField(blank=True, null=True)
+    user_agent = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.email
 
 
 # "name": "test@test.com"

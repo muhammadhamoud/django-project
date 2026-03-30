@@ -48,7 +48,7 @@ from .workspace import NEW_APPS
 # Generate Automatic URLS
 for APP in NEW_APPS:
 
-    if APP in ['homepage']:
+    if APP in ['homepage', 'communication']:
         urlpatterns += i18n_patterns(
         path('', include(f"{APP}.urls")),
         )

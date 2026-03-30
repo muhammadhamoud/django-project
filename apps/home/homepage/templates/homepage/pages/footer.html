@@ -1,3 +1,4 @@
+
 <footer class="border-t border-slate-200 bg-slate-950 text-white dark:border-slate-800">
     <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div class="lg:col-span-2">
@@ -21,10 +22,82 @@
                     {% endif %}
                 </div>
             </div>
+            
             <p class="mt-4 max-w-xl text-sm leading-7 text-white/70">
                 {{ site_information.description|default:"A premium digital presence crafted for businesses that want credibility, clarity, and performance." }}
-                
             </p>
+            
+            
+            <!-- Social Icons -->
+            <div class="mt-6 flex flex-wrap items-center gap-3">
+                {% if site_metadata.facebook %}
+                    <a href="{{ site_metadata.facebook }}" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 transition duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white"
+                    aria-label="Facebook">
+                        <i class="fa-brands fa-facebook-f text-sm"></i>
+                    </a>
+                {% endif %}
+
+                {% if site_metadata.twitter %}
+                    <a href="{{ site_metadata.twitter }}" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 transition duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white"
+                    aria-label="Twitter">
+                        <i class="fa-brands fa-x-twitter text-sm"></i>
+                    </a>
+                {% endif %}
+
+                {% if site_metadata.instagram %}
+                    <a href="{{ site_metadata.instagram }}" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 transition duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white"
+                    aria-label="Instagram">
+                        <i class="fa-brands fa-instagram text-sm"></i>
+                    </a>
+                {% endif %}
+
+                {% if site_metadata.linkedin %}
+                    <a href="{{ site_metadata.linkedin }}" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 transition duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white"
+                    aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in text-sm"></i>
+                    </a>
+                {% endif %}
+
+                {% if site_metadata.github %}
+                    <a href="{{ site_metadata.github }}" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 transition duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white"
+                    aria-label="GitHub">
+                        <i class="fa-brands fa-github text-sm"></i>
+                    </a>
+                {% endif %}
+
+                {% if site_metadata.youtube %}
+                    <a href="{{ site_metadata.youtube }}" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 transition duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white"
+                    aria-label="YouTube">
+                        <i class="fa-brands fa-youtube text-sm"></i>
+                    </a>
+                {% endif %}
+
+                {% if site_metadata.whatsapp %}
+                    <a href="{{ site_metadata.whatsapp }}" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 transition duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white"
+                    aria-label="WhatsApp">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                    </a>
+                {% endif %}
+
+                {% if site_metadata.medium %}
+                    <a href="{{ site_metadata.medium }}" target="_blank" rel="noopener noreferrer"
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 transition duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white"
+                    aria-label="Medium">
+                        <i class="fa-brands fa-medium text-sm"></i>
+                    </a>
+                {% endif %}
+            </div>
+            <div class="mt-6 flex flex-wrap items-center gap-3">
+                {% include 'communication/subscriber_form.html' %}
+            </div>
+
         </div>
 
         <div>
@@ -40,17 +113,77 @@
         <div>
             <h4 class="text-sm font-bold uppercase tracking-[0.25em] text-white/50">Contact</h4>
             <div class="mt-4 space-y-3 text-sm text-white/70">
-                <p>hello@yourcompany.com</p>
-                <p>+000 000 000 000</p>
-                <p>Your Address Here</p>
+                <!-- Contact -->
+                <ul class="mt-4 space-y-3 text-sm text-white/70">
+                    {% if site_metadata.address %}
+                        <li class="flex gap-2">
+                            <span class="mt-0.5"><i class="fas fa-location-dot"></i></span>
+                            <span>{{ site_metadata.address }}</span>
+                        </li>
+                    {% endif %}
+
+                    {% if site_metadata.email %}
+                        <li class="flex gap-2">
+                            <span class="mt-0.5"><i class="fas fa-envelope"></i></span>
+                            <a href="mailto:{{ site_metadata.email }}" class="hover:text-white">
+                                {{ site_metadata.email }}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if site_metadata.telephone %}
+                        <li class="flex gap-2">
+                            <span class="mt-0.5"><i class="fas fa-phone"></i></span>
+                            <a href="tel:{{ site_metadata.telephone }}" class="hover:text-white">
+                                {{ site_metadata.telephone }}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if site_metadata.mobile %}
+                        <li class="flex gap-2">
+                            <span class="mt-0.5"><i class="fas fa-phone"></i></span>
+                            <a href="tel:{{ site_metadata.mobile }}" class="hover:text-white">
+                                {{ site_metadata.mobile }}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if site_metadata.sales_email %}
+                        <li class="flex gap-2">
+                            <span class="mt-0.5"><i class="fas fa-briefcase"></i></span>
+                            <a href="mailto:{{ site_metadata.sales_email }}" class="hover:text-white">
+                                {{ site_metadata.sales_email }}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if site_metadata.technical_email %}
+                        <li class="flex gap-2">
+                            <span class="mt-0.5"><i class="fas fa-headset"></i></span>
+                            <a href="mailto:{{ site_metadata.technical_email }}" class="hover:text-white">
+                                {{ site_metadata.technical_email }}
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </div>
 
     <div class="border-t border-white/10">
         <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 text-sm text-white/50 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-            <p>© {% now "Y" %} Your Company. All rights reserved.</p>
-            <p>Built with Django, Tailwind CSS, and a premium UX system.</p>
+            <p>© {% now "Y" %} {{ site_information.company_name|default:"Company Name" }}. All rights reserved.</p>
+            <p class="max-w-2xl text-white/70">
+                By using our services, you agree to our
+                <a href="{% url 'homepage:terms_of_service' %}" class="font-medium text-white/90 hover:text-white underline underline-offset-4">
+                    Terms and Conditions
+                </a>
+                and
+                <a href="{% url 'homepage:privacy_policy' %}" class="font-medium text-white/90 hover:text-white underline underline-offset-4">
+                    Privacy Policy
+                </a>.
+            </p>
         </div>
     </div>
 </footer>

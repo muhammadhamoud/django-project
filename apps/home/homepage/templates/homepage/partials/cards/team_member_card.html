@@ -1,0 +1,95 @@
+<div class="group rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900">
+    <div class="flex items-center gap-4">
+        {% if member.image %}
+            <div class="h-20 w-20 overflow-hidden rounded-full ring-4 ring-slate-100 dark:ring-slate-800">
+                <img src="{{ member.image.url }}" alt="{{ member.name }}" class="h-full w-full object-cover">
+            </div>
+        {% else %}
+            <div class="flex h-20 w-20 items-center justify-center rounded-full bg-slate-100 text-xl font-bold text-slate-500 ring-4 ring-slate-100 dark:bg-slate-800 dark:text-slate-300 dark:ring-slate-800">
+                {{ member.name|default:"T"|slice:":1" }}
+            </div>
+        {% endif %}
+
+        <div class="min-w-0">
+            <h3 class="truncate text-lg font-bold text-slate-900 dark:text-white">
+                {{ member.name }}
+            </h3>
+
+            {% if member.job_title %}
+                <p class="mt-1 text-sm font-medium text-brand-600 dark:text-brand-400">
+                    {{ member.job_title }}
+                </p>
+            {% endif %}
+
+            {% if member.location %}
+                <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                    <i class="fas fa-location-dot mr-1"></i>{{ member.location }}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if member.bio or member.description %}
+        <p class="mt-5 text-sm leading-7 text-slate-600 dark:text-slate-400">
+            {{ member.bio|default:member.description|striptags|truncatewords:24 }}
+        </p>
+    {% endif %}
+
+    {% if member.email or member.phone_number %}
+        <div class="mt-5 flex flex-wrap gap-2">
+            {% if member.email %}
+                <a href="mailto:{{ member.email }}"
+                   class="inline-flex items-center rounded-full border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-brand-600 hover:text-brand-600 dark:border-slate-700 dark:text-slate-300 dark:hover:border-brand-400 dark:hover:text-brand-400">
+                    <i class="fas fa-envelope mr-2"></i>Email
+                </a>
+            {% endif %}
+
+            {% if member.phone_number %}
+                <a href="tel:{{ member.phone_number }}"
+                   class="inline-flex items-center rounded-full border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-brand-600 hover:text-brand-600 dark:border-slate-700 dark:text-slate-300 dark:hover:border-brand-400 dark:hover:text-brand-400">
+                    <i class="fas fa-phone mr-2"></i>Call
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if member.linkedin or member.twitter or member.facebook or member.instagram or member.github or member.medium %}
+        <div class="mt-5 flex items-center gap-3 border-t border-slate-100 pt-4 dark:border-slate-800">
+            {% if member.linkedin %}
+                <a href="{{ member.linkedin }}" target="_blank" class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+            {% endif %}
+
+            {% if member.twitter %}
+                <a href="{{ member.twitter }}" target="_blank" class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400" aria-label="Twitter">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+            {% endif %}
+
+            {% if member.facebook %}
+                <a href="{{ member.facebook }}" target="_blank" class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+            {% endif %}
+
+            {% if member.instagram %}
+                <a href="{{ member.instagram }}" target="_blank" class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            {% endif %}
+
+            {% if member.github %}
+                <a href="{{ member.github }}" target="_blank" class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400" aria-label="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            {% endif %}
+
+            {% if member.medium %}
+                <a href="{{ member.medium }}" target="_blank" class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400" aria-label="Medium">
+                    <i class="fa-brands fa-medium-m"></i>
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

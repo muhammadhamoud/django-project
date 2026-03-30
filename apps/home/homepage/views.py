@@ -37,9 +37,10 @@ def home(request):
     services = Service.objects.all().order_by('-is_featured')
     projects = Project.objects.filter(is_published=True).order_by('-modified')
     features = Feature.objects.all().order_by('-is_featured')
-    marketings = Marketing.objects.all().order_by('-is_featured')
+    # marketings = Marketing.objects.all().order_by('-is_featured')
     teammembers = TeamMember.objects.all().order_by('-is_featured')
     testimonials = Testimonial.objects.all().order_by('-is_featured')
+    frameworks = Framework.objects.all().order_by('-is_featured')
 
     site = SiteInformation.objects.filter(is_published=True).first()
     navbar_menu = MenuItem.objects.filter(
@@ -68,7 +69,8 @@ def home(request):
         'projects': projects,
         'features': features,
         'offerings': offerings,
-        'marketings': marketings,
+        'frameworks': frameworks,
+        # 'marketings': marketings,
         'teammembers': teammembers,
         'testimonials': testimonials,
         'navbar_menu': navbar_menu,
